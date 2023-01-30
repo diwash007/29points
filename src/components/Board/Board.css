@@ -16,6 +16,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    background: radial-gradient(circle farthest-side, #a8e063, #56ab2f);
 }
 
 #board .background {
