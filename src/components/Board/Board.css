@@ -21,12 +21,10 @@ body {
 }
 
 #board .background {
-    /* background-image: url('../../assets/imgs/bg.jpg'); */
     background-repeat: no-repeat;
     height: var(--view-height);
     width: var(--view-width);
     background-size: cover;
-    /* filter: blur(1px); */
     display: flex;
     align-items: center;
     justify-content: center;
