@@ -20,7 +20,7 @@ body {
 }
 
 #board .background {
-    background-image: url('../../assets/imgs/bg.jpg');
+    /* background-image: url('../../assets/imgs/bg.jpg'); */
     background-repeat: no-repeat;
     height: var(--view-height);
     width: var(--view-width);
