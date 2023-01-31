@@ -71,3 +71,18 @@ body {
     height: calc(var(--view-height) - 100px);
     width: calc(var(--view-width) - 160px);
 }
+
+
+@media screen and (max-width: 800px) {
+
+    #board .background .border{
+        width: calc(100vw - 10px);
+    }
+    .team1 {
+        width: calc(100vw - 70px);
+    }
+
+    .team2 {
+        height: calc(100vw - 70px);
+    }
+}
