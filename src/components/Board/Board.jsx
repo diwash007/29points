@@ -12,13 +12,13 @@ function Board() {
   var player3_cards = []
   var player4_cards = []
   for(let i=0; i<test.cards.length; i++)
-    player1_cards.push(<Card card={test.cards[i]}/>)
+    player1_cards.push(<Card card={test.cards[i]} index={i}/>)
   for(let i=0; i<test.cards.length; i++)
-    player2_cards.push(<Card card={test.fully_visible ? test.cards[i] : null}/>)
+    player2_cards.push(<Card card={test.fully_visible ? test.cards[i] : null} index={i}/>)
   for(let i=0; i<test.cards.length; i++)
-    player3_cards.push(<Card card={test.fully_visible ? test.cards[i] : null}/>)
+    player3_cards.push(<Card card={test.fully_visible ? test.cards[i] : null} index={i}/>)
   for(let i=0; i<test.cards.length; i++)
-    player4_cards.push(<Card card={test.fully_visible ? test.cards[i] : null}/>)
+    player4_cards.push(<Card card={test.fully_visible ? test.cards[i] : null} index={i}/>)
   return (
     <div id='board'>
       <div className='background'>

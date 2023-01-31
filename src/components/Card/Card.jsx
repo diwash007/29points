@@ -1,16 +1,13 @@
 import React from 'react'
 import './Card.css'
 
-function Card({card}) {
+function Card({card, index}) {
   function drawCard(e) {
     let card = document.getElementById(e.target.id);
-    card.style.position = "absolute";
-    card.style.top = "60%"
-    card.style.right = "50%"
-    card.style.transform = `translate(50%, -50%)`;
+    card.classList.add("player1card");
   }
   return (
-    <img src={`/assets/cards/${card ? card + ".svg" : "back.png"}`} className='card' id={card} key={card} alt={card} onClick={drawCard}/>
+    <img style={{left: `calc(${index} * 20px)`}} src={`/assets/cards/${card ? card + ".svg" : "back.png"}`} className='card' id={card} key={card} alt={card} onClick={drawCard}/>
   )
 }
 
