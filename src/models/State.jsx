@@ -1,17 +1,16 @@
 export default class State {
-  constructor(body, state = false) {
-    this.player_id = body["playerId"];
-    this.player_ids = body["playerIds"];
-    this.time_remaining = body["timeRemaining"];
-    this.teams = body["teams"];
-    this.cards = body["cards"];
-    this.bid_history = body["bidHistory"];
-    this.played = body["played"];
-    this.hands_history = body["handsHistory"];
-    this.trump_suit = body["trumpSuit"];
-    this.trump_revealed = body["trumpRevealed"];
-    this.all_cards = [[], [], [], []];
+  constructor(player_id, player_ids, teams, cards, bid_history, played, hands_history, trump_suit = null, trump_revealed = false, all_cards, fully_visible = false) {
+    this.player_id = player_id;
+    this.player_ids = player_ids;
+    this.teams = teams;
+    this.cards = cards;
+    this.bid_history = bid_history;
+    this.played = played;
+    this.hands_history = hands_history;
+    this.trump_suit = trump_suit;
+    this.trump_revealed = trump_revealed;
+    this.all_cards = all_cards;
 
-    this.fully_visible = state;
+    this.fully_visible = fully_visible;
   }
 }
