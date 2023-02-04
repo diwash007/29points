@@ -1,4 +1,4 @@
-import React from "react";
+import {React, useState} from "react";
 import ScoreBoard from "../ScoreBoard/ScoreBoard";
 import "./Board.css";
 import State from "../../models/State";
@@ -6,7 +6,7 @@ import Card from "../Card/Card";
 import Hand from "../Hand/Hand";
 
 function Board() {
-  let state = new State();
+  const [state, setGameState] = useState(new State());
 
   var player1_cards = [];
   var player2_cards = [];
@@ -18,6 +18,8 @@ function Board() {
       <Card
         card={state.all_cards[0][i]}
         index={i}
+        state = {state}
+        setGameState = {setGameState}
         key={state.all_cards[0][i]}
       />
     );
@@ -26,6 +28,8 @@ function Board() {
       <Card
         card={state.fully_visible ? state.all_cards[1][i] : null}
         index={i}
+        state = {state}
+        setGameState = {setGameState}
         key={state.all_cards[1][i]}
       />
     );
@@ -34,6 +38,8 @@ function Board() {
       <Card
         card={state.fully_visible ? state.all_cards[2][i] : null}
         index={i}
+        state = {state}
+        setGameState = {setGameState}
         key={state.all_cards[2][i]}
       />
     );
@@ -42,6 +48,8 @@ function Board() {
       <Card
         card={state.fully_visible ? state.all_cards[3][i] : null}
         index={i}
+        state = {state}
+        setGameState = {setGameState}
         key={state.all_cards[3][i]}
       />
     );

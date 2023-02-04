@@ -1,9 +1,11 @@
 import React from "react";
 import "./Card.css";
 
-function Card({ card, index }) {
+function Card({ card, index, state, setGameState }) {
   function drawCard(e) {
     let card = document.getElementById(e.target.id);
+    state.played.push(e.target.id);
+    setGameState(state);
     card.classList.add("player1card");
   }
   return (
@@ -14,7 +16,7 @@ function Card({ card, index }) {
       id={card}
       key={card}
       alt={card}
-      onClick={drawCard}
+      onClick={card? drawCard: null}
     />
   );
 }
