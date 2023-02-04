@@ -3,10 +3,14 @@ import "./Card.css";
 
 function Card({ card, index, state, setGameState }) {
   function drawCard(e) {
-    let card = document.getElementById(e.target.id);
-    state.played.push(e.target.id);
-    setGameState(state);
+    const card = document.getElementById(e.target.id);
     card.classList.add("player1card");
+
+    const new_state = Object.assign(Object.create(Object.getPrototypeOf(state)), state);
+
+    new_state.played.push(e.target.id);
+
+    setGameState(new_state);
   }
   return (
     <img
