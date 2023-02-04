@@ -40,6 +40,7 @@ export default class State {
     this.all_cards = [[], [], [], []];
 
     this.deal_cards();
+    this.deal_cards();
   }
 
   deal_cards() {

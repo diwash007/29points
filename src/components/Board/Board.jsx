@@ -6,42 +6,46 @@ import Card from "../Card/Card";
 import Hand from "../Hand/Hand";
 
 function Board() {
-  let test = new State();
+  let state = new State();
 
   var player1_cards = [];
   var player2_cards = [];
   var player3_cards = [];
   var player4_cards = [];
 
-  for (let i = 0; i < test.all_cards[0].length; i++)
+  for (let i = 0; i < state.all_cards[0].length; i++)
     player1_cards.push(
-      <Card card={test.all_cards[0][i]} index={i} key={test.all_cards[0][i]} />
+      <Card
+        card={state.all_cards[0][i]}
+        index={i}
+        key={state.all_cards[0][i]}
+      />
     );
-  for (let i = 0; i < test.all_cards[1].length; i++)
+  for (let i = 0; i < state.all_cards[1].length; i++)
     player2_cards.push(
       <Card
-        card={test.fully_visible ? test.all_cards[1][i] : null}
+        card={state.fully_visible ? state.all_cards[1][i] : null}
         index={i}
-        key={test.all_cards[1][i]}
+        key={state.all_cards[1][i]}
       />
     );
-  for (let i = 0; i < test.all_cards[2].length; i++)
+  for (let i = 0; i < state.all_cards[2].length; i++)
     player3_cards.push(
       <Card
-        card={test.fully_visible ? test.all_cards[2][i] : null}
+        card={state.fully_visible ? state.all_cards[2][i] : null}
         index={i}
-        key={test.all_cards[2][i]}
+        key={state.all_cards[2][i]}
       />
     );
-  for (let i = 0; i < test.all_cards[3].length; i++)
+  for (let i = 0; i < state.all_cards[3].length; i++)
     player4_cards.push(
       <Card
-        card={test.fully_visible ? test.all_cards[3][i] : null}
+        card={state.fully_visible ? state.all_cards[3][i] : null}
         index={i}
-        key={test.all_cards[3][i]}
+        key={state.all_cards[3][i]}
       />
     );
-    
+
   return (
     <div id="board">
       <div className="background">
