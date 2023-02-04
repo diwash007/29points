@@ -6,51 +6,27 @@ import Card from "../Card/Card";
 import Hand from "../Hand/Hand";
 
 function Board() {
-  let test = new State({
-    playerId: "gzIfvEBC",
-    playerIds: ["gzIfvEBC", "Bot 0", "pMAA1q7I", "Bot 1"],
-    cards: ["JD", "JC", "TS", "8C", "7C", "9S", "1C", "KS"],
-    timeRemaining: 0,
-    bidHistory: [
-      ["Bot 0", 16],
-      ["pMAA1q7I", 0],
-      ["Bot 1", 17],
-      ["Bot 0", 17],
-      ["Bot 1", 0],
-      ["gzIfvEBC", 0],
-    ],
-    handsHistory: [
-      ["Bot 0", ["JH", "8H", "KH", "7S"], "Bot 0"],
-      ["Bot 0", ["7H", "7C", "9H", "QD"], "Bot 1"],
-      ["Bot 1", ["8D", "1D", "9D", "TD"], "Bot 0"],
-    ],
-    played: ["1H", "8S", "9C"],
-    teams: [
-      { players: ["gzIfvEBC", "pMAA1q7I"], bid: 0, won: 0 },
-      { players: ["Bot 0", "Bot 1"], bid: 17, won: 9 },
-    ],
-    trumpSuit: "H",
-    trumpRevealed: { hand: 1, playerId: "gzIfvEBC" },
-  });
+  let test = new State();
+  console.log(test)
 
   var player1_cards = [];
   var player2_cards = [];
   var player3_cards = [];
   var player4_cards = [];
 
-  for (let i = 0; i < test.cards.length; i++)
-    player1_cards.push(<Card card={test.cards[i]} index={i} />);
-  for (let i = 0; i < test.cards.length; i++)
+  for (let i = 0; i < test.all_cards[0].length; i++)
+    player1_cards.push(<Card card={test.all_cards[0][i]} index={i} />);
+  for (let i = 0; i < test.all_cards[1].length; i++)
     player2_cards.push(
-      <Card card={test.fully_visible ? test.cards[i] : null} index={i} />
+      <Card card={test.fully_visible ? test.all_cards[1][i] : null} index={i} />
     );
-  for (let i = 0; i < test.cards.length; i++)
+  for (let i = 0; i < test.all_cards[2].length; i++)
     player3_cards.push(
-      <Card card={test.fully_visible ? test.cards[i] : null} index={i} />
+      <Card card={test.fully_visible ? test.all_cards[2][i] : null} index={i} />
     );
-  for (let i = 0; i < test.cards.length; i++)
+  for (let i = 0; i < test.all_cards[3].length; i++)
     player4_cards.push(
-      <Card card={test.fully_visible ? test.cards[i] : null} index={i} />
+      <Card card={test.fully_visible ? test.all_cards[3][i] : null} index={i} />
     );
     
   return (

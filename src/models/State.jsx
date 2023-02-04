@@ -1,4 +1,14 @@
+import shuffle from '../utils';
+
+
 export default class State {
+  deck = [
+    "JH", "9H", "1H", "TH", "KH", "QH", "8H", "7H",
+    "JC", "9C", "1C", "TC", "KC", "QC", "8C", "7C",
+    "JD", "9D", "1D", "TD", "KD", "QD", "8D", "7D",
+    "JS", "9S", "1S", "TS", "KS", "QS", "8S", "7S",
+  ]
+
   constructor(player_id, player_ids, teams, cards, bid_history, bid_state, played, hands_history, trump_suit, trump_revealed, all_cards, fully_visible = false) {
     this.player_id = player_id;
     this.player_ids = player_ids;
@@ -13,6 +23,7 @@ export default class State {
     this.all_cards = all_cards;
 
     this.fully_visible = fully_visible;
+    this.reset();
   }
 
   reset() {
@@ -27,5 +38,16 @@ export default class State {
     this.trump_suit = null
     this.trump_revealed = false
     this.all_cards = [[], [], [], []];
+
+    this.deal_cards();
+  }
+
+  deal_cards() {
+    let shuffled_deck = shuffle(this.deck);
+    for (let i=0; i<4; i++) {
+      for (let j=0; j<4; j++) {
+        this.all_cards[i].push(shuffled_deck.pop());
+      }
+    }
   }
 }
