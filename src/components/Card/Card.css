@@ -5,15 +5,16 @@
 }
 
 .player1card {
-    animation: player1card-animation 0.1s ease-in-out forwards;
+    animation: player1card-animation 0.5s linear forwards;
 }
 
 @keyframes player1card-animation {
     from {
+        top:0%;
     }
     to {
         top: -130%;
         left: 50%;
-        transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%) rotate(180deg);
     }
 }
