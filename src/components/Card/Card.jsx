@@ -16,7 +16,7 @@ function Card({ card, index, state, setGameState }) {
       id={card}
       key={card}
       alt={card}
-      onClick={card? drawCard: null}
+      onClick={card && state.player_id === "You-0" ? drawCard: null}
     />
   );
 }
