@@ -1,4 +1,4 @@
-import { card_rank, powers } from "constants";
+import { card_rank, powers } from "./constants";
 
 const shuffle = function (array) {
   let currentIndex = array.length,
@@ -24,14 +24,14 @@ const getHandPower = (cards) => {
   return power;
 };
 
-const rankCards = (cards) => {
+const rankCards = function(cards) {
   let cards_rank = {};
   for (let i = 0; i < cards.lenght; i++) {
     cards_rank[cards[i]] = card_rank[cards[i][0]];
   }
   return Object.keys(cards_rank).sort(function (a, b) {
-    return list[b] - list[a];
+    return cards_rank[b] - cards_rank[a];
   });
 };
 
-export default { shuffle, getSuitCards, getHandPower, rankCards };
+export { shuffle, getSuitCards, getHandPower, rankCards };

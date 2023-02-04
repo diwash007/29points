@@ -1,4 +1,4 @@
-import shuffle from '../utils/utils';
+import {shuffle} from '../utils/utils';
 
 
 export default class State {

@@ -11,11 +11,14 @@ const tallyRound = (state) => {
   history.push(state.played);
 
   let played_ranked = rankCards(state.played);
-  let winning_card = None;
+  let winning_card = null;
+
+  var i = 0,
+    len = played_ranked.length;
 
   if (!state.trump_revealed) {
     let curr_suit = state.played[0][1];
-    for (var i = 0, len = played_ranked.length; i < len; i++) {
+    for (i = 0; i < len; i++) {
       if (played_ranked[i][1] === curr_suit) {
         winning_card = played_ranked[i];
         break;
@@ -26,7 +29,7 @@ const tallyRound = (state) => {
 
     if (!trump_played) {
       let curr_suit = state.played[0][1];
-      for (var i = 0, len = played_ranked.length; i < len; i++) {
+      for (i = 0; i < len; i++) {
         if (played_ranked[i][1] === curr_suit) {
           winning_card = played_ranked[i];
           break;
