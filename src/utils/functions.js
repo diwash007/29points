@@ -2,7 +2,8 @@ import { getSuitCards, getHandPower, rankCards } from "./utils";
 
 const tallyRound = (state) => {
   let history = [];
-  let starter = state.hands_history
+  console.log(state.hands_history)
+  let starter = state.hands_history.length !== 0
     ? state.hands_history.at(-1)[2]
     : state.player_id;
   let starter_idx = state.player_ids.indexOf(starter);

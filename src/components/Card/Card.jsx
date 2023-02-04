@@ -12,14 +12,14 @@ function Card({ card, index, state, setGameState }) {
     state.played.push(e.target.id);
 
     // deepcopy state
-    const new_state = Object.assign(
+    let new_state = Object.assign(
       Object.create(Object.getPrototypeOf(state)),
       state
     );
 
     // new_state.all_cards[0] = new_state.all_cards[0].filter(item => item !== e.target.id)
 
-    if (new_state.played.length === 4) tallyRound(new_state);
+    if (new_state.played.length === 4) new_state = tallyRound(new_state);
 
     setGameState(new_state);
   }
