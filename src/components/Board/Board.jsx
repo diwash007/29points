@@ -6,7 +6,7 @@ import Hand from "../Hand/Hand";
 
 function Board() {
   const [state, setGameState] = useState(new State());
-  console.log("hello")
+  
   return (
     <div id="board">
       <div className="background">

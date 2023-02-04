@@ -5,10 +5,11 @@ function Card({ card, index, state, setGameState }) {
   function drawCard(e) {
     const card = document.getElementById(e.target.id);
     card.classList.add("player1card");
+    state.played.push(e.target.id);
 
     const new_state = Object.assign(Object.create(Object.getPrototypeOf(state)), state);
 
-    new_state.played.push(e.target.id);
+    // new_state.all_cards[0] = new_state.all_cards[0].filter(item => item !== e.target.id)
 
     setGameState(new_state);
   }
