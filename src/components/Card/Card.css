@@ -4,20 +4,16 @@
     position: absolute;
 }
 
-/* .player1card {
+.player1card {
     animation: player1card-animation 0.1s ease-in-out forwards;
 }
 
 @keyframes player1card-animation {
     from {
-        position: absolute;
-        bottom: 0%;
-        right: 50%;
     }
     to {
-        position: absolute;
-        transform: translate(50%, -50%);
-        top: -100%;
-        right: 50%;
+        top: -130%;
+        left: 50%;
+        transform: translate(-50%, -50%);
     }
-} */
+}
