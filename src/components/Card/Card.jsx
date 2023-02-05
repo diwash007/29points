@@ -1,6 +1,7 @@
 import React from "react";
 import "./Card.css";
-import tallyRound from "../../utils/functions";
+import Action from "../../models/Action";
+import { tallyRound, playGame } from "../../utils/functions";
 
 function Card({ card, index, state, setGameState }) {
   function drawCard(e) {
@@ -8,16 +9,12 @@ function Card({ card, index, state, setGameState }) {
     // play animation
     card.classList.add("player1card");
 
+    let action = new Action({ card: e.target.id });
+
+    let new_state = playGame(state, action);
+
     // add card to played
     state.played.push(e.target.id);
-
-    // deepcopy state
-    let new_state = Object.assign(
-      Object.create(Object.getPrototypeOf(state)),
-      state
-    );
-
-    // new_state.all_cards[0] = new_state.all_cards[0].filter(item => item !== e.target.id)
 
     if (new_state.played.length === 4) new_state = tallyRound(new_state);
 

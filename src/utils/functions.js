@@ -2,10 +2,10 @@ import { getSuitCards, getHandPower, rankCards } from "./utils";
 
 const tallyRound = (state) => {
   let history = [];
-  console.log(state.hands_history)
-  let starter = state.hands_history.length !== 0
-    ? state.hands_history.at(-1)[2]
-    : state.player_id;
+  let starter =
+    state.hands_history.length !== 0
+      ? state.hands_history.at(-1)[2]
+      : state.player_id;
   let starter_idx = state.player_ids.indexOf(starter);
   starter = state.player_ids[starter_idx];
   history.push(starter);
@@ -58,4 +58,29 @@ const tallyRound = (state) => {
   return state;
 };
 
-export default tallyRound;
+const playGame = (state, action) => {
+  // deepcopy state
+  let new_state = Object.assign(
+    Object.create(Object.getPrototypeOf(state)),
+    state
+  );
+
+  // new_state.all_cards[0] = new_state.all_cards[0].filter(item => item !== e.target.id)
+
+  let curr_player_idx = new_state.player_ids.indexOf(new_state.player_id)
+
+  if (action.reveal_trump) {
+    new_state.trump_revealed = {
+      "hand": state.hands_history.length,
+      "playerId": new_state.player_id
+    }
+    return new_state;
+  } else {
+    new_state.played.push(action.card);
+    // new_state.all_cards[0] = new_state.all_cards[0].filter(item => item !== e.target.id);
+  }
+  new_state.player_id = new_state.player_ids[(curr_player_idx + 1) % 4]
+  return new_state;
+}
+
+export { tallyRound, playGame };
