@@ -9,17 +9,17 @@ export default class State {
     "JS", "9S", "1S", "TS", "KS", "QS", "8S", "7S",
   ]
 
-  constructor(player_id, player_ids, teams, cards, bid_history, bid_state, played, hands_history, trump_suit, trump_revealed, all_cards, fully_visible = false) {
-    this.player_id = player_id;
-    this.player_ids = player_ids;
+  constructor(playerId, playerIds, teams, cards, bidHistory, bidState, played, handsHistory, trumpSuit, trumpRevealed, all_cards, fully_visible = true) {
+    this.playerId = playerId;
+    this.playerIds = playerIds;
     this.teams = teams;
     this.cards = cards;
-    this.bid_history = bid_history;
-    this.bid_state = bid_state;
+    this.bidHistory = bidHistory;
+    this.bidState = bidState;
     this.played = played;
-    this.hands_history = hands_history;
-    this.trump_suit = trump_suit;
-    this.trump_revealed = trump_revealed;
+    this.handsHistory = handsHistory;
+    this.trumpSuit = trumpSuit;
+    this.trumpRevealed = trumpRevealed;
     this.all_cards = all_cards;
 
     this.fully_visible = fully_visible;
@@ -28,17 +28,17 @@ export default class State {
   }
 
   reset() {
-    this.player_id = "You-0";
-    this.player_ids = ["You-0", "Opponent-0", "You-1", "Opponent-1"];
+    this.playerId = "You-0";
+    this.playerIds = ["You-0", "Opponent-0", "You-1", "Opponent-1"];
     this.cards = [];
-    this.bid_history = [];
-    this.bid_state = {"defenderId": "You-0", "challengerId": "Opponent-0", "defenderBid": 0, "challengerBid": 0}
-    this.hands_history = [];
+    this.bidHistory = [];
+    this.bidState = {"defenderId": "You-0", "challengerId": "Opponent-0", "defenderBid": 0, "challengerBid": 0}
+    this.handsHistory = [];
     this.played = [];
     this.teams = [{"players": ["You-0", "You-1"], "bid": 16, "won": 0}, {"players": ["Opponent-0", "Opponent-1"], "bid": 0, "won": 0}];
-    this.trump_suit = null;
+    this.trumpSuit = null;
     this.bid_winner = null;
-    this.trump_revealed = false;
+    this.trumpRevealed = false;
     this.all_cards = [[], [], [], []];
 
     this.deal_cards();

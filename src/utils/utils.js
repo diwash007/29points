@@ -26,7 +26,7 @@ const getHandPower = (cards) => {
 
 const rankCards = function(cards) {
   let cards_rank = {};
-  for (let i = 0; i < cards.lenght; i++) {
+  for (let i = 0; i < cards.length; i++) {
     cards_rank[cards[i]] = card_rank[cards[i][0]];
   }
   return Object.keys(cards_rank).sort(function (a, b) {

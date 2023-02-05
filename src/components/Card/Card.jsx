@@ -1,22 +1,21 @@
 import React from "react";
 import "./Card.css";
 import Action from "../../models/Action";
-import { tallyRound, playGame } from "../../utils/functions";
+import { playGame } from "../../utils/functions";
 
 function Card({ card, index, state, setGameState }) {
   function drawCard(e) {
+    
     const card = document.getElementById(e.target.id);
     // play animation
     card.classList.add("player1card");
 
-    let action = new Action({ card: e.target.id });
+    let action = new Action(e.target.id, null);
 
     let new_state = playGame(state, action);
 
     // add card to played
-    state.played.push(e.target.id);
-
-    if (new_state.played.length === 4) new_state = tallyRound(new_state);
+    // state.played.push(e.target.id);
 
     setGameState(new_state);
   }
@@ -28,7 +27,7 @@ function Card({ card, index, state, setGameState }) {
       id={card}
       key={card}
       alt={card}
-      onClick={card && state.player_id === "You-0" ? drawCard : null}
+      onClick={card && state.playerId === "You-0" ? drawCard : null}
     />
   );
 }

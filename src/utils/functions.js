@@ -3,11 +3,11 @@ import { getSuitCards, getHandPower, rankCards } from "./utils";
 const tallyRound = (state) => {
   let history = [];
   let starter =
-    state.hands_history.length !== 0
-      ? state.hands_history.at(-1)[2]
-      : state.player_id;
-  let starter_idx = state.player_ids.indexOf(starter);
-  starter = state.player_ids[starter_idx];
+    state.handsHistory.length !== 0
+      ? state.handsHistory.at(-1)[2]
+      : state.playerId;
+  let starter_idx = state.playerIds.indexOf(starter);
+  starter = state.playerIds[starter_idx];
   history.push(starter);
   history.push(state.played);
 
@@ -17,7 +17,7 @@ const tallyRound = (state) => {
   var i = 0,
     len = played_ranked.length;
 
-  if (!state.trump_revealed) {
+  if (!state.trumpRevealed) {
     let curr_suit = state.played[0][1];
     for (i = 0; i < len; i++) {
       if (played_ranked[i][1] === curr_suit) {
@@ -26,7 +26,7 @@ const tallyRound = (state) => {
       }
     }
   } else {
-    let trump_played = getSuitCards(played_ranked, state.trump_suit);
+    let trump_played = getSuitCards(played_ranked, state.trumpSuit);
 
     if (!trump_played) {
       let curr_suit = state.played[0][1];
@@ -43,17 +43,30 @@ const tallyRound = (state) => {
 
   let points = getHandPower(state.played);
   let winning_card_idx = state.played.indexOf(winning_card);
-  let winner = state.player_ids[(starter_idx + winning_card_idx) % 4];
+  let winner = state.playerIds[(starter_idx + winning_card_idx) % 4];
   history.push(winner);
-  state.hands_history.push(history);
+  state.handsHistory.push(history);
 
   if (state.teams[0]["players"].includes(winner))
     state.teams[0]["won"] += points;
   else state.teams[1]["won"] += points;
 
-  state.player_id = winner;
+  state.playerId = winner;
+  console.log(`round over: winner is ${winner} -> ${winning_card}`);
+  state.cards = state.all_cards[state.playerIds.indexOf(winner)];
 
-  state.played = [];
+  // for x in list:
+  //    if r in x:
+  //         remove r from x
+
+  for (let i = 0; i < 4; i++) {
+    for (let j = 0; j < 4; j++) {
+      if (state.all_cards[i].includes(state.played[j])) state.all_cards[i] = state.all_cards[i].filter(item => item !== state.played[j])
+    }
+  }
+
+  state.played.length = 0;
+  // new_state.all_cards[0] = new_state.all_cards[0].filter(item => item !== e.target.id)
 
   return state;
 };
@@ -67,19 +80,21 @@ const playGame = (state, action) => {
 
   // new_state.all_cards[0] = new_state.all_cards[0].filter(item => item !== e.target.id)
 
-  let curr_player_idx = new_state.player_ids.indexOf(new_state.player_id)
+  let curr_playerIdx = new_state.playerIds.indexOf(new_state.playerId)
 
   if (action.reveal_trump) {
-    new_state.trump_revealed = {
-      "hand": state.hands_history.length,
-      "playerId": new_state.player_id
+    new_state.trumpRevealed = {
+      "hand": state.handsHistory.length,
+      "playerId": new_state.playerId
     }
     return new_state;
   } else {
     new_state.played.push(action.card);
     // new_state.all_cards[0] = new_state.all_cards[0].filter(item => item !== e.target.id);
   }
-  new_state.player_id = new_state.player_ids[(curr_player_idx + 1) % 4]
+  console.log(`${new_state.playerId} -> ${action.card}`);
+  new_state.playerId = new_state.playerIds[(curr_playerIdx + 1) % 4]
+  new_state.cards = new_state.all_cards[(curr_playerIdx + 1) % 4]
   return new_state;
 }
 
