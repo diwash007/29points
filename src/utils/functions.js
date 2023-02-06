@@ -86,6 +86,11 @@ const playGame = (state, action) => {
     return new_state;
   } else {
     new_state.played.push(action.card);
+    if (new_state.playerId !== "You-0") {
+      const card = document.getElementById(`p${curr_playerIdx + 1}`);
+      card.firstChild.classList.add(`p${curr_playerIdx + 1}-draw`);
+    }
+
   }
   console.log(`${new_state.playerId} -> ${action.card}`);
   new_state.playerId = new_state.playerIds[(curr_playerIdx + 1) % 4]

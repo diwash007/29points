@@ -17,6 +17,7 @@ function Hand({ cards, player, state, setGameState }) {
   return (
     <div
       className={`${player} hand`}
+      id={player}
       key={player}
       style={{ width: `calc(56px + ${cards.length - 1} * 20px)` }}
     >

@@ -9,7 +9,7 @@ export default class State {
     "JS", "9S", "1S", "TS", "KS", "QS", "8S", "7S",
   ]
 
-  constructor(playerId, playerIds, teams, cards, bidHistory, bidState, played, handsHistory, trumpSuit, trumpRevealed, all_cards, fully_visible = true) {
+  constructor(playerId, playerIds, teams, cards, bidHistory, bidState, played, handsHistory, trumpSuit, trumpRevealed, all_cards, fully_visible = false) {
     this.playerId = playerId;
     this.playerIds = playerIds;
     this.teams = teams;

@@ -8,15 +8,10 @@ function Card({ card, index, state, setGameState }) {
     
     const card = document.getElementById(e.target.id);
     // play animation
-    card.classList.add("player1card");
+    card.classList.add("p1-draw");
 
     let action = new Action(e.target.id, null);
-
     let new_state = playGame(state, action);
-
-    // add card to played
-    // state.played.push(e.target.id);
-
     setGameState(new_state);
   }
   return (

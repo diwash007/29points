@@ -1,20 +1,71 @@
+:root {
+    --card-height: 80px;
+    --card-width: 56px;
+}
+
 .card {
-    height: 80px;
-    width: 56px;
+    height: var(--card-height);
+    width: var(--card-width);
     position: absolute;
 }
 
-.player1card {
-    animation: player1card-animation 0.5s linear forwards;
+.p1-draw {
+    animation: p1-animation 0.5s linear forwards;
 }
 
-@keyframes player1card-animation {
+.p2-draw {
+    animation: p2-animation 0.5s linear forwards;
+}
+
+.p3-draw {
+    animation: p3-animation 0.5s linear forwards;
+}
+
+.p4-draw {
+    animation: p4-animation 0.5s linear forwards;
+}
+
+@keyframes p1-animation {
     from {
-        top:0%;
+        bottom: 0px;
     }
     to {
-        top: -130%;
+        bottom: 100px;
         left: 50%;
         transform: translate(-50%, -50%) rotate(180deg);
+    }
+}
+
+@keyframes p2-animation {
+    from {
+        top:0px;
+    }
+    to {
+        top:200px;
+        left:50%;
+        transform: translate(-50%, 50%) rotate(180deg);
+    }
+}
+
+@keyframes p3-animation {
+    from {
+        right:0px;
+    }
+    to {
+        bottom: 50px;
+        top:50%;
+        left:50%;
+        transform: translate(-50%, 50%) rotate(180deg);
+    }
+}
+
+@keyframes p4-animation {
+    from {
+        left:0px;
+    }
+    to {
+        left: -500px;
+        top:50%;
+        transform: translate(-50%, 50%) rotate(180deg);
     }
 }
