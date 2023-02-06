@@ -8,7 +8,7 @@ import { playGame } from "../../utils/functions";
 
 function Board() {
   const [state, setGameState] = useState(new State());
-  if (state.playerId !== "You-0") {
+  if (state.playerId !== "You-0" && state.game_over !== true) {
     const options = {
       method: "POST",
       headers: { "Content-Type": "application/json" },

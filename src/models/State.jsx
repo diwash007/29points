@@ -36,7 +36,7 @@ export default class State {
     this.handsHistory = [];
     this.played = [];
     this.teams = [{"players": ["You-0", "You-1"], "bid": 16, "won": 0}, {"players": ["Opponent-0", "Opponent-1"], "bid": 0, "won": 0}];
-    this.trumpSuit = null;
+    this.trumpSuit = "H";
     this.bid_winner = null;
     this.trumpRevealed = false;
     this.all_cards = [[], [], [], []];

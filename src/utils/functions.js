@@ -27,8 +27,9 @@ const tallyRound = (state) => {
     }
   } else {
     let trump_played = getSuitCards(played_ranked, state.trumpSuit);
+    console.log(played_ranked, state.trumpSuit, trump_played)
 
-    if (!trump_played) {
+    if (trump_played.length === 0) {
       let curr_suit = state.played[0][1];
       for (i = 0; i < len; i++) {
         if (played_ranked[i][1] === curr_suit) {
@@ -40,7 +41,7 @@ const tallyRound = (state) => {
       winning_card = trump_played[0];
     }
   }
-
+  console.log(winning_card)
   let points = getHandPower(state.played);
   let winning_card_idx = state.played.indexOf(winning_card);
   let winner = state.playerIds[(starter_idx + winning_card_idx) % 4];
@@ -52,8 +53,7 @@ const tallyRound = (state) => {
   else state.teams[1]["won"] += points;
 
   state.playerId = winner;
-  console.log(`round over: winner is ${winner} -> ${winning_card}`);
-  state.cards = state.all_cards[state.playerIds.indexOf(winner)];
+  console.log(`round over: winner is ${winner} -> ${winning_card}`, state.teams);
 
   for (let i = 0; i < 4; i++) {
     for (let j = 0; j < 4; j++) {
@@ -61,8 +61,11 @@ const tallyRound = (state) => {
     }
   }
 
+  state.cards = state.all_cards[state.playerIds.indexOf(winner)];
   state.played.length = 0;
 
+
+  if (state.handsHistory.length === 8) state.game_over = true;
   return state;
 };
 
