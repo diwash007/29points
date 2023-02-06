@@ -63,7 +63,11 @@ const tallyRound = (state) => {
 
   state.cards = state.all_cards[state.playerIds.indexOf(winner)];
   state.played.length = 0;
-
+  for (let i=2; i<5; i++) {
+    const card = document.getElementById(`p${i}`);
+    card.firstChild.classList.remove(`p${i}-draw`);
+    card.firstChild.src = `/assets/cards/back.png`
+  }
 
   if (state.handsHistory.length === 8) state.game_over = true;
   return state;
