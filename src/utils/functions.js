@@ -55,10 +55,6 @@ const tallyRound = (state) => {
   console.log(`round over: winner is ${winner} -> ${winning_card}`);
   state.cards = state.all_cards[state.playerIds.indexOf(winner)];
 
-  // for x in list:
-  //    if r in x:
-  //         remove r from x
-
   for (let i = 0; i < 4; i++) {
     for (let j = 0; j < 4; j++) {
       if (state.all_cards[i].includes(state.played[j])) state.all_cards[i] = state.all_cards[i].filter(item => item !== state.played[j])
@@ -66,19 +62,16 @@ const tallyRound = (state) => {
   }
 
   state.played.length = 0;
-  // new_state.all_cards[0] = new_state.all_cards[0].filter(item => item !== e.target.id)
 
   return state;
 };
 
 const playGame = (state, action) => {
-  // deepcopy state
+
   let new_state = Object.assign(
     Object.create(Object.getPrototypeOf(state)),
     state
   );
-
-  // new_state.all_cards[0] = new_state.all_cards[0].filter(item => item !== e.target.id)
 
   let curr_playerIdx = new_state.playerIds.indexOf(new_state.playerId)
 
@@ -90,11 +83,13 @@ const playGame = (state, action) => {
     return new_state;
   } else {
     new_state.played.push(action.card);
-    // new_state.all_cards[0] = new_state.all_cards[0].filter(item => item !== e.target.id);
   }
   console.log(`${new_state.playerId} -> ${action.card}`);
   new_state.playerId = new_state.playerIds[(curr_playerIdx + 1) % 4]
   new_state.cards = new_state.all_cards[(curr_playerIdx + 1) % 4]
+
+  if (new_state.played.length === 4) new_state = tallyRound(new_state);
+
   return new_state;
 }
 

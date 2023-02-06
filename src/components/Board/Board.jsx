@@ -4,11 +4,10 @@ import "./Board.css";
 import State from "../../models/State";
 import Action from "../../models/Action";
 import Hand from "../Hand/Hand";
-import { playGame, tallyRound } from "../../utils/functions";
+import { playGame } from "../../utils/functions";
 
 function Board() {
   const [state, setGameState] = useState(new State());
-  if (state.played.length === 4) setGameState(tallyRound(state));
   if (state.playerId !== "You-0") {
     const options = {
       method: "POST",
