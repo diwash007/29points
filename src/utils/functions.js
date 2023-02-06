@@ -89,6 +89,7 @@ const playGame = (state, action) => {
     if (new_state.playerId !== "You-0") {
       const card = document.getElementById(`p${curr_playerIdx + 1}`);
       card.firstChild.classList.add(`p${curr_playerIdx + 1}-draw`);
+      card.firstChild.src = `/assets/cards/${action.card}.svg`
     }
 
   }

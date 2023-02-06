@@ -38,10 +38,10 @@
 
 @keyframes p2-animation {
     from {
-        top:0px;
+        top: 0px;
     }
     to {
-        top:200px;
+        top:150px;
         left:50%;
         transform: translate(-50%, 50%) rotate(180deg);
     }
@@ -49,11 +49,10 @@
 
 @keyframes p3-animation {
     from {
-        right:0px;
+        bottom: 0px;
     }
     to {
-        bottom: 50px;
-        top:50%;
+        bottom: -100px;
         left:50%;
         transform: translate(-50%, 50%) rotate(180deg);
     }
@@ -61,11 +60,11 @@
 
 @keyframes p4-animation {
     from {
-        left:0px;
+        top: 0px;
     }
     to {
-        left: -500px;
-        top:50%;
+        top:-230px;
+        left:50%;
         transform: translate(-50%, 50%) rotate(180deg);
     }
 }
