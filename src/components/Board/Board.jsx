@@ -4,11 +4,15 @@ import "./Board.css";
 import State from "../../models/State";
 import Action from "../../models/Action";
 import Hand from "../Hand/Hand";
-import { playGame } from "../../utils/functions";
+import { playGame, tallyRound } from "../../utils/functions";
 
 function Board() {
   const [state, setGameState] = useState(new State());
-  if (state.playerId !== "You-0" && state.game_over !== true) {
+  if (
+    state.playerId !== "You-0" &&
+    state.game_over !== true &&
+    state.round_over !== true
+  ) {
     const options = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -17,7 +21,19 @@ function Board() {
     fetch("http://localhost:8001/play", options)
       .then((response) => response.json())
       .then((data) => {
-        setGameState(playGame(state, new Action(data.card, data.revealTrump)));
+        let new_state = playGame(
+          state,
+          new Action(data.card, data.revealTrump)
+        );
+        setGameState(new_state);
+        if (new_state.played.length === 4) {
+          new_state.round_over = true;
+          setTimeout(function () {
+            new_state = tallyRound(new_state);
+            new_state.round_over = false;
+            setGameState(new_state);
+          }, 3000);
+        }
       });
   }
   return (

@@ -24,6 +24,7 @@ export default class State {
 
     this.fully_visible = fully_visible;
     this.game_over = false
+    this.round_over = false
     this.reset();
   }
 

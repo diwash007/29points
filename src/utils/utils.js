@@ -34,4 +34,12 @@ const rankCards = function(cards) {
   });
 };
 
-export { shuffle, getSuitCards, getHandPower, rankCards };
+function sleep(ms) {
+  var start = Date.now(),
+      now = start;
+  while (now - start < ms) {
+    now = Date.now();
+  }
+}
+
+export { shuffle, getSuitCards, getHandPower, rankCards, sleep };

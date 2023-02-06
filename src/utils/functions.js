@@ -1,6 +1,11 @@
 import { getSuitCards, getHandPower, rankCards } from "./utils";
 
-const tallyRound = (state) => {
+const tallyRound = (prev_state) => {
+
+  let state = Object.assign(
+    Object.create(Object.getPrototypeOf(prev_state)),
+    prev_state
+  );
   let history = [];
   let starter =
     state.handsHistory.length !== 0
@@ -27,7 +32,6 @@ const tallyRound = (state) => {
     }
   } else {
     let trump_played = getSuitCards(played_ranked, state.trumpSuit);
-    console.log(played_ranked, state.trumpSuit, trump_played)
 
     if (trump_played.length === 0) {
       let curr_suit = state.played[0][1];
@@ -41,7 +45,6 @@ const tallyRound = (state) => {
       winning_card = trump_played[0];
     }
   }
-  console.log(winning_card)
   let points = getHandPower(state.played);
   let winning_card_idx = state.played.indexOf(winning_card);
   let winner = state.playerIds[(starter_idx + winning_card_idx) % 4];
@@ -63,7 +66,8 @@ const tallyRound = (state) => {
 
   state.cards = state.all_cards[state.playerIds.indexOf(winner)];
   state.played.length = 0;
-  for (let i=2; i<5; i++) {
+  document.getElementsByClassName("p1-draw")[0].style.display = "none";
+  for (let i = 2; i < 5; i++) {
     const card = document.getElementById(`p${i}`);
     card.firstChild.classList.remove(`p${i}-draw`);
     card.firstChild.src = `/assets/cards/back.png`
@@ -100,8 +104,6 @@ const playGame = (state, action) => {
   console.log(`${new_state.playerId} -> ${action.card}`);
   new_state.playerId = new_state.playerIds[(curr_playerIdx + 1) % 4]
   new_state.cards = new_state.all_cards[(curr_playerIdx + 1) % 4]
-
-  if (new_state.played.length === 4) new_state = tallyRound(new_state);
 
   return new_state;
 }
