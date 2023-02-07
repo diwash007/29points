@@ -5,6 +5,7 @@ import State from "../../models/State";
 import Action from "../../models/Action";
 import Hand from "../Hand/Hand";
 import { playGame, tallyRound } from "../../utils/functions";
+import TrumpSuit from "../TrumpSuit/TrumpSuit";
 
 function Board() {
   const [state, setGameState] = useState(new State());
@@ -40,6 +41,7 @@ function Board() {
     <div id="board">
       <div className="background">
         <ScoreBoard teams={state.teams}/>
+        <TrumpSuit state={state} />
         <div className="border">
           <div className="table">
             <div className="team2">
