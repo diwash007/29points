@@ -27,45 +27,48 @@
 }
 
 @keyframes p1-animation {
-    from {
-        bottom: 0px;
+    0% {
+        top: 0%;
     }
-    to {
-        bottom: calc(var(--table-height)/2 - var(--card-height)/2 - 160px);
+    100% {
+        top: 50%;
         left: 50%;
-        transform: translate(-50%, -50%) rotate(180deg);
+        transform: translateY(calc(160px - var(--table-height)/2)) translate(-50%, -50%) rotate(180deg);
     }
 }
 
 @keyframes p2-animation {
-    from {
-        top: 0px;
+    0% {
+        top: 0%;
+        left: 0%;
     }
-    to {
-        top:calc(var(--table-width)/2 - var(--card-width)/2 - 200px);
+    100% {
+        top: 50%;
         left:50%;
-        transform: translate(-50%, 50%) rotate(180deg);
+        transform: translateY(calc(var(--table-width)/2 - 190px)) translate(-50%, -50%) rotate(180deg);
     }
 }
 
 @keyframes p3-animation {
-    from {
-        bottom: 0px;
+    0% {
+        top: 0%;
+        left: 0%;
     }
-    to {
-        bottom: calc(160px - var(--table-height)/2 + var(--card-height)/2);
+    100% {
+        top: 50%;
         left:50%;
-        transform: translate(-50%, 50%) rotate(180deg);
+        transform: translateY(calc(var(--table-height)/2 - 160px)) translate(-50%, -50%) rotate(180deg);
     }
 }
 
 @keyframes p4-animation {
-    from {
-        top: 0px;
+    0% {
+        top: 0%;
+        left: 0%;
     }
-    to {
-        top:calc(258px - var(--table-width)/2 - var(--card-width)/2);
+    100%{
+        top: 50%;
         left:50%;
-        transform: translate(-50%, -50%) rotate(180deg);
+        transform: translateY(calc(190px - var(--table-width)/2)) translate(-50%, -50%) rotate(180deg);
     }
 }
