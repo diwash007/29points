@@ -39,7 +39,7 @@ function Board() {
   return (
     <div id="board">
       <div className="background">
-        <ScoreBoard />
+        <ScoreBoard teams={state.teams}/>
         <div className="border">
           <div className="table">
             <div className="team2">
