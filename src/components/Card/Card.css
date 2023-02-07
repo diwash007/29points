@@ -7,6 +7,7 @@
     height: var(--card-height);
     width: var(--card-width);
     position: absolute;
+    cursor: pointer;
 }
 
 .p1-draw {
@@ -30,7 +31,7 @@
         bottom: 0px;
     }
     to {
-        bottom: 100px;
+        bottom: calc(var(--table-height)/2 - var(--card-height)/2 - 160px);
         left: 50%;
         transform: translate(-50%, -50%) rotate(180deg);
     }
@@ -41,7 +42,7 @@
         top: 0px;
     }
     to {
-        top:150px;
+        top:calc(var(--table-width)/2 - var(--card-width)/2 - 200px);
         left:50%;
         transform: translate(-50%, 50%) rotate(180deg);
     }
@@ -52,7 +53,7 @@
         bottom: 0px;
     }
     to {
-        bottom: -100px;
+        bottom: calc(160px - var(--table-height)/2 + var(--card-height)/2);
         left:50%;
         transform: translate(-50%, 50%) rotate(180deg);
     }
@@ -63,8 +64,8 @@
         top: 0px;
     }
     to {
-        top:-230px;
+        top:calc(258px - var(--table-width)/2 - var(--card-width)/2);
         left:50%;
-        transform: translate(-50%, 50%) rotate(180deg);
+        transform: translate(-50%, -50%) rotate(180deg);
     }
 }
