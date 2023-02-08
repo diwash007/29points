@@ -7,7 +7,6 @@
     height: var(--card-height);
     width: var(--card-width);
     position: absolute;
-    cursor: pointer;
     transition: all 0.5s ease-in-out;
 }
 
