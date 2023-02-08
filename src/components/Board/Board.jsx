@@ -7,6 +7,7 @@ import Hand from "../Hand/Hand";
 import { playGame, tallyRound } from "../../utils/functions";
 import TrumpSuit from "../TrumpSuit/TrumpSuit";
 import { userId } from "../../utils/constants";
+import RevealTrump from "../RevealTrump/RevealTrump";
 
 function Board() {
   const [state, setGameState] = useState(new State());
@@ -41,8 +42,9 @@ function Board() {
   return (
     <div id="board">
       <div className="background">
-        <ScoreBoard teams={state.teams}/>
+        <ScoreBoard teams={state.teams} />
         <TrumpSuit state={state} />
+        <RevealTrump state={state} />
         <div className="border">
           <div className="table">
             <div className="team2">
