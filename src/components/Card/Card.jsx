@@ -33,7 +33,9 @@ function Card({ card, index, state, setGameState }) {
       id={card}
       key={card}
       alt={card}
-      onClick={card && state.playerId === userId ? drawCard : null}
+      onClick={
+        card && state.playerId === userId && !state.round_over ? drawCard : null
+      }
     />
   );
 }

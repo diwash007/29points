@@ -57,7 +57,7 @@ const tallyRound = (prev_state) => {
   else state.teams[1]["won"] += points;
 
   state.playerId = winner;
-  console.log(`round over: winner is ${winner} -> ${winning_card}`, state.trumpSuit, state.trumpRevealed);
+  console.log(`round over: winner is ${winner} -> ${winning_card}`);
 
   for (let i = 0; i < 4; i++) {
     for (let j = 0; j < 4; j++) {
@@ -88,12 +88,7 @@ const playGame = (state, action) => {
   let curr_playerIdx = new_state.playerIds.indexOf(new_state.playerId)
 
   if (action.reveal_trump) {
-    new_state.trumpRevealed = {
-      "hand": state.handsHistory.length,
-      "playerId": new_state.playerId
-    }
-    new_state.trumpSuit = new_state.hiddenTrumpSuit;
-    return new_state;
+    return revealTrump(new_state);
   } else {
     new_state.played.push(action.card);
     if (new_state.playerId !== userId) {
@@ -110,4 +105,20 @@ const playGame = (state, action) => {
   return new_state;
 }
 
-export { tallyRound, playGame };
+const canRevealTrump = (state) => {
+  let curr_suit = state.played[0][1];
+  let curr_playerIdx = state.playerIds.indexOf(state.playerId);
+  if (!state.all_cards[curr_playerIdx].toString().includes(curr_suit)) return true;
+  return false;
+}
+
+const revealTrump = (state) => {
+  state.trumpRevealed = {
+    "hand": state.handsHistory.length,
+    "playerId": state.playerId
+  }
+  state.trumpSuit = state.hiddenTrumpSuit;
+  return state;
+}
+
+export { tallyRound, playGame, canRevealTrump, revealTrump };

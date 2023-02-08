@@ -4,7 +4,7 @@ import "./Board.css";
 import State from "../../models/State";
 import Action from "../../models/Action";
 import Hand from "../Hand/Hand";
-import { playGame, tallyRound } from "../../utils/functions";
+import { playGame, tallyRound, canRevealTrump } from "../../utils/functions";
 import TrumpSuit from "../TrumpSuit/TrumpSuit";
 import { userId } from "../../utils/constants";
 import RevealTrump from "../RevealTrump/RevealTrump";
@@ -44,7 +44,10 @@ function Board() {
       <div className="background">
         <ScoreBoard teams={state.teams} />
         <TrumpSuit state={state} />
-        <RevealTrump state={state} />
+        {state.played.length > 0 &&
+          state.playerId === userId &&
+          !state.trumpRevealed &&
+          canRevealTrump(state) && <RevealTrump state={state} setGameState={setGameState} />}
         <div className="border">
           <div className="table">
             <div className="team2">
