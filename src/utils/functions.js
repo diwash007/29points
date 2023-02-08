@@ -92,6 +92,7 @@ const playGame = (state, action) => {
       "hand": state.handsHistory.length,
       "playerId": new_state.playerId
     }
+    new_state.trumpSuit = new_state.hiddenTrumpSuit;
     return new_state;
   } else {
     new_state.played.push(action.card);
