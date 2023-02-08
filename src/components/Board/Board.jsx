@@ -4,7 +4,7 @@ import "./Board.css";
 import State from "../../models/State";
 import Action from "../../models/Action";
 import Hand from "../Hand/Hand";
-import { playGame, tallyRound, canRevealTrump } from "../../utils/functions";
+import { playGame, tallyRound, canRevealTrump, clearTable } from "../../utils/functions";
 import TrumpSuit from "../TrumpSuit/TrumpSuit";
 import { userId } from "../../utils/constants";
 import RevealTrump from "../RevealTrump/RevealTrump";
@@ -28,11 +28,12 @@ function Board() {
           setGameState(new_state);
           if (new_state.played.length === 4) {
             new_state.round_over = true;
+            new_state = tallyRound(new_state);
             setTimeout(function () {
-              new_state = tallyRound(new_state);
+              new_state = clearTable(new_state);
               new_state.round_over = false;
               setGameState(new_state);
-            }, 3000);
+            }, 10000);
           }
         });
     } else {

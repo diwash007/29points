@@ -1,7 +1,7 @@
 import React from "react";
 import "./Card.css";
 import Action from "../../models/Action";
-import { playGame, tallyRound } from "../../utils/functions";
+import { clearTable, playGame, tallyRound } from "../../utils/functions";
 import { userId } from "../../utils/constants";
 
 function Card({ card, index, state, setGameState }) {
@@ -12,8 +12,9 @@ function Card({ card, index, state, setGameState }) {
     setGameState(new_state);
     if (new_state.played.length === 4) {
       new_state.round_over = true;
+      new_state = tallyRound(new_state);
       setTimeout(function () {
-        new_state = tallyRound(new_state);
+        new_state = clearTable(new_state);
         new_state.round_over = false;
         setGameState(new_state);
       }, 3000);

@@ -57,26 +57,37 @@ const tallyRound = (prev_state) => {
   else state.teams[1]["won"] += points;
 
   state.playerId = winner;
+  const card = document.getElementById(winning_card);
+  card.classList.add("winner");
   console.log(`round over: winner is ${winner} -> ${winning_card}`);
 
+  if (state.handsHistory.length === 8) state.game_over = true;
+  return state;
+};
+
+const clearTable = (prev_state) => {
+  let state = Object.assign(
+    Object.create(Object.getPrototypeOf(prev_state)),
+    prev_state
+  );
   for (let i = 0; i < 4; i++) {
     for (let j = 0; j < 4; j++) {
       if (state.all_cards[i].includes(state.played[j])) state.all_cards[i] = state.all_cards[i].filter(item => item !== state.played[j])
     }
   }
 
-  state.cards = state.all_cards[state.playerIds.indexOf(winner)];
+  state.cards = state.all_cards[state.playerIds.indexOf(state.playerId)];
   state.played.length = 0;
   document.getElementsByClassName("p1-draw")[0].style.display = "none";
   for (let i = 2; i < 5; i++) {
     const card = document.getElementById(`p${i}`);
     card.firstChild.src = `/assets/cards/back.png`;
-    card.firstChild.classList.remove(`p${i}-draw`);
+    card.firstChild.classList.remove(`p${i}-draw`, "winner");
   }
 
   if (state.handsHistory.length === 8) state.game_over = true;
   return state;
-};
+}
 
 const playGame = (state, action) => {
 
@@ -94,6 +105,7 @@ const playGame = (state, action) => {
     if (new_state.playerId !== userId) {
       const card = document.getElementById(`p${curr_playerIdx + 1}`);
       card.firstChild.src = `/assets/cards/${action.card}.svg`;
+      card.firstChild.setAttribute('id', action.card);
       card.firstChild.classList.add(`p${curr_playerIdx + 1}-draw`);
     } else {
       const card = document.getElementById(action.card);
@@ -128,4 +140,8 @@ const revealTrump = (state) => {
   return new_state;
 }
 
-export { tallyRound, playGame, canRevealTrump, revealTrump };
+const getLegalCards = (state) => {
+
+}
+
+export { tallyRound, playGame, canRevealTrump, revealTrump, getLegalCards, clearTable };
