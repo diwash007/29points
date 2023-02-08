@@ -113,12 +113,16 @@ const canRevealTrump = (state) => {
 }
 
 const revealTrump = (state) => {
-  state.trumpRevealed = {
-    "hand": state.handsHistory.length,
-    "playerId": state.playerId
+  let new_state = Object.assign(
+    Object.create(Object.getPrototypeOf(state)),
+    state
+  );
+  new_state.trumpRevealed = {
+    "hand": new_state.handsHistory.length,
+    "playerId": new_state.playerId
   }
-  state.trumpSuit = state.hiddenTrumpSuit;
-  return state;
+  new_state.trumpSuit = new_state.hiddenTrumpSuit;
+  return new_state;
 }
 
 export { tallyRound, playGame, canRevealTrump, revealTrump };
