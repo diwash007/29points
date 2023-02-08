@@ -33,7 +33,7 @@ function Board() {
               new_state = clearTable(new_state);
               new_state.round_over = false;
               setGameState(new_state);
-            }, 10000);
+            }, 2000);
           }
         });
     } else {

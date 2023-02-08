@@ -14,14 +14,6 @@
     box-shadow: 0 0 5px 5px lightgreen;
 }
 
-.winner::after {
-    height: 100px;
-    width: 100px;
-    content: "hello";
-    position: absolute;
-    background-color: red;
-}
-
 .p1-draw {
     animation: p1-animation 0.5s linear forwards;
 }

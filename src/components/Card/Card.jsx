@@ -17,7 +17,7 @@ function Card({ card, index, state, setGameState }) {
         new_state = clearTable(new_state);
         new_state.round_over = false;
         setGameState(new_state);
-      }, 3000);
+      }, 2000);
     }
   }
   return (
