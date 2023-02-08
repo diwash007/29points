@@ -6,9 +6,6 @@ import { userId } from "../../utils/constants";
 
 function Card({ card, index, state, setGameState }) {
   function drawCard(e) {
-    const card = document.getElementById(e.target.id);
-    // play animation
-    card.classList.add("p1-draw");
 
     let action = new Action(e.target.id, null);
     let new_state = playGame(state, action);

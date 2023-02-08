@@ -95,6 +95,9 @@ const playGame = (state, action) => {
       const card = document.getElementById(`p${curr_playerIdx + 1}`);
       card.firstChild.src = `/assets/cards/${action.card}.svg`;
       card.firstChild.classList.add(`p${curr_playerIdx + 1}-draw`);
+    } else {
+      const card = document.getElementById(action.card);
+      card.classList.add("p1-draw");
     }
 
   }
