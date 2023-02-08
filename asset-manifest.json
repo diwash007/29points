@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/29points-react/static/css/main.6b402ba1.css",
+    "main.js": "/29points-react/static/js/main.8d17ae4d.js",
+    "index.html": "/29points-react/index.html",
+    "main.6b402ba1.css.map": "/29points-react/static/css/main.6b402ba1.css.map",
+    "main.8d17ae4d.js.map": "/29points-react/static/js/main.8d17ae4d.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.6b402ba1.css",
+    "static/js/main.8d17ae4d.js"
+  ]
+}
