@@ -1,3 +1,4 @@
+import { userId } from "./constants";
 import { getSuitCards, getHandPower, rankCards } from "./utils";
 
 const tallyRound = (prev_state) => {
@@ -56,7 +57,7 @@ const tallyRound = (prev_state) => {
   else state.teams[1]["won"] += points;
 
   state.playerId = winner;
-  console.log(`round over: winner is ${winner} -> ${winning_card}`, state.teams);
+  console.log(`round over: winner is ${winner} -> ${winning_card}`, state.trumpSuit, state.trumpRevealed);
 
   for (let i = 0; i < 4; i++) {
     for (let j = 0; j < 4; j++) {
@@ -94,7 +95,7 @@ const playGame = (state, action) => {
     return new_state;
   } else {
     new_state.played.push(action.card);
-    if (new_state.playerId !== "You-0") {
+    if (new_state.playerId !== userId) {
       const card = document.getElementById(`p${curr_playerIdx + 1}`);
       card.firstChild.classList.add(`p${curr_playerIdx + 1}-draw`);
       card.firstChild.src = `/assets/cards/${action.card}.svg`

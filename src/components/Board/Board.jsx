@@ -6,11 +6,12 @@ import Action from "../../models/Action";
 import Hand from "../Hand/Hand";
 import { playGame, tallyRound } from "../../utils/functions";
 import TrumpSuit from "../TrumpSuit/TrumpSuit";
+import { userId } from "../../utils/constants";
 
 function Board() {
   const [state, setGameState] = useState(new State());
   if (
-    state.playerId !== "You-0" &&
+    state.playerId !== userId &&
     state.game_over !== true &&
     state.round_over !== true
   ) {

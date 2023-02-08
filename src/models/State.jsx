@@ -1,3 +1,4 @@
+import { userId } from '../utils/constants';
 import {shuffle} from '../utils/utils';
 
 
@@ -29,14 +30,14 @@ export default class State {
   }
 
   reset() {
-    this.playerId = "You-0";
-    this.playerIds = ["You-0", "Opponent-0", "You-1", "Opponent-1"];
+    this.playerId = userId;
+    this.playerIds = [userId, "Opponent-0", "You-1", "Opponent-1"];
     this.cards = [];
     this.bidHistory = [];
-    this.bidState = {"defenderId": "You-0", "challengerId": "Opponent-0", "defenderBid": 0, "challengerBid": 0}
+    this.bidState = {"defenderId": userId, "challengerId": "Opponent-0", "defenderBid": 0, "challengerBid": 0}
     this.handsHistory = [];
     this.played = [];
-    this.teams = [{"players": ["You-0", "You-1"], "bid": 16, "won": 0}, {"players": ["Opponent-0", "Opponent-1"], "bid": 0, "won": 0}];
+    this.teams = [{"players": [userId, "You-1"], "bid": 16, "won": 0}, {"players": ["Opponent-0", "Opponent-1"], "bid": 0, "won": 0}];
     this.trumpSuit = "S";
     this.bid_winner = null;
     this.trumpRevealed = false;

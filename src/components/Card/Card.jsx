@@ -2,6 +2,7 @@ import React from "react";
 import "./Card.css";
 import Action from "../../models/Action";
 import { playGame, tallyRound } from "../../utils/functions";
+import { userId } from "../../utils/constants";
 
 function Card({ card, index, state, setGameState }) {
   function drawCard(e) {
@@ -25,14 +26,14 @@ function Card({ card, index, state, setGameState }) {
     <img
       style={{
         left: `calc(${index} * 20px)`,
-        cursor: card && state.playerId === "You-0" ? "pointer" : "default",
+        cursor: card && state.playerId === userId ? "pointer" : "default",
       }}
       src={`/assets/cards/${card ? card + ".svg" : "back.png"}`}
       className="card"
       id={card}
       key={card}
       alt={card}
-      onClick={card && state.playerId === "You-0" ? drawCard : null}
+      onClick={card && state.playerId === userId ? drawCard : null}
     />
   );
 }
