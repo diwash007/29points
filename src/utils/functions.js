@@ -144,4 +144,21 @@ const getLegalCards = (state) => {
 
 }
 
-export { tallyRound, playGame, canRevealTrump, revealTrump, getLegalCards, clearTable };
+const weWon = (teams) => {
+  let our_bid = teams[0]["bid"];
+  let our_won = teams[0]["won"];
+  let their_bid = teams[1]["bid"];
+  let their_won = teams[1]["won"];
+
+  if (our_bid > their_bid) {
+    if (our_won >= our_bid) return true
+    else return false
+  }
+  else {
+    if (their_won < their_bid) return true
+    else return false
+  }
+
+}
+
+export { tallyRound, playGame, canRevealTrump, revealTrump, getLegalCards, clearTable, weWon };
