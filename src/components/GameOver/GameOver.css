@@ -36,3 +36,12 @@
 .options > button:first-child {
     background-color: #509412;
 }
+
+.stats {
+    width: 150px;
+    font-size: 14px;
+}
+
+.stats tr td:nth-child(2) {
+    text-align: center;
+}
