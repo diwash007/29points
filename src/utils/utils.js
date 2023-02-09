@@ -34,6 +34,10 @@ const rankCards = function(cards) {
   });
 };
 
+const getCardRank = (card) => {
+  return card_rank[card[0]];
+}
+
 function sleep(ms) {
   var start = Date.now(),
       now = start;
@@ -42,4 +46,4 @@ function sleep(ms) {
   }
 }
 
-export { shuffle, getSuitCards, getHandPower, rankCards, sleep };
+export { shuffle, getSuitCards, getHandPower, rankCards, getCardRank, sleep };

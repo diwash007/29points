@@ -1,10 +1,12 @@
 import React from "react";
 import "./Card.css";
 import Action from "../../models/Action";
-import { playGame, roundOver } from "../../utils/functions";
+import { getLegalCards, playGame, roundOver } from "../../utils/functions";
 import { userId } from "../../utils/constants";
 
 function Card({ card, index, state, setGameState }) {
+  console.log(getLegalCards(state))
+  let isLegalCard = getLegalCards(state).includes(card);
   function drawCard(e) {
     let action = new Action(e.target.id, null);
     let new_state = playGame(state, action);
@@ -22,7 +24,12 @@ function Card({ card, index, state, setGameState }) {
       key={card}
       alt={card}
       onClick={
-        card && state.playerId === userId && !state.round_over ? drawCard : null
+        card &&
+        state.playerId === userId &&
+        !state.round_over &&
+        isLegalCard
+          ? drawCard
+          : null
       }
     />
   );

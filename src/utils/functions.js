@@ -1,5 +1,5 @@
 import { userId } from "./constants";
-import { getSuitCards, getHandPower, rankCards } from "./utils";
+import { getSuitCards, getHandPower, rankCards, getCardRank } from "./utils";
 
 const tallyRound = (prev_state) => {
 
@@ -132,15 +132,11 @@ const revealTrump = (state) => {
     state
   );
   new_state.trumpRevealed = {
-    "hand": new_state.handsHistory.length,
+    "hand": new_state.handsHistory.length + 1,
     "playerId": new_state.playerId
   }
   new_state.trumpSuit = new_state.hiddenTrumpSuit;
   return new_state;
-}
-
-const getLegalCards = (state) => {
-
 }
 
 const weWon = (teams) => {
@@ -171,5 +167,73 @@ const roundOver = (new_state, setGameState) => {
     }, 2000);
   }
 }
+
+const getLegalCards = (state) => {
+  let cards = [];
+  let curr_playerIdx = 0;
+  let playerCards = state.all_cards[curr_playerIdx];
+
+  if (state.played.length === 0) {
+    for (let card of playerCards)
+      cards.push(card);
+  } else {
+    let curr_suit = state.played[0][1];
+    let curr_suit_cards = getSuitCards(playerCards, curr_suit);
+    if (curr_suit_cards.length !== 0) {
+      for (let card of curr_suit_cards)
+        cards.push(card);
+    } else {
+      if (state.trumpRevealed !== null) {
+        let trump_suit_cards = getSuitCards(playerCards, state.trumpSuit)
+        if (trump_suit_cards.length !== 0) {
+          let was_trump_revealed_in_this_round = state.trumpRevealed["hand"] === state.handsHistory.length + 1;
+          let did_i_reveal_the_trump = state.trumpRevealed["playerId"] === state.playerId;
+          console.log(was_trump_revealed_in_this_round, did_i_reveal_the_trump)
+          if (was_trump_revealed_in_this_round && did_i_reveal_the_trump) {
+            if (state.played.toString().includes(state.trumpSuit)) {
+
+              let played_trumps = getSuitCards(state.played, state.trumpSuit);
+              let played_trumps_ranked = rankCards(played_trumps);
+
+              if (state.played.length === 2) {
+                if (state.played.indexOf(played_trumps_ranked[0]) === 0) {
+                  for (let card of playerCards)
+                    cards.push(card);
+                } else {
+                  for (let card of playerCards) {
+                    if (card[1] === state.trumpSuit && getCardRank(card) > getCardRank(played_trumps_ranked[0]))
+                      cards.push(card);
+                  }
+                }
+              } else if (state.played.length === 3) {
+                if (state.played.indexOf(played_trumps_ranked[0]) === 1) {
+                  for (let card of playerCards)
+                    cards.push(card);
+                } else {
+                  for (let card of playerCards) {
+                    if (card[1] === state.trumpSuit && getCardRank(card) > getCardRank(played_trumps_ranked[0]))
+                      cards.push(card);
+                  }
+                }
+              }
+            } else {
+              for (let card of trump_suit_cards)
+                cards.push(card);
+            }
+          } else {
+            for (let card of playerCards) cards.push(card);
+          }
+
+        } else {
+          for (let card of playerCards) cards.push(card);
+        }
+      } else {
+        for (let card of playerCards) cards.push(card);
+      }
+    }
+  }
+  return cards;
+}
+
 
 export { tallyRound, playGame, canRevealTrump, revealTrump, getLegalCards, clearTable, weWon, roundOver };
