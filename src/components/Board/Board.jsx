@@ -11,7 +11,7 @@ import {
   clearTable,
 } from "../../utils/functions";
 import TrumpSuit from "../TrumpSuit/TrumpSuit";
-import { userId } from "../../utils/constants";
+import { userId, baseUrl } from "../../utils/constants";
 import RevealTrump from "../RevealTrump/RevealTrump";
 import GameOver from "../GameOver/GameOver";
 
@@ -24,7 +24,7 @@ function Board() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(state),
       };
-      fetch("http://localhost:8001/play", options)
+      fetch(baseUrl + "play", options)
         .then((response) => response.json())
         .then((data) => {
           let new_state = playGame(
