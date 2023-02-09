@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/29points-react/static/css/main.bfaa5ee8.css",
-    "main.js": "/29points-react/static/js/main.3e90311e.js",
-    "index.html": "/29points-react/index.html",
-    "main.bfaa5ee8.css.map": "/29points-react/static/css/main.bfaa5ee8.css.map",
-    "main.3e90311e.js.map": "/29points-react/static/js/main.3e90311e.js.map"
+    "main.css": "/29points/static/css/main.bfaa5ee8.css",
+    "main.js": "/29points/static/js/main.b682ae79.js",
+    "index.html": "/29points/index.html",
+    "main.bfaa5ee8.css.map": "/29points/static/css/main.bfaa5ee8.css.map",
+    "main.b682ae79.js.map": "/29points/static/js/main.b682ae79.js.map"
   },
   "entrypoints": [
     "static/css/main.bfaa5ee8.css",
-    "static/js/main.3e90311e.js"
+    "static/js/main.b682ae79.js"
   ]
 }
