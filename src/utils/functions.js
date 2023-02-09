@@ -157,7 +157,19 @@ const weWon = (teams) => {
     if (their_won < their_bid) return true
     else return false
   }
-
 }
 
-export { tallyRound, playGame, canRevealTrump, revealTrump, getLegalCards, clearTable, weWon };
+const roundOver = (new_state, setGameState) => {
+  setGameState(new_state);
+  if (new_state.played.length === 4) {
+    new_state.round_over = true;
+    new_state = tallyRound(new_state);
+    setTimeout(function () {
+      new_state = clearTable(new_state);
+      new_state.round_over = false;
+      setGameState(new_state);
+    }, 2000);
+  }
+}
+
+export { tallyRound, playGame, canRevealTrump, revealTrump, getLegalCards, clearTable, weWon, roundOver };

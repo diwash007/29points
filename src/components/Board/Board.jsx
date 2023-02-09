@@ -4,12 +4,7 @@ import "./Board.css";
 import State from "../../models/State";
 import Action from "../../models/Action";
 import Hand from "../Hand/Hand";
-import {
-  playGame,
-  tallyRound,
-  canRevealTrump,
-  clearTable,
-} from "../../utils/functions";
+import { playGame, roundOver, canRevealTrump } from "../../utils/functions";
 import TrumpSuit from "../TrumpSuit/TrumpSuit";
 import { userId, baseUrl } from "../../utils/constants";
 import RevealTrump from "../RevealTrump/RevealTrump";
@@ -31,37 +26,24 @@ function Board() {
             state,
             new Action(data.card, data.revealTrump)
           );
-          setGameState(new_state);
-          if (new_state.played.length === 4) {
-            new_state.round_over = true;
-            new_state = tallyRound(new_state);
-            setTimeout(function () {
-              new_state = clearTable(new_state);
-              new_state.round_over = false;
-              setGameState(new_state);
-            }, 2000);
-          }
+          roundOver(new_state, setGameState);
         });
     } else {
       if (state.all_cards[0].length === 1) {
-        let new_state = playGame(state, new Action(state.all_cards[0][0], null));
-        setGameState(new_state);
-        if (new_state.played.length === 4) {
-          new_state.round_over = true;
-          new_state = tallyRound(new_state);
-          setTimeout(function () {
-            new_state = clearTable(new_state);
-            new_state.round_over = false;
-            setGameState(new_state);
-          }, 2000);
-        }
+        let new_state = playGame(
+          state,
+          new Action(state.all_cards[0][0], null)
+        );
+        roundOver(new_state, setGameState);
       }
     }
   }
   return (
     <div id="board">
       <div className="background">
-        {state.game_over && <GameOver teams={state.teams} setGameState={setGameState}/>}
+        {state.game_over && (
+          <GameOver teams={state.teams} setGameState={setGameState} />
+        )}
         <ScoreBoard teams={state.teams} />
         <TrumpSuit state={state} />
         {state.played.length > 0 &&

@@ -6,8 +6,8 @@ import State from "../../models/State";
 function GameOver({ teams, setGameState }) {
   let plays = parseInt(localStorage.getItem("plays"));
   let wins = parseInt(localStorage.getItem("wins"));
-  plays = plays? plays + 1 : 1;
-  if (weWon(teams)) wins = wins? wins + 1 : 1;
+  plays = plays ? plays + 1 : 1;
+  if (weWon(teams)) wins = wins ? wins + 1 : 1;
 
   useEffect(() => {
     localStorage.setItem("wins", wins);
@@ -21,18 +21,20 @@ function GameOver({ teams, setGameState }) {
         <span>You {weWon(teams) ? "Win" : "Lose"}</span>
       </div>
       <table className="stats">
-        <tr>
-          <td>Played:</td>
-          <td>{plays ? plays : 0}</td>
-        </tr>
-        <tr>
-          <td>Won:</td>
-          <td>{wins ? wins : 0}</td>
-        </tr>
-        <tr>
-          <td>Win %:</td>
-          <td>{wins && plays ? (wins/plays * 100).toFixed(1) : 0}%</td>
-        </tr>
+        <tbody>
+          <tr>
+            <td>Played:</td>
+            <td>{plays ? plays : 0}</td>
+          </tr>
+          <tr>
+            <td>Won:</td>
+            <td>{wins ? wins : 0}</td>
+          </tr>
+          <tr>
+            <td>Win %:</td>
+            <td>{wins && plays ? ((wins / plays) * 100).toFixed(1) : 0}%</td>
+          </tr>
+        </tbody>
       </table>
       <div className="options">
         <button onClick={() => setGameState(new State())}>Play again</button>
