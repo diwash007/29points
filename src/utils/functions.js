@@ -15,8 +15,7 @@ const tallyRound = (prev_state) => {
   let starter_idx = state.playerIds.indexOf(starter);
   starter = state.playerIds[starter_idx];
   history.push(starter);
-  history.push(state.played);
-
+  history.push(JSON.parse(JSON.stringify(state.played)));
   let played_ranked = rankCards(state.played);
   let winning_card = null;
 
