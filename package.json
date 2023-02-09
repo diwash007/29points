@@ -1,7 +1,7 @@
 {
   "name": "29points",
   "version": "0.1.0",
-  "homepage": "https://diwash007.github.io/29points-react",
+  "homepage": "https://diwash007.github.io/29points",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",

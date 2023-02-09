@@ -9,7 +9,7 @@ function TrumpSuit({ state }) {
   return (
     <div id="trump-board">
       <img
-        src={`/assets/cards/${trumpSuit}`}
+        src={`/29points/assets/cards/${trumpSuit}`}
         width="500px"
         height="500px"
         alt="trump suit"

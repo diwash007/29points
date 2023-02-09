@@ -26,7 +26,7 @@ function Card({ card, index, state, setGameState }) {
         left: `calc(${index} * 20px)`,
         cursor: card && state.playerId === userId ? "pointer" : "default",
       }}
-      src={`/assets/cards/${card ? card + ".svg" : "back.png"}`}
+      src={`/29points/assets/cards/${card ? card + ".svg" : "back.png"}`}
       className="card"
       id={card}
       key={card}

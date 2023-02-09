@@ -81,7 +81,7 @@ const clearTable = (prev_state) => {
   document.getElementsByClassName("p1-draw")[0].style.display = "none";
   for (let i = 2; i < 5; i++) {
     const card = document.getElementById(`p${i}`);
-    card.firstChild.src = `/assets/cards/back.png`;
+    card.firstChild.src = `/29points/assets/cards/back.png`;
     card.firstChild.classList.remove(`p${i}-draw`, "winner");
   }
 
@@ -104,7 +104,7 @@ const playGame = (state, action) => {
     new_state.played.push(action.card);
     if (new_state.playerId !== userId) {
       const card = document.getElementById(`p${curr_playerIdx + 1}`);
-      card.firstChild.src = `/assets/cards/${action.card}.svg`;
+      card.firstChild.src = `/29points/assets/cards/${action.card}.svg`;
       card.firstChild.setAttribute('id', action.card);
       card.firstChild.classList.add(`p${curr_playerIdx + 1}-draw`);
     } else {

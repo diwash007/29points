@@ -6,7 +6,7 @@ function RevealTrump({ state, setGameState }) {
   return (
     <img
       id="reveal-trump"
-      src="/assets/imgs/reveal-trump.png"
+      src="/29points/assets/imgs/reveal-trump.png"
       alt="reveal trump"
       onClick={() => setGameState(revealTrump(state))}
     />
