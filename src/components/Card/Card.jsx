@@ -5,7 +5,6 @@ import { getLegalCards, playGame, roundOver } from "../../utils/functions";
 import { userId } from "../../utils/constants";
 
 function Card({ card, index, state, setGameState }) {
-  console.log(getLegalCards(state))
   let isLegalCard = getLegalCards(state).includes(card);
   function drawCard(e) {
     let action = new Action(e.target.id, null);
@@ -19,7 +18,7 @@ function Card({ card, index, state, setGameState }) {
         cursor: card && state.playerId === userId ? "pointer" : "default",
       }}
       src={`/29points/assets/cards/${card ? card + ".svg" : "back.png"}`}
-      className="card"
+      className={`card ${isLegalCard ? "legal-card" : ""}`}
       id={card}
       key={card}
       alt={card}

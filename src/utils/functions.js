@@ -188,7 +188,6 @@ const getLegalCards = (state) => {
         if (trump_suit_cards.length !== 0) {
           let was_trump_revealed_in_this_round = state.trumpRevealed["hand"] === state.handsHistory.length + 1;
           let did_i_reveal_the_trump = state.trumpRevealed["playerId"] === state.playerId;
-          console.log(was_trump_revealed_in_this_round, did_i_reveal_the_trump)
           if (was_trump_revealed_in_this_round && did_i_reveal_the_trump) {
             if (state.played.toString().includes(state.trumpSuit)) {
 
