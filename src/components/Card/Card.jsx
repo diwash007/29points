@@ -21,7 +21,7 @@ function Card({ card, index, state, setGameState }) {
       className={`card ${isLegalCard ? "legal-card" : ""}`}
       id={card}
       key={card}
-      alt={card}
+      alt="playing card"
       onClick={
         card &&
         state.playerId === userId &&
