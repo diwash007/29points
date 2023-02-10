@@ -1,6 +1,6 @@
 let userId = "You-0";
-let baseUrl = "http://localhost:5000/";
-// let baseUrl = "https://29.gilobyte.com/";
+// let baseUrl = "http://localhost:5000/";
+let baseUrl = "https://29.gilobyte.com/";
 
 let clearTableDelay = 2000;
 
