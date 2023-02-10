@@ -11,6 +11,7 @@ import RevealTrump from "../RevealTrump/RevealTrump";
 import GameOver from "../GameOver/GameOver";
 import { cacheImages } from "../../utils/utils";
 import { ClipLoader } from "react-spinners";
+import ChooseTrump from "../ChooseTrump/ChooseTrump";
 
 function Board() {
   const [state, setGameState] = useState(new State());
@@ -61,6 +62,10 @@ function Board() {
           !state.round_over && (
             <RevealTrump state={state} setGameState={setGameState} />
           )}
+
+        {!state.hiddenTrumpSuit && (
+          <ChooseTrump state={state} setGameState={setGameState} />
+        )}
         <div className="border">
           <div className="table">
             {isLoading ? (
