@@ -1,4 +1,4 @@
-import { userId } from "./constants";
+import { clearTableDelay, userId } from "./constants";
 import { getSuitCards, getHandPower, rankCards, getCardRank } from "./utils";
 
 const tallyRound = (prev_state) => {
@@ -169,7 +169,7 @@ const roundOver = (new_state, setGameState) => {
       new_state = clearTable(new_state);
       new_state.round_over = false;
       setGameState(new_state);
-    }, 2000);
+    }, clearTableDelay);
   }
 };
 
