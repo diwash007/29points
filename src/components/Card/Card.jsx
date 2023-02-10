@@ -18,7 +18,15 @@ function Card({ card, index, state, setGameState }) {
         cursor: card && state.playerId === userId ? "pointer" : "default",
       }}
       src={`/29points/assets/cards/${card ? card + ".svg" : "back.png"}`}
-      className={`card ${isLegalCard ? "legal-card" : ""}`}
+      className={`card ${
+        card &&
+        state.playerId === userId &&
+        !state.round_over &&
+        isLegalCard &&
+        state.hiddenTrumpSuit
+          ? "legal-card"
+          : ""
+      }`}
       id={card}
       key={card}
       alt="playing card"
@@ -26,7 +34,8 @@ function Card({ card, index, state, setGameState }) {
         card &&
         state.playerId === userId &&
         !state.round_over &&
-        isLegalCard
+        isLegalCard &&
+        state.hiddenTrumpSuit
           ? drawCard
           : null
       }

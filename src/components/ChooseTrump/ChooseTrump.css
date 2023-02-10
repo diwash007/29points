@@ -1,9 +1,10 @@
 #choose-trump-card {
     position: absolute;
     z-index: 50;
-    height: 250px;
+    height: 215px;
+    width: 315px;
     background: linear-gradient(180deg,#f7f7f7 39.58%,#dce1ed 100%);
-    padding: 20px 48px;
+    padding: 24px 48px;
     left: 50%;
     top: 50%;
     transform: translate(-50%,-50%);
@@ -13,16 +14,17 @@
     align-items: center;
     flex-direction: column;
     gap: 30px;
+    box-sizing: border-box;
 }
 
 #choose-trump-card label {
-    font-size: 24px;
+    font-size: 18px;
 }
 
 .options {
     display: flex;
     flex-direction: wrap;
-    gap: 20px;
+    gap: 10px;
 }
 
 .options img {
