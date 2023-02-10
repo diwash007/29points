@@ -49,7 +49,8 @@ function Board() {
         {state.played.length > 0 &&
           state.playerId === userId &&
           !state.trumpRevealed &&
-          canRevealTrump(state) && (
+          canRevealTrump(state) &&
+          !state.round_over && (
             <RevealTrump state={state} setGameState={setGameState} />
           )}
         <div className="border">

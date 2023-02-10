@@ -2,7 +2,6 @@ import { userId } from "./constants";
 import { getSuitCards, getHandPower, rankCards, getCardRank } from "./utils";
 
 const tallyRound = (prev_state) => {
-
   let state = Object.assign(
     Object.create(Object.getPrototypeOf(prev_state)),
     prev_state
@@ -69,62 +68,69 @@ const clearTable = (prev_state) => {
     Object.create(Object.getPrototypeOf(prev_state)),
     prev_state
   );
-  for (let i = 0; i < 4; i++) {
-    for (let j = 0; j < 4; j++) {
-      if (state.all_cards[i].includes(state.played[j])) state.all_cards[i] = state.all_cards[i].filter(item => item !== state.played[j])
-    }
-  }
 
   state.cards = state.all_cards[state.playerIds.indexOf(state.playerId)];
   state.played.length = 0;
   document.getElementsByClassName("p1-draw")[0].style.display = "none";
-  for (let i = 2; i < 5; i++) {
-    const card = document.getElementById(`p${i}`);
-    card.firstChild.src = `/29points/assets/cards/back.png`;
-    card.firstChild.classList.remove(`p${i}-draw`, "winner");
+  for (let i = 1; i < 5; i++) {
+    const hand = document.getElementById(`p${i}`);
+    // hand.firstChild.src = `/29points/assets/cards/back.png`;
+    // hand.firstChild.classList.remove(`p${i}-draw`, "winner");
+    hand.firstChild.remove();
   }
 
   if (state.handsHistory.length === 8) state.game_over = true;
   return state;
-}
+};
 
 const playGame = (state, action) => {
-
   let new_state = Object.assign(
     Object.create(Object.getPrototypeOf(state)),
     state
   );
 
-  let curr_playerIdx = new_state.playerIds.indexOf(new_state.playerId)
+  let curr_playerIdx = new_state.playerIds.indexOf(new_state.playerId);
 
   if (action.reveal_trump) {
     return revealTrump(new_state);
   } else {
     new_state.played.push(action.card);
     if (new_state.playerId !== userId) {
-      const card = document.getElementById(`p${curr_playerIdx + 1}`);
-      card.firstChild.src = `/29points/assets/cards/${action.card}.svg`;
-      card.firstChild.setAttribute('id', action.card);
-      card.firstChild.classList.add(`p${curr_playerIdx + 1}-draw`);
-    } else {
-      const card = document.getElementById(action.card);
-      card.classList.add("p1-draw");
-    }
+      const hand = document.getElementById(`p${curr_playerIdx + 1}`);
+      let card = hand.firstChild.cloneNode(true);
+      card.src = `/29points/assets/cards/${action.card}.svg`;
+      card.setAttribute("id", action.card);
+      card.classList.add(`p${curr_playerIdx + 1}-draw`);
+      hand.firstChild.before(card);
 
+      new_state.all_cards[curr_playerIdx] = new_state.all_cards[
+        curr_playerIdx
+      ].filter((card) => card !== action.card);
+    } else {
+      const hand = document.getElementById(`p${curr_playerIdx + 1}`);
+      const card = document.getElementById(action.card);
+      let cardClone = card.cloneNode(true);
+      cardClone.classList.add("p1-draw");
+      hand.firstChild.before(cardClone);
+      new_state.all_cards[curr_playerIdx] = new_state.all_cards[
+        curr_playerIdx
+      ].filter((card) => card !== action.card);
+    }
   }
   console.log(`${new_state.playerId} -> ${action.card}`);
-  new_state.playerId = new_state.playerIds[(curr_playerIdx + 1) % 4]
-  new_state.cards = new_state.all_cards[(curr_playerIdx + 1) % 4]
+  new_state.playerId = new_state.playerIds[(curr_playerIdx + 1) % 4];
+  new_state.cards = new_state.all_cards[(curr_playerIdx + 1) % 4];
 
   return new_state;
-}
+};
 
 const canRevealTrump = (state) => {
   let curr_suit = state.played[0][1];
   let curr_playerIdx = state.playerIds.indexOf(state.playerId);
-  if (!state.all_cards[curr_playerIdx].toString().includes(curr_suit)) return true;
+  if (!state.all_cards[curr_playerIdx].toString().includes(curr_suit))
+    return true;
   return false;
-}
+};
 
 const revealTrump = (state) => {
   let new_state = Object.assign(
@@ -132,12 +138,12 @@ const revealTrump = (state) => {
     state
   );
   new_state.trumpRevealed = {
-    "hand": new_state.handsHistory.length + 1,
-    "playerId": new_state.playerId
-  }
+    hand: new_state.handsHistory.length + 1,
+    playerId: new_state.playerId,
+  };
   new_state.trumpSuit = new_state.hiddenTrumpSuit;
   return new_state;
-}
+};
 
 const weWon = (teams) => {
   let our_bid = teams[0]["bid"];
@@ -146,14 +152,13 @@ const weWon = (teams) => {
   let their_won = teams[1]["won"];
 
   if (our_bid > their_bid) {
-    if (our_won >= our_bid) return true
-    else return false
+    if (our_won >= our_bid) return true;
+    else return false;
+  } else {
+    if (their_won < their_bid) return true;
+    else return false;
   }
-  else {
-    if (their_won < their_bid) return true
-    else return false
-  }
-}
+};
 
 const roundOver = (new_state, setGameState) => {
   setGameState(new_state);
@@ -166,7 +171,7 @@ const roundOver = (new_state, setGameState) => {
       setGameState(new_state);
     }, 2000);
   }
-}
+};
 
 const getLegalCards = (state) => {
   let cards = [];
@@ -174,55 +179,56 @@ const getLegalCards = (state) => {
   let playerCards = state.all_cards[curr_playerIdx];
 
   if (state.played.length === 0) {
-    for (let card of playerCards)
-      cards.push(card);
+    for (let card of playerCards) cards.push(card);
   } else {
     let curr_suit = state.played[0][1];
     let curr_suit_cards = getSuitCards(playerCards, curr_suit);
     if (curr_suit_cards.length !== 0) {
-      for (let card of curr_suit_cards)
-        cards.push(card);
+      for (let card of curr_suit_cards) cards.push(card);
     } else {
       if (state.trumpRevealed !== null) {
-        let trump_suit_cards = getSuitCards(playerCards, state.trumpSuit)
+        let trump_suit_cards = getSuitCards(playerCards, state.trumpSuit);
         if (trump_suit_cards.length !== 0) {
-          let was_trump_revealed_in_this_round = state.trumpRevealed["hand"] === state.handsHistory.length + 1;
-          let did_i_reveal_the_trump = state.trumpRevealed["playerId"] === state.playerId;
+          let was_trump_revealed_in_this_round =
+            state.trumpRevealed["hand"] === state.handsHistory.length + 1;
+          let did_i_reveal_the_trump =
+            state.trumpRevealed["playerId"] === state.playerId;
           if (was_trump_revealed_in_this_round && did_i_reveal_the_trump) {
             if (state.played.toString().includes(state.trumpSuit)) {
-
               let played_trumps = getSuitCards(state.played, state.trumpSuit);
               let played_trumps_ranked = rankCards(played_trumps);
 
               if (state.played.length === 2) {
                 if (state.played.indexOf(played_trumps_ranked[0]) === 0) {
-                  for (let card of playerCards)
-                    cards.push(card);
+                  for (let card of playerCards) cards.push(card);
                 } else {
                   for (let card of playerCards) {
-                    if (card[1] === state.trumpSuit && getCardRank(card) > getCardRank(played_trumps_ranked[0]))
+                    if (
+                      card[1] === state.trumpSuit &&
+                      getCardRank(card) > getCardRank(played_trumps_ranked[0])
+                    )
                       cards.push(card);
                   }
                 }
               } else if (state.played.length === 3) {
                 if (state.played.indexOf(played_trumps_ranked[0]) === 1) {
-                  for (let card of playerCards)
-                    cards.push(card);
+                  for (let card of playerCards) cards.push(card);
                 } else {
                   for (let card of playerCards) {
-                    if (card[1] === state.trumpSuit && getCardRank(card) > getCardRank(played_trumps_ranked[0]))
+                    if (
+                      card[1] === state.trumpSuit &&
+                      getCardRank(card) > getCardRank(played_trumps_ranked[0])
+                    )
                       cards.push(card);
                   }
                 }
               }
             } else {
-              for (let card of trump_suit_cards)
-                cards.push(card);
+              for (let card of trump_suit_cards) cards.push(card);
             }
           } else {
             for (let card of playerCards) cards.push(card);
           }
-
         } else {
           for (let card of playerCards) cards.push(card);
         }
@@ -232,7 +238,15 @@ const getLegalCards = (state) => {
     }
   }
   return cards;
-}
+};
 
-
-export { tallyRound, playGame, canRevealTrump, revealTrump, getLegalCards, clearTable, weWon, roundOver };
+export {
+  tallyRound,
+  playGame,
+  canRevealTrump,
+  revealTrump,
+  getLegalCards,
+  clearTable,
+  weWon,
+  roundOver,
+};
