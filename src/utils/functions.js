@@ -83,7 +83,7 @@ const clearTable = (prev_state) => {
   return state;
 };
 
-const playGame = (state, action) => {
+const playGame = (state, action, theme) => {
   let new_state = Object.assign(
     Object.create(Object.getPrototypeOf(state)),
     state
@@ -98,7 +98,7 @@ const playGame = (state, action) => {
     if (new_state.playerId !== userId) {
       const hand = document.getElementById(`p${curr_playerIdx + 1}`);
       let card = hand.firstChild.cloneNode(true);
-      card.src = `/29points/assets/cards/${action.card}.svg`;
+      card.src = `/29points/assets/cards/${theme}/${action.card}.png`;
       card.setAttribute("id", action.card);
       card.classList.add(`p${curr_playerIdx + 1}-draw`);
       hand.firstChild.before(card);

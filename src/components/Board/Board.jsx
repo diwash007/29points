@@ -9,17 +9,19 @@ import TrumpSuit from "../TrumpSuit/TrumpSuit";
 import { userId, baseUrl } from "../../utils/constants";
 import RevealTrump from "../RevealTrump/RevealTrump";
 import GameOver from "../GameOver/GameOver";
-import { cacheImages } from "../../utils/utils";
 import { ClipLoader } from "react-spinners";
 import ChooseTrump from "../ChooseTrump/ChooseTrump";
 
 function Board() {
   const [state, setGameState] = useState(new State());
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+  const [theme, setTheme] = useState("");
 
   useEffect(() => {
-    cacheImages(setIsLoading);
-  }, []);
+    let cardTheme = localStorage.getItem("theme");
+    if (!cardTheme) localStorage.setItem("theme", "bhoos");
+    setTheme(cardTheme ? cardTheme : "bhoos");
+  }, [theme]);
 
   if (state.game_over !== true && state.round_over !== true) {
     if (state.playerId !== userId) {
@@ -33,7 +35,8 @@ function Board() {
         .then((data) => {
           let new_state = playGame(
             state,
-            new Action(data.card, data.revealTrump)
+            new Action(data.card, data.revealTrump),
+            theme
           );
           roundOver(new_state, setGameState);
         });
@@ -41,7 +44,8 @@ function Board() {
       if (state.all_cards[0].length === 1) {
         let new_state = playGame(
           state,
-          new Action(state.all_cards[0][0], null)
+          new Action(state.all_cards[0][0], null),
+          theme
         );
         roundOver(new_state, setGameState);
       }
@@ -64,7 +68,11 @@ function Board() {
           )}
 
         {!state.hiddenTrumpSuit && (
-          <ChooseTrump state={state} setGameState={setGameState} />
+          <ChooseTrump
+            state={state}
+            setGameState={setGameState}
+            theme={theme}
+          />
         )}
         <div className="border">
           <div className="table">
@@ -79,6 +87,7 @@ function Board() {
                     key="p2"
                     state={state}
                     setGameState={setGameState}
+                    theme={theme}
                   />
                   <Hand
                     cards={state.all_cards[3]}
@@ -86,6 +95,7 @@ function Board() {
                     key="p4"
                     state={state}
                     setGameState={setGameState}
+                    theme={theme}
                   />
                 </div>
                 <div className="team1">
@@ -95,6 +105,7 @@ function Board() {
                     key="p3"
                     state={state}
                     setGameState={setGameState}
+                    theme={theme}
                   />
                   <Hand
                     cards={state.all_cards[0]}
@@ -102,6 +113,7 @@ function Board() {
                     key="p1"
                     state={state}
                     setGameState={setGameState}
+                    theme={theme}
                   />
                 </div>
               </>

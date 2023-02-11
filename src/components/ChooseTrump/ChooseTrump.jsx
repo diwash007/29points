@@ -1,7 +1,7 @@
 import React from 'react';
 import './ChooseTrump.css'
 
-function ChooseTrump({ state, setGameState}) {
+function ChooseTrump({ state, setGameState, theme}) {
     const selectTrump = (trump) => {
         let new_state = Object.assign(
             Object.create(Object.getPrototypeOf(state)),
@@ -16,10 +16,10 @@ function ChooseTrump({ state, setGameState}) {
     <div id="choose-trump-card">
       <label>Choose trump suit</label>
       <div className="options">
-        <img src="/29points/assets/cards/1H.svg" onClick={() => selectTrump("H")} alt="hearts" />
-        <img src="/29points/assets/cards/1C.svg" onClick={() => selectTrump("C")} alt="clubs" />
-        <img src="/29points/assets/cards/1D.svg" onClick={() => selectTrump("D")} alt="diamonds" />
-        <img src="/29points/assets/cards/1S.svg" onClick={() => selectTrump("S")} alt="spades" />
+        <img src={`/29points/assets/cards/${theme}/1H.png`} onClick={() => selectTrump("H")} alt="hearts" />
+        <img src={`/29points/assets/cards/${theme}/1C.png`} onClick={() => selectTrump("C")} alt="clubs" />
+        <img src={`/29points/assets/cards/${theme}/1D.png`} onClick={() => selectTrump("D")} alt="diamonds" />
+        <img src={`/29points/assets/cards/${theme}/1S.png`} onClick={() => selectTrump("S")} alt="spades" />
       </div>
     </div>
   )

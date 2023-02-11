@@ -2,7 +2,7 @@ import React from "react";
 import "./Hand.css";
 import Card from "../Card/Card";
 
-function Hand({ cards, player, state, setGameState }) {
+function Hand({ cards, player, state, setGameState, theme }) {
   let player_cards = [];
   for (let i = 0; i < cards.length; i++)
     player_cards.push(
@@ -12,6 +12,7 @@ function Hand({ cards, player, state, setGameState }) {
         state={state}
         setGameState={setGameState}
         key={cards[i]}
+        theme={theme}
       />
     );
   return (

@@ -4,11 +4,11 @@ import Action from "../../models/Action";
 import { getLegalCards, playGame, roundOver } from "../../utils/functions";
 import { userId } from "../../utils/constants";
 
-function Card({ card, index, state, setGameState }) {
+function Card({ card, index, state, setGameState, theme }) {
   let isLegalCard = getLegalCards(state).includes(card);
   function drawCard(e) {
     let action = new Action(e.target.id, null);
-    let new_state = playGame(state, action);
+    let new_state = playGame(state, action, theme);
     roundOver(new_state, setGameState);
   }
   return (
@@ -17,7 +17,7 @@ function Card({ card, index, state, setGameState }) {
         left: `calc(${index} * 20px)`,
         cursor: card && state.playerId === userId ? "pointer" : "default",
       }}
-      src={`/29points/assets/cards/${card ? card + ".svg" : "back.png"}`}
+      src={`/29points/assets/cards/${theme}/${card ? card + ".png" : "back.png"}`}
       className={`card ${
         card &&
         state.playerId === userId &&
