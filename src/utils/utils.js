@@ -1,4 +1,5 @@
 import { card_rank, powers } from "./constants";
+import images from "./images";
 
 const shuffle = function (array) {
   let currentIndex = array.length,
@@ -46,17 +47,17 @@ function sleep(ms) {
   }
 }
 
-// const cacheImages = async (setIsLoading) => {
-//   const promises = images.map((src) => {
-//     return new Promise(function (resolve, reject) {
-//       const img = new Image();
-//       img.src = src;
-//       img.onload = resolve();
-//       img.onerror = reject();
-//     })
-//   });
-//   await Promise.all(promises);
-//   setIsLoading(false);
-// }
+const cacheImages = async (setIsLoading) => {
+  const promises = await images.map((src) => {
+    return new Promise(function (resolve, reject) {
+      const img = new Image();
+      img.src = src;
+      img.onload = resolve();
+      img.onerror = reject();
+    })
+  });
+  await Promise.all(promises);
+  setIsLoading(false);
+}
 
-export { shuffle, getSuitCards, getHandPower, rankCards, getCardRank, sleep };
+export { shuffle, getSuitCards, getHandPower, rankCards, getCardRank, sleep, cacheImages };

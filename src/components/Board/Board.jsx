@@ -9,12 +9,13 @@ import TrumpSuit from "../TrumpSuit/TrumpSuit";
 import { userId, baseUrl } from "../../utils/constants";
 import RevealTrump from "../RevealTrump/RevealTrump";
 import GameOver from "../GameOver/GameOver";
+import { cacheImages } from "../../utils/utils";
 import { ClipLoader } from "react-spinners";
 import ChooseTrump from "../ChooseTrump/ChooseTrump";
 
 function Board() {
   const [state, setGameState] = useState(new State());
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [theme, setTheme] = useState("");
 
   useEffect(() => {
@@ -22,6 +23,10 @@ function Board() {
     if (!cardTheme) localStorage.setItem("theme", "bhoos");
     setTheme(cardTheme ? cardTheme : "bhoos");
   }, [theme]);
+
+  useEffect(() => {
+    cacheImages(setIsLoading);
+  }, []);
 
   if (state.game_over !== true && state.round_over !== true) {
     if (state.playerId !== userId) {
@@ -72,6 +77,7 @@ function Board() {
             state={state}
             setGameState={setGameState}
             theme={theme}
+            isLoading={isLoading}
           />
         )}
         <div className="border">
