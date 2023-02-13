@@ -1,20 +1,17 @@
 import React from "react";
+import { bid } from "../../utils/functions";
 import "./ChooseBid.css";
 
-function ChooseBid() {
+function ChooseBid({ state, setGameState }) {
   let minimumBid = 16;
   let bidButtons = [];
 
-  const bid = (i) => {
-    console.log(i);
-  };
-  
   for (let i = minimumBid; i < 29; i++)
     bidButtons.push(
       <button
         key={i}
         onClick={() => {
-          bid(i);
+          bid(i, state, setGameState);
         }}
       >
         {i}

@@ -240,6 +240,30 @@ const getLegalCards = (state) => {
   return cards;
 };
 
+const bid = (bid, state, setGameState) => {
+  let new_state = Object.assign(
+    Object.create(Object.getPrototypeOf(state)),
+    state
+  );
+  let history = [];
+  history.push(new_state.playerId);
+  history.push(bid);
+  new_state.bidHistory.push(history);
+
+  if (bid !== 0) {
+    new_state.bidState.defenderId = new_state.playerId;
+    new_state.bidState.defenderBid = bid;
+  }
+
+  new_state.playerId =
+    new_state.playerIds[
+    (new_state.playerIds.indexOf(new_state.playerId) + 1) % 4
+    ];
+  new_state.bidState.challengerId = new_state.playerId;
+
+  setGameState(new_state);
+};
+
 export {
   tallyRound,
   playGame,
@@ -249,4 +273,5 @@ export {
   clearTable,
   weWon,
   roundOver,
+  bid
 };

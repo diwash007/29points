@@ -4,7 +4,12 @@ import "./Board.css";
 import State from "../../models/State";
 import Action from "../../models/Action";
 import Hand from "../Hand/Hand";
-import { playGame, roundOver, canRevealTrump } from "../../utils/functions";
+import {
+  playGame,
+  roundOver,
+  canRevealTrump,
+  bid,
+} from "../../utils/functions";
 import TrumpSuit from "../TrumpSuit/TrumpSuit";
 import { userId, baseUrl } from "../../utils/constants";
 import RevealTrump from "../RevealTrump/RevealTrump";
@@ -28,8 +33,25 @@ function Board() {
   useEffect(() => {
     cacheImages(setIsLoading);
   }, []);
-
-  if (state.game_over !== true && state.round_over !== true) {
+  if (state.bid_winner === null) {
+    if (state.playerId !== userId) {
+      const options = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(state),
+      };
+      fetch(baseUrl + "bid", options)
+        .then((response) => response.json())
+        .then((data) => {
+          bid(data.bid, state, setGameState);
+        });
+    }
+  }
+  if (
+    state.game_over !== true &&
+    state.round_over !== true &&
+    state.bid_winner
+  ) {
     if (state.playerId !== userId) {
       const options = {
         method: "POST",
@@ -57,6 +79,7 @@ function Board() {
       }
     }
   }
+  console.log(state);
   return (
     <div id="board">
       <div className="background">
@@ -79,7 +102,7 @@ function Board() {
                     <RevealTrump state={state} setGameState={setGameState} />
                   )}
 
-                {!state.hiddenTrumpSuit && !state.bid_winner && (
+                {!state.hiddenTrumpSuit && state.bid_winner !== null && (
                   <ChooseTrump
                     state={state}
                     setGameState={setGameState}
@@ -88,7 +111,9 @@ function Board() {
                   />
                 )}
 
-                <ChooseBid />
+                {state.playerId === userId && (
+                  <ChooseBid state={state} setGameState={setGameState} />
+                )}
                 <div className="team2">
                   <Hand
                     cards={state.all_cards[1]}
