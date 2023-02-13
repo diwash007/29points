@@ -18,7 +18,7 @@
     font-size: 24px;
 }
 
-.options > button {
+#summary .options > button {
     cursor: pointer;
     padding: 5px 0px;
     width: 90px;

@@ -3,7 +3,6 @@ import { userId } from "../../utils/constants";
 import "./TrumpSuit.css";
 
 function TrumpSuit({ state }) {
-  console.log(state);
   let trumpSuit = state.trumpRevealed
     ? `1${state.trumpSuit}.png`
     : userId === state.bid_winner && state.hiddenTrumpSuit

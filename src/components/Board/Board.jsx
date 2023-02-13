@@ -12,6 +12,7 @@ import GameOver from "../GameOver/GameOver";
 import { cacheImages } from "../../utils/utils";
 import { ClipLoader } from "react-spinners";
 import ChooseTrump from "../ChooseTrump/ChooseTrump";
+import ChooseBid from "../ChooseBid/ChooseBid";
 
 function Board() {
   const [state, setGameState] = useState(new State());
@@ -59,33 +60,35 @@ function Board() {
   return (
     <div id="board">
       <div className="background">
-        {state.game_over && (
-          <GameOver teams={state.teams} setGameState={setGameState} />
-        )}
-        <ScoreBoard teams={state.teams} />
-        <TrumpSuit state={state} />
-        {state.played.length > 0 &&
-          state.playerId === userId &&
-          !state.trumpRevealed &&
-          canRevealTrump(state) &&
-          !state.round_over && (
-            <RevealTrump state={state} setGameState={setGameState} />
-          )}
-
-        {!state.hiddenTrumpSuit && (
-          <ChooseTrump
-            state={state}
-            setGameState={setGameState}
-            theme={theme}
-            isLoading={isLoading}
-          />
-        )}
         <div className="border">
           <div className="table">
             {isLoading ? (
               <ClipLoader color="white" />
             ) : (
               <>
+                {state.game_over && (
+                  <GameOver teams={state.teams} setGameState={setGameState} />
+                )}
+                <ScoreBoard teams={state.teams} />
+                <TrumpSuit state={state} />
+                {state.played.length > 0 &&
+                  state.playerId === userId &&
+                  !state.trumpRevealed &&
+                  canRevealTrump(state) &&
+                  !state.round_over && (
+                    <RevealTrump state={state} setGameState={setGameState} />
+                  )}
+
+                {!state.hiddenTrumpSuit && !state.bid_winner && (
+                  <ChooseTrump
+                    state={state}
+                    setGameState={setGameState}
+                    theme={theme}
+                    isLoading={isLoading}
+                  />
+                )}
+
+                <ChooseBid />
                 <div className="team2">
                   <Hand
                     cards={state.all_cards[1]}
