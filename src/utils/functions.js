@@ -241,25 +241,44 @@ const getLegalCards = (state) => {
 };
 
 const bid = (bid, state, setGameState) => {
+  console.log(state);
   let new_state = Object.assign(
     Object.create(Object.getPrototypeOf(state)),
     state
   );
   let history = [];
+  let newBidState = { 'defenderId': userId, 'challengerId': 'Opponent-0', 'defenderBid': 0, 'challengerBid': 0 }
   history.push(new_state.playerId);
   history.push(bid);
   new_state.bidHistory.push(history);
+  console.log(`${new_state.playerId} bid: ${bid}`)
 
   if (bid !== 0) {
-    new_state.bidState.defenderId = new_state.playerId;
-    new_state.bidState.defenderBid = bid;
+    if (bid > new_state.bidState.defenderBid) {
+      newBidState.challengerId = new_state.bidState.defenderId;
+      newBidState.challengerBid = new_state.bidState.defenderBid;
+      newBidState.defenderBid = bid;
+      newBidState.defenderId = new_state.playerId;
+
+    } else {
+      newBidState.defenderId = new_state.playerId;
+      newBidState.defenderBid = bid;
+    }
+
   }
 
-  new_state.playerId =
-    new_state.playerIds[
+  newBidState.challengerId = new_state.playerIds[
     (new_state.playerIds.indexOf(new_state.playerId) + 1) % 4
-    ];
-  new_state.bidState.challengerId = new_state.playerId;
+  ];
+
+  new_state.playerId = newBidState.challengerId;
+
+  if (new_state.bidHistory !== 0 && new_state.playerId === userId) {
+    new_state.bid_winner = newBidState.defenderId;
+    console.log(`Bid winner: ${new_state.bid_winner}`)
+  }
+
+  new_state.bidState = newBidState;
 
   setGameState(new_state);
 };

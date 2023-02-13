@@ -79,7 +79,7 @@ function Board() {
       }
     }
   }
-  console.log(state);
+
   return (
     <div id="board">
       <div className="background">
