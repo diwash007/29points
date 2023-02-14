@@ -1,5 +1,5 @@
 const userId = 'You-0'
-const DEBUG = false
+const DEBUG = true
 const baseUrl = 'http://localhost:5000/'
 // let baseUrl = "https://29.gilobyte.com/";
 

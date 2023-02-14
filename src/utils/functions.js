@@ -246,16 +246,20 @@ const bid = (bid, prevState, setGameState) => {
   state.playerId = state.playerIds[(currPlayerIndex + 1) % 4]
   if (state.bid_pass.length === 3) {
     state.bid_winner = state.bidState.bidder
-    if (state.bidState.bid === 0) state.bidState.bid = 16
-    if ([userId, 'You-1'].includes(state.bidState.bidder)) {
+    if (state.bidState.bid === 15) {
+      state.bidState.bid = 16
+      state.bid_winner = 'Opponent-1'
+    }
+    if (state.teams[0].players.includes(state.bid_winner)) {
       state.teams[0].bid = state.bidState.bid
     } else {
       state.teams[1].bid = state.bidState.bid
+      state.teams[0].bid = 0
     }
     dprint(`Bid winner: ${state.bid_winner} - ${state.bidState.bid}`)
     state.playerId = userId
+    dprint(state)
   }
-
   setGameState(state)
 }
 
