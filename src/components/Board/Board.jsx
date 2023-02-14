@@ -14,7 +14,7 @@ import TrumpSuit from "../TrumpSuit/TrumpSuit";
 import { userId, baseUrl } from "../../utils/constants";
 import RevealTrump from "../RevealTrump/RevealTrump";
 import GameOver from "../GameOver/GameOver";
-import { cacheImages } from "../../utils/utils";
+import { cacheImages, dprint } from "../../utils/utils";
 import { ClipLoader } from "react-spinners";
 import ChooseTrump from "../ChooseTrump/ChooseTrump";
 import ChooseBid from "../ChooseBid/ChooseBid";
@@ -53,7 +53,7 @@ function Board() {
         );
         new_state.hiddenTrumpSuit = data.suit;
         new_state.deal_cards();
-        console.log(`Trump selected: ${data.suit} - ${state.bid_winner}`);
+        dprint(`Trump selected: ${data.suit} - ${state.bid_winner}`);
         setGameState(new_state);
       });
   }

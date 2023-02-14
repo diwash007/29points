@@ -1,5 +1,6 @@
 import React from "react";
 import { ClipLoader } from "react-spinners";
+import { dprint } from "../../utils/utils";
 import "./ChooseTrump.css";
 
 function ChooseTrump({ state, setGameState, theme, isLoading }) {
@@ -10,7 +11,7 @@ function ChooseTrump({ state, setGameState, theme, isLoading }) {
     );
     new_state.hiddenTrumpSuit = trump;
     new_state.deal_cards();
-    console.log(`Trump selected: ${trump} - ${state.playerId}`);
+    dprint(`Trump selected: ${trump} - ${state.playerId}`);
     setGameState(new_state);
   };
   return (

@@ -1,4 +1,4 @@
-import { userId } from "../utils/constants";
+import { DEBUG, userId } from "../utils/constants";
 import { shuffle } from "../utils/utils";
 
 export default class State {
@@ -49,7 +49,7 @@ export default class State {
     trumpSuit,
     trumpRevealed,
     all_cards,
-    fully_visible = false
+    fully_visible = DEBUG
   ) {
     this.playerId = playerId;
     this.playerIds = playerIds;
@@ -63,7 +63,7 @@ export default class State {
     this.hiddenTrumpSuit = trumpSuit;
     this.trumpRevealed = trumpRevealed;
     this.all_cards = all_cards;
-    this.bid_pass = []
+    this.bid_pass = [];
 
     this.fully_visible = fully_visible;
     this.game_over = false;
@@ -79,7 +79,7 @@ export default class State {
     this.bidHistory = [];
     this.bidState = {
       bidder: userId,
-      bid: 15
+      bid: 15,
     };
     this.handsHistory = [];
     this.played = [];
@@ -89,7 +89,6 @@ export default class State {
     ];
     this.hiddenTrumpSuit = null;
     this.trumpSuit = null;
-    // this.bid_winner = userId;
     this.trumpRevealed = false;
     this.all_cards = [[], [], [], []];
 

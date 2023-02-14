@@ -1,5 +1,5 @@
 import { clearTableDelay, userId } from "./constants";
-import { getSuitCards, getHandPower, rankCards, getCardRank } from "./utils";
+import { getSuitCards, getHandPower, rankCards, getCardRank, dprint } from "./utils";
 
 const tallyRound = (prev_state) => {
   let state = Object.assign(
@@ -57,7 +57,7 @@ const tallyRound = (prev_state) => {
   state.playerId = winner;
   const card = document.getElementById(winning_card);
   card.classList.add("winner");
-  console.log(`round over: winner is ${winner} -> ${winning_card}`);
+  dprint(`round over: winner is ${winner} -> ${winning_card}`);
 
   if (state.handsHistory.length === 8) state.game_over = true;
   return state;
@@ -117,7 +117,7 @@ const playGame = (state, action, theme) => {
       ].filter((card) => card !== action.card);
     }
   }
-  console.log(`${new_state.playerId} -> ${action.card}`);
+  dprint(`${new_state.playerId} -> ${action.card}`);
   new_state.playerId = new_state.playerIds[(curr_playerIdx + 1) % 4];
   new_state.cards = new_state.all_cards[(curr_playerIdx + 1) % 4];
 
@@ -142,7 +142,7 @@ const revealTrump = (state) => {
     playerId: new_state.playerId,
   };
   new_state.trumpSuit = new_state.hiddenTrumpSuit;
-  console.log(`Trump revealed by ${state.playerId}`)
+  dprint(`Trump revealed by ${state.playerId}`)
   return new_state;
 };
 
@@ -251,7 +251,7 @@ const bid = (bid, prev_state, setGameState) => {
   history.push(state.playerId);
   history.push(bid);
   state.bidHistory.push(history);
-  console.log(`${state.playerId} bid: ${bid}`);
+  dprint(`${state.playerId} bid: ${bid}`);
 
   if (bid <= state.bidState.bid) {
     state.bid_pass.push(state.playerId)
@@ -269,7 +269,7 @@ const bid = (bid, prev_state, setGameState) => {
     } else {
       state.teams[1].bid = state.bidState.bid;
     }
-    console.log(`Bid winner: ${state.bid_winner} - ${state.bidState.bid}`)
+    dprint(`Bid winner: ${state.bid_winner} - ${state.bidState.bid}`)
     state.playerId = userId;
   }
 

@@ -1,4 +1,4 @@
-import { card_rank, powers } from "./constants";
+import { card_rank, DEBUG, powers } from "./constants";
 import images from "./images";
 
 const shuffle = function (array) {
@@ -60,4 +60,8 @@ const cacheImages = async (setIsLoading) => {
   setIsLoading(false);
 }
 
-export { shuffle, getSuitCards, getHandPower, rankCards, getCardRank, sleep, cacheImages };
+const dprint = (msg) => {
+  if (DEBUG) console.log(msg);
+}
+
+export { shuffle, getSuitCards, getHandPower, rankCards, getCardRank, sleep, cacheImages, dprint };
