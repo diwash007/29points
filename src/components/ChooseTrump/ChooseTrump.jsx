@@ -1,14 +1,11 @@
-import React from "react";
-import { ClipLoader } from "react-spinners";
-import { dprint } from "../../utils/utils";
-import "./ChooseTrump.css";
+import React from 'react';
+import { ClipLoader } from 'react-spinners';
+import { dprint } from '../../utils/utils';
+import './ChooseTrump.css';
 
 function ChooseTrump({ state, setGameState, theme, isLoading }) {
   const selectTrump = (trump) => {
-    let new_state = Object.assign(
-      Object.create(Object.getPrototypeOf(state)),
-      state
-    );
+    let new_state = Object.assign(Object.create(Object.getPrototypeOf(state)), state);
     new_state.hiddenTrumpSuit = trump;
     new_state.deal_cards();
     dprint(`Trump selected: ${trump} - ${state.playerId}`);
@@ -23,22 +20,22 @@ function ChooseTrump({ state, setGameState, theme, isLoading }) {
         <div className="options">
           <img
             src={`/29points/assets/cards/${theme}/1H.png`}
-            onClick={() => selectTrump("H")}
+            onClick={() => selectTrump('H')}
             alt="hearts"
           />
           <img
             src={`/29points/assets/cards/${theme}/1C.png`}
-            onClick={() => selectTrump("C")}
+            onClick={() => selectTrump('C')}
             alt="clubs"
           />
           <img
             src={`/29points/assets/cards/${theme}/1D.png`}
-            onClick={() => selectTrump("D")}
+            onClick={() => selectTrump('D')}
             alt="diamonds"
           />
           <img
             src={`/29points/assets/cards/${theme}/1S.png`}
-            onClick={() => selectTrump("S")}
+            onClick={() => selectTrump('S')}
             alt="spades"
           />
         </div>

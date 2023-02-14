@@ -1,35 +1,35 @@
 #choose-trump-card {
-    position: absolute;
-    z-index: 50;
-    background: linear-gradient(180deg,#f7f7f7 39.58%,#dce1ed 100%);
-    padding: 24px 48px;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%,-50%);
-    border-radius: 8px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    gap: 20px;
-    box-sizing: border-box;
+  position: absolute;
+  z-index: 50;
+  background: linear-gradient(180deg, #f7f7f7 39.58%, #dce1ed 100%);
+  padding: 24px 48px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+  box-sizing: border-box;
 }
 
 #choose-trump-card label {
-    font-size: 18px;
+  font-size: 18px;
 }
 
 .options {
-    display: flex;
-    gap: 10px;
+  display: flex;
+  gap: 10px;
 }
 
 .options img {
-    height: 80px;
-    cursor: pointer;
-    box-shadow: 0px 0px 1px 0px black;
+  height: 80px;
+  cursor: pointer;
+  box-shadow: 0px 0px 1px 0px black;
 }
 
 .options img:hover {
-    box-shadow: 0px 0px 10px 0px green;
+  box-shadow: 0px 0px 10px 0px green;
 }

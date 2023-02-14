@@ -1,6 +1,6 @@
-import React from "react";
-import { bid } from "../../utils/functions";
-import "./ChooseBid.css";
+import React from 'react';
+import { bid } from '../../utils/functions';
+import './ChooseBid.css';
 
 function ChooseBid({ state, setGameState }) {
   let minimumBid = state.bidState.bid;
@@ -19,11 +19,14 @@ function ChooseBid({ state, setGameState }) {
     );
   bidButtons.push(
     <button
-      key={"pass"}
+      key={'pass'}
       onClick={() => {
         bid(0, state, setGameState);
       }}
-    > Pass </button>
+    >
+      {' '}
+      Pass{' '}
+    </button>
   );
   return (
     <div id="bidButtons">

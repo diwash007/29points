@@ -1,13 +1,13 @@
-import React from "react";
-import { userId } from "../../utils/constants";
-import "./TrumpSuit.css";
+import React from 'react';
+import { userId } from '../../utils/constants';
+import './TrumpSuit.css';
 
 function TrumpSuit({ state }) {
   let trumpSuit = state.trumpRevealed
     ? `1${state.trumpSuit}.png`
     : userId === state.bid_winner && state.hiddenTrumpSuit
     ? `1${state.hiddenTrumpSuit}.png`
-    : "back.png";
+    : 'back.png';
   return (
     <div id="trump-board">
       <img
@@ -16,7 +16,7 @@ function TrumpSuit({ state }) {
         height="500px"
         alt="trump suit"
         style={{
-          boxShadow: state.trumpRevealed ? " 0 0 5px 5px lightgreen" : "",
+          boxShadow: state.trumpRevealed ? ' 0 0 5px 5px lightgreen' : ''
         }}
       />
     </div>

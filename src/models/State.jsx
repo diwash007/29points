@@ -1,40 +1,40 @@
-import { DEBUG, userId } from "../utils/constants";
-import { shuffle } from "../utils/utils";
+import { DEBUG, userId } from '../utils/constants';
+import { shuffle } from '../utils/utils';
 
 export default class State {
   deck = [
-    "JH",
-    "9H",
-    "1H",
-    "TH",
-    "KH",
-    "QH",
-    "8H",
-    "7H",
-    "JC",
-    "9C",
-    "1C",
-    "TC",
-    "KC",
-    "QC",
-    "8C",
-    "7C",
-    "JD",
-    "9D",
-    "1D",
-    "TD",
-    "KD",
-    "QD",
-    "8D",
-    "7D",
-    "JS",
-    "9S",
-    "1S",
-    "TS",
-    "KS",
-    "QS",
-    "8S",
-    "7S",
+    'JH',
+    '9H',
+    '1H',
+    'TH',
+    'KH',
+    'QH',
+    '8H',
+    '7H',
+    'JC',
+    '9C',
+    '1C',
+    'TC',
+    'KC',
+    'QC',
+    '8C',
+    '7C',
+    'JD',
+    '9D',
+    '1D',
+    'TD',
+    'KD',
+    'QD',
+    '8D',
+    '7D',
+    'JS',
+    '9S',
+    '1S',
+    'TS',
+    'KS',
+    'QS',
+    '8S',
+    '7S'
   ];
 
   constructor(
@@ -74,18 +74,18 @@ export default class State {
 
   reset() {
     this.playerId = userId;
-    this.playerIds = [userId, "Opponent-0", "You-1", "Opponent-1"];
+    this.playerIds = [userId, 'Opponent-0', 'You-1', 'Opponent-1'];
     this.cards = [];
     this.bidHistory = [];
     this.bidState = {
       bidder: userId,
-      bid: 15,
+      bid: 15
     };
     this.handsHistory = [];
     this.played = [];
     this.teams = [
-      { players: [userId, "You-1"], bid: 16, won: 0 },
-      { players: ["Opponent-0", "Opponent-1"], bid: 0, won: 0 },
+      { players: [userId, 'You-1'], bid: 16, won: 0 },
+      { players: ['Opponent-0', 'Opponent-1'], bid: 0, won: 0 }
     ];
     this.hiddenTrumpSuit = null;
     this.trumpSuit = null;

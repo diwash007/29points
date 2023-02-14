@@ -1,87 +1,89 @@
 :root {
-    --card-height: 80px;
-    --card-width: 56px;
+  --card-height: 80px;
+  --card-width: 56px;
 }
 
 .card {
-    height: var(--card-height);
-    width: var(--card-width);
-    position: absolute;
-    transition: all 0.3s linear;
+  height: var(--card-height);
+  width: var(--card-width);
+  position: absolute;
+  transition: all 0.3s linear;
 }
 
 .legal-card {
-    transform: translateY(-10px);
+  transform: translateY(-10px);
 }
 
 .legal-card:hover {
-    transform: translateY(-20px);
-    box-shadow: 0px 0px 5px 1px lime;
+  transform: translateY(-20px);
+  box-shadow: 0px 0px 5px 1px lime;
 }
 
 .winner {
-    box-shadow: 0 0 5px 5px lightgreen;
+  box-shadow: 0 0 5px 5px lightgreen;
 }
 
 .p1-draw {
-    animation: p1-animation 0.5s linear forwards;
+  animation: p1-animation 0.5s linear forwards;
 }
 
 .p2-draw {
-    animation: p2-animation 0.5s linear forwards;
+  animation: p2-animation 0.5s linear forwards;
 }
 
 .p3-draw {
-    animation: p3-animation 0.5s linear forwards;
+  animation: p3-animation 0.5s linear forwards;
 }
 
 .p4-draw {
-    animation: p4-animation 0.5s linear forwards;
+  animation: p4-animation 0.5s linear forwards;
 }
 
 @keyframes p1-animation {
-    0% {
-        top: 0%;
-    }
-    100% {
-        top: 50%;
-        left: 50%;
-        transform: translateY(calc(160px - var(--table-height)/2)) translate(-50%, -50%) rotate(180deg);
-    }
+  0% {
+    top: 0%;
+  }
+  100% {
+    top: 50%;
+    left: 50%;
+    transform: translateY(calc(160px - var(--table-height) / 2)) translate(-50%, -50%)
+      rotate(180deg);
+  }
 }
 
 @keyframes p2-animation {
-    0% {
-        top: 0%;
-        left: 0%;
-    }
-    100% {
-        top: 50%;
-        left:50%;
-        transform: translateY(calc(var(--table-width)/2 - 190px)) translate(-50%, -50%) rotate(180deg);
-    }
+  0% {
+    top: 0%;
+    left: 0%;
+  }
+  100% {
+    top: 50%;
+    left: 50%;
+    transform: translateY(calc(var(--table-width) / 2 - 190px)) translate(-50%, -50%) rotate(180deg);
+  }
 }
 
 @keyframes p3-animation {
-    0% {
-        top: 0%;
-        left: 0%;
-    }
-    100% {
-        top: 50%;
-        left:50%;
-        transform: translateY(calc(var(--table-height)/2 - 160px)) translate(-50%, -50%) rotate(180deg);
-    }
+  0% {
+    top: 0%;
+    left: 0%;
+  }
+  100% {
+    top: 50%;
+    left: 50%;
+    transform: translateY(calc(var(--table-height) / 2 - 160px)) translate(-50%, -50%)
+      rotate(180deg);
+  }
 }
 
 @keyframes p4-animation {
-    0% {
-        top: 0%;
-        left: 0%;
-    }
-    100%{
-        top: 50%;
-        left:50%;
-        transform: translateY(calc(190px - var(--table-width)/2)) translate(-50%, -50%) rotate(180deg);
-    }
+  0% {
+    top: 0%;
+    left: 0%;
+  }
+  100% {
+    top: 50%;
+    left: 50%;
+    transform: translateY(calc(190px - var(--table-width) / 2)) translate(-50%, -50%) rotate(180deg);
+  }
 }

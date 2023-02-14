@@ -1,67 +1,64 @@
-import { card_rank, DEBUG, powers } from "./constants";
-import images from "./images";
+import { cardRank, DEBUG, powers } from './constants'
+import images from './images'
 
 const shuffle = function (array) {
-  let currentIndex = array.length,
-    randomIndex;
+  let currentIndex = array.length
+  let randomIndex
   while (currentIndex !== 0) {
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex--;
-    [array[currentIndex], array[randomIndex]] = [
-      array[randomIndex],
-      array[currentIndex],
-    ];
+    randomIndex = Math.floor(Math.random() * currentIndex)
+    currentIndex--
+    ;[array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]]
   }
-  return array;
-};
+  return array
+}
 
-const getSuitCards = (cards, card_suit) => {
-  return cards.filter((card) => card[1] === card_suit);
-};
+const getSuitCards = (cards, cardSuit) => {
+  return cards.filter((card) => card[1] === cardSuit)
+}
 
 const getHandPower = (cards) => {
-  let power = 0;
-  for (let i = 0; i < cards.length; i++) power += powers[cards[i][0]];
-  return power;
-};
+  let power = 0
+  for (let i = 0; i < cards.length; i++) power += powers[cards[i][0]]
+  return power
+}
 
 const rankCards = function (cards) {
-  let cards_rank = {};
+  const cardsRank = {}
   for (let i = 0; i < cards.length; i++) {
-    cards_rank[cards[i]] = card_rank[cards[i][0]];
+    cardsRank[cards[i]] = cardRank[cards[i][0]]
   }
-  return Object.keys(cards_rank).sort(function (a, b) {
-    return cards_rank[b] - cards_rank[a];
-  });
-};
+  return Object.keys(cardsRank).sort(function (a, b) {
+    return cardsRank[b] - cardsRank[a]
+  })
+}
 
 const getCardRank = (card) => {
-  return card_rank[card[0]];
+  return cardRank[card[0]]
 }
 
 function sleep(ms) {
-  var start = Date.now(),
-    now = start;
+  const start = Date.now()
+  let now = start
   while (now - start < ms) {
-    now = Date.now();
+    now = Date.now()
   }
 }
 
 const cacheImages = async (setIsLoading) => {
   const promises = await images.map((src) => {
     return new Promise(function (resolve, reject) {
-      const img = new Image();
-      img.src = src;
-      img.onload = resolve();
-      img.onerror = reject();
+      const img = new Image()
+      img.src = src
+      img.onload = resolve()
+      img.onerror = reject(new Error())
     })
-  });
-  await Promise.all(promises);
-  setIsLoading(false);
+  })
+  await Promise.all(promises)
+  setIsLoading(false)
 }
 
 const dprint = (msg) => {
-  if (DEBUG) console.log(msg);
+  if (DEBUG) console.log(msg)
 }
 
-export { shuffle, getSuitCards, getHandPower, rankCards, getCardRank, sleep, cacheImages, dprint };
+export { shuffle, getSuitCards, getHandPower, rankCards, getCardRank, sleep, cacheImages, dprint }

@@ -1,56 +1,44 @@
-import { React, useEffect, useState } from "react";
-import ScoreBoard from "../ScoreBoard/ScoreBoard";
-import "./Board.css";
-import State from "../../models/State";
-import Action from "../../models/Action";
-import Hand from "../Hand/Hand";
-import {
-  playGame,
-  roundOver,
-  canRevealTrump,
-  bid,
-} from "../../utils/functions";
-import TrumpSuit from "../TrumpSuit/TrumpSuit";
-import { userId, baseUrl } from "../../utils/constants";
-import RevealTrump from "../RevealTrump/RevealTrump";
-import GameOver from "../GameOver/GameOver";
-import { cacheImages, dprint } from "../../utils/utils";
-import { ClipLoader } from "react-spinners";
-import ChooseTrump from "../ChooseTrump/ChooseTrump";
-import ChooseBid from "../ChooseBid/ChooseBid";
+import { React, useEffect, useState } from 'react';
+import ScoreBoard from '../ScoreBoard/ScoreBoard';
+import './Board.css';
+import State from '../../models/State';
+import Action from '../../models/Action';
+import Hand from '../Hand/Hand';
+import { playGame, roundOver, canRevealTrump, bid } from '../../utils/functions';
+import TrumpSuit from '../TrumpSuit/TrumpSuit';
+import { userId, baseUrl } from '../../utils/constants';
+import RevealTrump from '../RevealTrump/RevealTrump';
+import GameOver from '../GameOver/GameOver';
+import { cacheImages, dprint } from '../../utils/utils';
+import { ClipLoader } from 'react-spinners';
+import ChooseTrump from '../ChooseTrump/ChooseTrump';
+import ChooseBid from '../ChooseBid/ChooseBid';
 
 function Board() {
   const [state, setGameState] = useState(new State());
   const [isLoading, setIsLoading] = useState(true);
-  const [theme, setTheme] = useState("");
+  const [theme, setTheme] = useState('');
 
   useEffect(() => {
-    let cardTheme = localStorage.getItem("theme");
-    if (!cardTheme) localStorage.setItem("theme", "bhoos");
-    setTheme(cardTheme ? cardTheme : "bhoos");
+    let cardTheme = localStorage.getItem('theme');
+    if (!cardTheme) localStorage.setItem('theme', 'bhoos');
+    setTheme(cardTheme ? cardTheme : 'bhoos');
   }, [theme]);
 
   useEffect(() => {
     cacheImages(setIsLoading);
   }, []);
 
-  if (
-    state.bid_winner !== null &&
-    state.hiddenTrumpSuit === null &&
-    state.bid_winner !== userId
-  ) {
+  if (state.bid_winner !== null && state.hiddenTrumpSuit === null && state.bid_winner !== userId) {
     const options = {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(state),
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(state)
     };
-    fetch(baseUrl + "chooseTrump", options)
+    fetch(baseUrl + 'chooseTrump', options)
       .then((response) => response.json())
       .then((data) => {
-        let new_state = Object.assign(
-          Object.create(Object.getPrototypeOf(state)),
-          state
-        );
+        let new_state = Object.assign(Object.create(Object.getPrototypeOf(state)), state);
         new_state.hiddenTrumpSuit = data.suit;
         new_state.deal_cards();
         dprint(`Trump selected: ${data.suit} - ${state.bid_winner}`);
@@ -61,12 +49,12 @@ function Board() {
   if (state.bid_winner === null) {
     if (state.playerId !== userId) {
       const options = {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(state),
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(state)
       };
       setTimeout(() => {
-        fetch(baseUrl + "bid", options)
+        fetch(baseUrl + 'bid', options)
           .then((response) => response.json())
           .then((data) => {
             bid(data.bid, state, setGameState);
@@ -74,34 +62,22 @@ function Board() {
       }, 1000);
     }
   }
-  if (
-    state.game_over !== true &&
-    state.round_over !== true &&
-    state.bid_winner
-  ) {
+  if (state.game_over !== true && state.round_over !== true && state.bid_winner) {
     if (state.playerId !== userId) {
       const options = {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(state),
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(state)
       };
-      fetch(baseUrl + "play", options)
+      fetch(baseUrl + 'play', options)
         .then((response) => response.json())
         .then((data) => {
-          let new_state = playGame(
-            state,
-            new Action(data.card, data.revealTrump),
-            theme
-          );
+          let new_state = playGame(state, new Action(data.card, data.revealTrump), theme);
           roundOver(new_state, setGameState);
         });
     } else {
       if (state.all_cards[0].length === 1) {
-        let new_state = playGame(
-          state,
-          new Action(state.all_cards[0][0], null),
-          theme
-        );
+        let new_state = playGame(state, new Action(state.all_cards[0][0], null), theme);
         roundOver(new_state, setGameState);
       }
     }
@@ -116,18 +92,14 @@ function Board() {
               <ClipLoader color="white" />
             ) : (
               <>
-                {state.game_over && (
-                  <GameOver teams={state.teams} setGameState={setGameState} />
-                )}
+                {state.game_over && <GameOver teams={state.teams} setGameState={setGameState} />}
                 <ScoreBoard teams={state.teams} />
                 <TrumpSuit state={state} />
                 {state.played.length > 0 &&
                   state.playerId === userId &&
                   !state.trumpRevealed &&
                   canRevealTrump(state) &&
-                  !state.round_over && (
-                    <RevealTrump state={state} setGameState={setGameState} />
-                  )}
+                  !state.round_over && <RevealTrump state={state} setGameState={setGameState} />}
 
                 {!state.hiddenTrumpSuit && state.bid_winner === userId && (
                   <ChooseTrump

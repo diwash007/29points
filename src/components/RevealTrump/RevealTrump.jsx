@@ -1,6 +1,6 @@
-import React from "react";
-import { revealTrump } from "../../utils/functions";
-import "./RevealTrump.css";
+import React from 'react';
+import { revealTrump } from '../../utils/functions';
+import './RevealTrump.css';
 
 function RevealTrump({ state, setGameState }) {
   return (

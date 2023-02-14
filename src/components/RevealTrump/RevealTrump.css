@@ -1,10 +1,9 @@
 #reveal-trump {
-    height: 50px;
-    width: 155px;
-    position: absolute;
-    bottom: 50px;
-    right: 50px;
-    cursor: pointer;
-    z-index: 1;
+  height: 50px;
+  width: 155px;
+  position: absolute;
+  bottom: 50px;
+  right: 50px;
+  cursor: pointer;
+  z-index: 1;
 }
-
