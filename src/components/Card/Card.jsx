@@ -1,15 +1,15 @@
-import React from 'react';
-import './Card.css';
-import Action from '../../models/Action';
-import { getLegalCards, playGame, roundOver } from '../../utils/functions';
-import { userId } from '../../utils/constants';
+import React from 'react'
+import './Card.css'
+import Action from '../../models/Action'
+import { getLegalCards, playGame, roundOver } from '../../utils/functions'
+import { userId } from '../../utils/constants'
 
 function Card({ card, index, state, setGameState, theme }) {
-  let isLegalCard = getLegalCards(state).includes(card);
+  const isLegalCard = getLegalCards(state).includes(card)
   function drawCard(e) {
-    let action = new Action(e.target.id, null);
-    let new_state = playGame(state, action, theme);
-    roundOver(new_state, setGameState);
+    const action = new Action(e.target.id, null)
+    const newState = playGame(state, action, theme)
+    roundOver(newState, setGameState)
   }
   return (
     <img
@@ -21,7 +21,7 @@ function Card({ card, index, state, setGameState, theme }) {
       className={`card ${
         card &&
         state.playerId === userId &&
-        !state.round_over &&
+        !state.roundOver &&
         isLegalCard &&
         state.hiddenTrumpSuit
           ? 'legal-card'
@@ -33,14 +33,14 @@ function Card({ card, index, state, setGameState, theme }) {
       onClick={
         card &&
         state.playerId === userId &&
-        !state.round_over &&
+        !state.roundOver &&
         isLegalCard &&
         state.hiddenTrumpSuit
           ? drawCard
           : null
       }
     />
-  );
+  )
 }
 
-export default Card;
+export default Card

@@ -1,5 +1,5 @@
-import { DEBUG, userId } from '../utils/constants';
-import { shuffle } from '../utils/utils';
+import { DEBUG, userId } from '../utils/constants'
+import { shuffle } from '../utils/utils'
 
 export default class State {
   deck = [
@@ -35,7 +35,7 @@ export default class State {
     'QS',
     '8S',
     '7S'
-  ];
+  ]
 
   constructor(
     playerId,
@@ -48,60 +48,59 @@ export default class State {
     handsHistory,
     trumpSuit,
     trumpRevealed,
-    all_cards,
-    fully_visible = DEBUG
+    allCards,
+    fullyVisible = DEBUG
   ) {
-    this.playerId = playerId;
-    this.playerIds = playerIds;
-    this.teams = teams;
-    this.cards = cards;
-    this.bidHistory = bidHistory;
-    this.bidState = bidState;
-    this.played = played;
-    this.handsHistory = handsHistory;
-    this.trumpSuit = trumpSuit;
-    this.hiddenTrumpSuit = trumpSuit;
-    this.trumpRevealed = trumpRevealed;
-    this.all_cards = all_cards;
-    this.bid_pass = [];
+    this.playerId = playerId
+    this.playerIds = playerIds
+    this.teams = teams
+    this.cards = cards
+    this.bidHistory = bidHistory
+    this.bidState = bidState
+    this.played = played
+    this.handsHistory = handsHistory
+    this.trumpSuit = trumpSuit
+    this.hiddenTrumpSuit = trumpSuit
+    this.trumpRevealed = trumpRevealed
+    this.allCards = allCards
+    this.bidPass = []
 
-    this.fully_visible = fully_visible;
-    this.game_over = false;
-    this.round_over = false;
-    this.bid_winner = null;
-    this.reset();
+    this.fullyVisible = fullyVisible
+    this.gameOver = false
+    this.roundOver = false
+    this.bidWinner = null
+    this.reset()
   }
 
   reset() {
-    this.playerId = userId;
-    this.playerIds = [userId, 'Opponent-0', 'You-1', 'Opponent-1'];
-    this.cards = [];
-    this.bidHistory = [];
+    this.playerId = userId
+    this.playerIds = [userId, 'Opponent-0', 'You-1', 'Opponent-1']
+    this.cards = []
+    this.bidHistory = []
     this.bidState = {
       bidder: userId,
       bid: 15
-    };
-    this.handsHistory = [];
-    this.played = [];
+    }
+    this.handsHistory = []
+    this.played = []
     this.teams = [
       { players: [userId, 'You-1'], bid: 16, won: 0 },
       { players: ['Opponent-0', 'Opponent-1'], bid: 0, won: 0 }
-    ];
-    this.hiddenTrumpSuit = null;
-    this.trumpSuit = null;
-    this.trumpRevealed = false;
-    this.all_cards = [[], [], [], []];
+    ]
+    this.hiddenTrumpSuit = null
+    this.trumpSuit = null
+    this.trumpRevealed = false
+    this.allCards = [[], [], [], []]
 
-    this.deal_cards();
-    this.cards = this.all_cards[0];
-    // this.deal_cards();
+    this.dealCards()
+    this.cards = this.allCards[0]
   }
 
-  deal_cards() {
-    let shuffled_deck = shuffle(this.deck);
+  dealCards() {
+    const shuffledDeck = shuffle(this.deck)
     for (let i = 0; i < 4; i++) {
       for (let j = 0; j < 4; j++) {
-        this.all_cards[i].push(shuffled_deck.pop());
+        this.allCards[i].push(shuffledDeck.pop())
       }
     }
   }

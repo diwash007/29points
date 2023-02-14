@@ -52,14 +52,14 @@ const tallyRound = (prevState) => {
   card.classList.add('winner')
   dprint(`round over: winner is ${winner} -> ${winningCard}`)
 
-  if (state.handsHistory.length === 8) state.game_over = true
+  if (state.handsHistory.length === 8) state.gameOver = true
   return state
 }
 
 const clearTable = (prevState) => {
   const state = Object.assign(Object.create(Object.getPrototypeOf(prevState)), prevState)
 
-  state.cards = state.all_cards[state.playerIds.indexOf(state.playerId)]
+  state.cards = state.allCards[state.playerIds.indexOf(state.playerId)]
   state.played.length = 0
   document.getElementsByClassName('p1-draw')[0].style.display = 'none'
   for (let i = 1; i < 5; i++) {
@@ -69,7 +69,7 @@ const clearTable = (prevState) => {
     hand.firstChild.remove()
   }
 
-  if (state.handsHistory.length === 8) state.game_over = true
+  if (state.handsHistory.length === 8) state.gameOver = true
   return state
 }
 
@@ -78,7 +78,7 @@ const playGame = (state, action, theme) => {
 
   const currPlayerIndex = newState.playerIds.indexOf(newState.playerId)
 
-  if (action.reveal_trump) {
+  if (action.revealTrump) {
     return revealTrump(newState)
   } else {
     newState.played.push(action.card)
@@ -90,7 +90,7 @@ const playGame = (state, action, theme) => {
       card.classList.add(`p${currPlayerIndex + 1}-draw`)
       hand.firstChild.before(card)
 
-      newState.all_cards[currPlayerIndex] = newState.all_cards[currPlayerIndex].filter(
+      newState.allCards[currPlayerIndex] = newState.allCards[currPlayerIndex].filter(
         (card) => card !== action.card
       )
     } else {
@@ -99,14 +99,14 @@ const playGame = (state, action, theme) => {
       const cardClone = card.cloneNode(true)
       cardClone.classList.add('p1-draw')
       hand.firstChild.before(cardClone)
-      newState.all_cards[currPlayerIndex] = newState.all_cards[currPlayerIndex].filter(
+      newState.allCards[currPlayerIndex] = newState.allCards[currPlayerIndex].filter(
         (card) => card !== action.card
       )
     }
   }
   dprint(`${newState.playerId} -> ${action.card}`)
   newState.playerId = newState.playerIds[(currPlayerIndex + 1) % 4]
-  newState.cards = newState.all_cards[(currPlayerIndex + 1) % 4]
+  newState.cards = newState.allCards[(currPlayerIndex + 1) % 4]
 
   return newState
 }
@@ -114,7 +114,7 @@ const playGame = (state, action, theme) => {
 const canRevealTrump = (state) => {
   const currSuit = state.played[0][1]
   const currPlayerIndex = state.playerIds.indexOf(state.playerId)
-  if (!state.all_cards[currPlayerIndex].toString().includes(currSuit)) return true
+  if (!state.allCards[currPlayerIndex].toString().includes(currSuit)) return true
   return false
 }
 
@@ -147,11 +147,11 @@ const weWon = (teams) => {
 const roundOver = (newState, setGameState) => {
   setGameState(newState)
   if (newState.played.length === 4) {
-    newState.round_over = true
+    newState.roundOver = true
     newState = tallyRound(newState)
     setTimeout(function () {
       newState = clearTable(newState)
-      newState.round_over = false
+      newState.roundOver = false
       setGameState(newState)
     }, clearTableDelay)
   }
@@ -160,7 +160,7 @@ const roundOver = (newState, setGameState) => {
 const getLegalCards = (state) => {
   const cards = []
   const currPlayerIndex = 0
-  const playerCards = state.all_cards[currPlayerIndex]
+  const playerCards = state.allCards[currPlayerIndex]
 
   if (state.played.length === 0) {
     for (const card of playerCards) cards.push(card)
@@ -238,27 +238,26 @@ const bid = (bid, prevState, setGameState) => {
   // let hand = document.getElementById(`p${currPlayerIndex + 1}`)
 
   if (bid <= state.bidState.bid) {
-    state.bid_pass.push(state.playerId)
+    state.bidPass.push(state.playerId)
   } else if (bid > 0) {
     state.bidState.bidder = state.playerId
     state.bidState.bid = bid
   }
   state.playerId = state.playerIds[(currPlayerIndex + 1) % 4]
-  if (state.bid_pass.length === 3) {
-    state.bid_winner = state.bidState.bidder
+  if (state.bidPass.length === 3) {
+    state.bidWinner = state.bidState.bidder
     if (state.bidState.bid === 15) {
       state.bidState.bid = 16
-      state.bid_winner = 'Opponent-1'
+      state.bidWinner = 'Opponent-1'
     }
-    if (state.teams[0].players.includes(state.bid_winner)) {
+    if (state.teams[0].players.includes(state.bidWinner)) {
       state.teams[0].bid = state.bidState.bid
     } else {
       state.teams[1].bid = state.bidState.bid
       state.teams[0].bid = 0
     }
-    dprint(`Bid winner: ${state.bid_winner} - ${state.bidState.bid}`)
+    dprint(`Bid winner: ${state.bidWinner} - ${state.bidState.bid}`)
     state.playerId = userId
-    dprint(state)
   }
   setGameState(state)
 }

@@ -1,16 +1,16 @@
-import React from 'react';
-import { ClipLoader } from 'react-spinners';
-import { dprint } from '../../utils/utils';
-import './ChooseTrump.css';
+import React from 'react'
+import { ClipLoader } from 'react-spinners'
+import { dprint } from '../../utils/utils'
+import './ChooseTrump.css'
 
 function ChooseTrump({ state, setGameState, theme, isLoading }) {
   const selectTrump = (trump) => {
-    let new_state = Object.assign(Object.create(Object.getPrototypeOf(state)), state);
-    new_state.hiddenTrumpSuit = trump;
-    new_state.deal_cards();
-    dprint(`Trump selected: ${trump} - ${state.playerId}`);
-    setGameState(new_state);
-  };
+    const newState = Object.assign(Object.create(Object.getPrototypeOf(state)), state)
+    newState.hiddenTrumpSuit = trump
+    newState.dealCards()
+    dprint(`Trump selected: ${trump} - ${state.playerId}`)
+    setGameState(newState)
+  }
   return (
     <div id="choose-trump-card">
       <label>Choose trump suit</label>
@@ -41,7 +41,7 @@ function ChooseTrump({ state, setGameState, theme, isLoading }) {
         </div>
       )}
     </div>
-  );
+  )
 }
 
-export default ChooseTrump;
+export default ChooseTrump

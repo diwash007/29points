@@ -1,6 +1,6 @@
-import React from 'react';
-import { revealTrump } from '../../utils/functions';
-import './RevealTrump.css';
+import React from 'react'
+import { revealTrump } from '../../utils/functions'
+import './RevealTrump.css'
 
 function RevealTrump({ state, setGameState }) {
   return (
@@ -10,7 +10,7 @@ function RevealTrump({ state, setGameState }) {
       alt="reveal trump"
       onClick={() => setGameState(revealTrump(state))}
     />
-  );
+  )
 }
 
-export default RevealTrump;
+export default RevealTrump

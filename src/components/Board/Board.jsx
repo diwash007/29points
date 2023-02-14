@@ -1,84 +1,84 @@
-import { React, useEffect, useState } from 'react';
-import ScoreBoard from '../ScoreBoard/ScoreBoard';
-import './Board.css';
-import State from '../../models/State';
-import Action from '../../models/Action';
-import Hand from '../Hand/Hand';
-import { playGame, roundOver, canRevealTrump, bid } from '../../utils/functions';
-import TrumpSuit from '../TrumpSuit/TrumpSuit';
-import { userId, baseUrl } from '../../utils/constants';
-import RevealTrump from '../RevealTrump/RevealTrump';
-import GameOver from '../GameOver/GameOver';
-import { cacheImages, dprint } from '../../utils/utils';
-import { ClipLoader } from 'react-spinners';
-import ChooseTrump from '../ChooseTrump/ChooseTrump';
-import ChooseBid from '../ChooseBid/ChooseBid';
+import { React, useEffect, useState } from 'react'
+import ScoreBoard from '../ScoreBoard/ScoreBoard'
+import './Board.css'
+import State from '../../models/State'
+import Action from '../../models/Action'
+import Hand from '../Hand/Hand'
+import { playGame, roundOver, canRevealTrump, bid } from '../../utils/functions'
+import TrumpSuit from '../TrumpSuit/TrumpSuit'
+import { userId, baseUrl } from '../../utils/constants'
+import RevealTrump from '../RevealTrump/RevealTrump'
+import GameOver from '../GameOver/GameOver'
+import { cacheImages, dprint } from '../../utils/utils'
+import { ClipLoader } from 'react-spinners'
+import ChooseTrump from '../ChooseTrump/ChooseTrump'
+import ChooseBid from '../ChooseBid/ChooseBid'
 
 function Board() {
-  const [state, setGameState] = useState(new State());
-  const [isLoading, setIsLoading] = useState(true);
-  const [theme, setTheme] = useState('');
+  const [state, setGameState] = useState(new State())
+  const [isLoading, setIsLoading] = useState(true)
+  const [theme, setTheme] = useState('')
 
   useEffect(() => {
-    let cardTheme = localStorage.getItem('theme');
-    if (!cardTheme) localStorage.setItem('theme', 'bhoos');
-    setTheme(cardTheme ? cardTheme : 'bhoos');
-  }, [theme]);
+    const cardTheme = localStorage.getItem('theme')
+    if (!cardTheme) localStorage.setItem('theme', 'bhoos')
+    setTheme(cardTheme || 'bhoos')
+  }, [theme])
 
   useEffect(() => {
-    cacheImages(setIsLoading);
-  }, []);
+    cacheImages(setIsLoading)
+  }, [])
 
-  if (state.bid_winner !== null && state.hiddenTrumpSuit === null && state.bid_winner !== userId) {
+  if (state.bidWinner !== null && state.hiddenTrumpSuit === null && state.bidWinner !== userId) {
     const options = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(state)
-    };
+    }
     fetch(baseUrl + 'chooseTrump', options)
       .then((response) => response.json())
       .then((data) => {
-        let new_state = Object.assign(Object.create(Object.getPrototypeOf(state)), state);
-        new_state.hiddenTrumpSuit = data.suit;
-        new_state.deal_cards();
-        dprint(`Trump selected: ${data.suit} - ${state.bid_winner}`);
-        setGameState(new_state);
-      });
+        const newState = Object.assign(Object.create(Object.getPrototypeOf(state)), state)
+        newState.hiddenTrumpSuit = data.suit
+        newState.dealCards()
+        dprint(`Trump selected: ${data.suit} - ${state.bidWinner}`)
+        setGameState(newState)
+      })
   }
 
-  if (state.bid_winner === null) {
+  if (state.bidWinner === null) {
     if (state.playerId !== userId) {
       const options = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(state)
-      };
+      }
       setTimeout(() => {
         fetch(baseUrl + 'bid', options)
           .then((response) => response.json())
           .then((data) => {
-            bid(data.bid, state, setGameState);
-          });
-      }, 1000);
+            bid(data.bid, state, setGameState)
+          })
+      }, 1000)
     }
   }
-  if (state.game_over !== true && state.round_over !== true && state.bid_winner) {
+  if (state.gameOver !== true && state.roundOver !== true && state.bidWinner) {
     if (state.playerId !== userId) {
       const options = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(state)
-      };
+      }
       fetch(baseUrl + 'play', options)
         .then((response) => response.json())
         .then((data) => {
-          let new_state = playGame(state, new Action(data.card, data.revealTrump), theme);
-          roundOver(new_state, setGameState);
-        });
+          const newState = playGame(state, new Action(data.card, data.revealTrump), theme)
+          roundOver(newState, setGameState)
+        })
     } else {
-      if (state.all_cards[0].length === 1) {
-        let new_state = playGame(state, new Action(state.all_cards[0][0], null), theme);
-        roundOver(new_state, setGameState);
+      if (state.allCards[0].length === 1) {
+        const newState = playGame(state, new Action(state.allCards[0][0], null), theme)
+        roundOver(newState, setGameState)
       }
     }
   }
@@ -92,16 +92,16 @@ function Board() {
               <ClipLoader color="white" />
             ) : (
               <>
-                {state.game_over && <GameOver teams={state.teams} setGameState={setGameState} />}
+                {state.gameOver && <GameOver teams={state.teams} setGameState={setGameState} />}
                 <ScoreBoard teams={state.teams} />
                 <TrumpSuit state={state} />
                 {state.played.length > 0 &&
                   state.playerId === userId &&
                   !state.trumpRevealed &&
                   canRevealTrump(state) &&
-                  !state.round_over && <RevealTrump state={state} setGameState={setGameState} />}
+                  !state.roundOver && <RevealTrump state={state} setGameState={setGameState} />}
 
-                {!state.hiddenTrumpSuit && state.bid_winner === userId && (
+                {!state.hiddenTrumpSuit && state.bidWinner === userId && (
                   <ChooseTrump
                     state={state}
                     setGameState={setGameState}
@@ -110,12 +110,12 @@ function Board() {
                   />
                 )}
 
-                {state.playerId === userId && state.bid_winner === null && (
+                {state.playerId === userId && state.bidWinner === null && (
                   <ChooseBid state={state} setGameState={setGameState} />
                 )}
                 <div className="team2">
                   <Hand
-                    cards={state.all_cards[1]}
+                    cards={state.allCards[1]}
                     player="p2"
                     key="p2"
                     state={state}
@@ -123,7 +123,7 @@ function Board() {
                     theme={theme}
                   />
                   <Hand
-                    cards={state.all_cards[3]}
+                    cards={state.allCards[3]}
                     player="p4"
                     key="p4"
                     state={state}
@@ -133,7 +133,7 @@ function Board() {
                 </div>
                 <div className="team1">
                   <Hand
-                    cards={state.all_cards[2]}
+                    cards={state.allCards[2]}
                     player="p3"
                     key="p3"
                     state={state}
@@ -141,7 +141,7 @@ function Board() {
                     theme={theme}
                   />
                   <Hand
-                    cards={state.all_cards[0]}
+                    cards={state.allCards[0]}
                     player="p1"
                     key="p1"
                     state={state}
@@ -155,7 +155,7 @@ function Board() {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-export default Board;
+export default Board
