@@ -8,9 +8,9 @@ function ChooseTrump({ state, setGameState, theme, isLoading }) {
       Object.create(Object.getPrototypeOf(state)),
       state
     );
-    console.log("hi");
     new_state.hiddenTrumpSuit = trump;
     new_state.deal_cards();
+    console.log(`Trump selected: ${trump} - ${state.playerId}`);
     setGameState(new_state);
   };
   return (

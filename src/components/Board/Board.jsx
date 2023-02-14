@@ -33,6 +33,31 @@ function Board() {
   useEffect(() => {
     cacheImages(setIsLoading);
   }, []);
+
+  if (
+    state.bid_winner !== null &&
+    state.hiddenTrumpSuit === null &&
+    state.bid_winner !== userId
+  ) {
+    const options = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(state),
+    };
+    fetch(baseUrl + "chooseTrump", options)
+      .then((response) => response.json())
+      .then((data) => {
+        let new_state = Object.assign(
+          Object.create(Object.getPrototypeOf(state)),
+          state
+        );
+        new_state.hiddenTrumpSuit = data.suit;
+        new_state.deal_cards();
+        console.log(`Trump selected: ${data.suit} - ${state.bid_winner}`);
+        setGameState(new_state);
+      });
+  }
+
   if (state.bid_winner === null) {
     if (state.playerId !== userId) {
       const options = {
@@ -40,11 +65,13 @@ function Board() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(state),
       };
-      fetch(baseUrl + "bid", options)
-        .then((response) => response.json())
-        .then((data) => {
-          bid(data.bid, state, setGameState);
-        });
+      setTimeout(() => {
+        fetch(baseUrl + "bid", options)
+          .then((response) => response.json())
+          .then((data) => {
+            bid(data.bid, state, setGameState);
+          });
+      }, 1000);
     }
   }
   if (
@@ -102,7 +129,7 @@ function Board() {
                     <RevealTrump state={state} setGameState={setGameState} />
                   )}
 
-                {!state.hiddenTrumpSuit && state.bid_winner !== null && (
+                {!state.hiddenTrumpSuit && state.bid_winner === userId && (
                   <ChooseTrump
                     state={state}
                     setGameState={setGameState}
@@ -111,7 +138,7 @@ function Board() {
                   />
                 )}
 
-                {state.playerId === userId && state.bid_winner === null &&(
+                {state.playerId === userId && state.bid_winner === null && (
                   <ChooseBid state={state} setGameState={setGameState} />
                 )}
                 <div className="team2">

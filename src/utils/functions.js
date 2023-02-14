@@ -142,6 +142,7 @@ const revealTrump = (state) => {
     playerId: new_state.playerId,
   };
   new_state.trumpSuit = new_state.hiddenTrumpSuit;
+  console.log(`Trump revealed by ${state.playerId}`)
   return new_state;
 };
 
@@ -262,6 +263,13 @@ const bid = (bid, prev_state, setGameState) => {
   state.playerId = state.playerIds[(state.playerIds.indexOf(state.playerId) + 1) % 4]
   if (state.bid_pass.length === 3) {
     state.bid_winner = state.bidState.bidder;
+    if (state.bidState.bid === 0) state.bidState.bid = 16
+    if ([userId, "You-1"].includes(state.bidState.bidder)) {
+      state.teams[0].bid = state.bidState.bid;
+    } else {
+      state.teams[1].bid = state.bidState.bid;
+    }
+    console.log(`Bid winner: ${state.bid_winner} - ${state.bidState.bid}`)
     state.playerId = userId;
   }
 
