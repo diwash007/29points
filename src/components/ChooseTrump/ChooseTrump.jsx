@@ -10,7 +10,7 @@ function ChooseTrump({ state, setGameState, theme, isLoading }) {
     );
     console.log("hi");
     new_state.hiddenTrumpSuit = trump;
-    console.log(new_state);
+    new_state.deal_cards();
     setGameState(new_state);
   };
   return (

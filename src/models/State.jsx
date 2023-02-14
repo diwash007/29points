@@ -63,6 +63,7 @@ export default class State {
     this.hiddenTrumpSuit = trumpSuit;
     this.trumpRevealed = trumpRevealed;
     this.all_cards = all_cards;
+    this.bid_pass = []
 
     this.fully_visible = fully_visible;
     this.game_over = false;
@@ -77,10 +78,8 @@ export default class State {
     this.cards = [];
     this.bidHistory = [];
     this.bidState = {
-      defenderId: userId,
-      challengerId: "Opponent-0",
-      defenderBid: 0,
-      challengerBid: 0,
+      bidder: userId,
+      bid: 15
     };
     this.handsHistory = [];
     this.played = [];

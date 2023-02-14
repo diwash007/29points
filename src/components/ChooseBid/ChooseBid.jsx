@@ -3,10 +3,10 @@ import { bid } from "../../utils/functions";
 import "./ChooseBid.css";
 
 function ChooseBid({ state, setGameState }) {
-  let minimumBid = 16;
+  let minimumBid = state.bidState.bid;
   let bidButtons = [];
 
-  for (let i = minimumBid; i < 29; i++)
+  for (let i = minimumBid + 1; i < 29; i++)
     bidButtons.push(
       <button
         key={i}
@@ -17,6 +17,14 @@ function ChooseBid({ state, setGameState }) {
         {i}
       </button>
     );
+  bidButtons.push(
+    <button
+      key={"pass"}
+      onClick={() => {
+        bid(0, state, setGameState);
+      }}
+    > Pass </button>
+  );
   return (
     <div id="bidButtons">
       <label>Choose bid</label>

@@ -111,7 +111,7 @@ function Board() {
                   />
                 )}
 
-                {state.playerId === userId && (
+                {state.playerId === userId && state.bid_winner === null &&(
                   <ChooseBid state={state} setGameState={setGameState} />
                 )}
                 <div className="team2">
