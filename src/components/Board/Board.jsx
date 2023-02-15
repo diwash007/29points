@@ -12,7 +12,8 @@ import GameOver from '../GameOver/GameOver'
 import { cacheImages, dprint } from '../../utils/utils'
 import { ClipLoader } from 'react-spinners'
 import ChooseTrump from '../ChooseTrump/ChooseTrump'
-import ChooseBid from '../ChooseBid/ChooseBid'
+// import ChooseBid from '../ChooseBid/ChooseBid'
+import BidHolder from '../BidHolder/BidHolder'
 
 function Board() {
   const [state, setGameState] = useState(new State())
@@ -88,6 +89,7 @@ function Board() {
       <div className="background">
         <div className="border">
           <div className="table">
+            <BidHolder />
             {isLoading ? (
               <ClipLoader color="white" />
             ) : (
@@ -110,9 +112,9 @@ function Board() {
                   />
                 )}
 
-                {state.playerId === userId && state.bidWinner === null && (
+                {/* {state.playerId === userId && state.bidWinner === null && (
                   <ChooseBid state={state} setGameState={setGameState} />
-                )}
+                )} */}
                 <div className="team2">
                   <Hand
                     cards={state.allCards[1]}
