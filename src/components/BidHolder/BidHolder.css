@@ -4,6 +4,10 @@
   border-radius: 8px;
   width: 80px;
   height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
 }
 
 .p2-bid,
@@ -21,17 +25,17 @@
   bottom: 22%;
 }
 
-.p2-bid {
+.p4-bid {
   top: 47.5%;
   left: 18%;
-  transform: rotate(90deg);
+  transform: rotate(-90deg);
 }
 
 .p3-bid {
   top: 27%;
 }
 
-.p4-bid {
+.p2-bid {
   top: 47.5%;
   right: 18%;
   transform: rotate(90deg);
