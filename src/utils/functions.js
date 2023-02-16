@@ -235,7 +235,8 @@ const bid = (bid, prevState, setGameState) => {
   dprint(`${state.playerId} bid: ${bid}`)
 
   const currPlayerIndex = state.playerIds.indexOf(state.playerId)
-  // let hand = document.getElementById(`p${currPlayerIndex + 1}`)
+  const hand = document.getElementById(`p${currPlayerIndex + 1}-bid`)
+  hand.innerHTML = bid <= state.bidState.bid ? 'pass' : `Bid: ${bid}`
 
   if (bid <= state.bidState.bid) {
     state.bidPass.push(state.playerId)
@@ -249,6 +250,8 @@ const bid = (bid, prevState, setGameState) => {
     if (state.bidState.bid === 15) {
       state.bidState.bid = 16
       state.bidWinner = 'Opponent-1'
+      const p4Hand = document.getElementById(`p4-bid`)
+      p4Hand.innerHTML = `Bid: 16`
     }
     if (state.teams[0].players.includes(state.bidWinner)) {
       state.teams[0].bid = state.bidState.bid
