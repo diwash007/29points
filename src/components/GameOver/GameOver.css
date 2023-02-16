@@ -25,7 +25,7 @@
   margin: 5px;
   color: white;
   border-radius: 5px;
-  background-color: #b22222;
+  background-color: var(--red);
   border: none;
 }
 
@@ -34,7 +34,7 @@
 }
 
 #summary .options > button:first-child {
-  background-color: #509412 !important;
+  background-color: var(--green) !important;
 }
 
 .stats {

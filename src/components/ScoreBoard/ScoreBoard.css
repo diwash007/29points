@@ -24,11 +24,11 @@
 #scoreboard .player-score div {
   height: 20px;
   width: 20px;
-  background-color: blue;
+  background-color: var(--blue);
 }
 
 #scoreboard .enemy-score div {
   height: 20px;
   width: 20px;
-  background-color: red;
+  background-color: var(--red);
 }

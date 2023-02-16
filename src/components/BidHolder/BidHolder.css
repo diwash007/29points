@@ -12,12 +12,12 @@
 
 .p2-bid,
 .p4-bid {
-  background-color: red;
+  background-color: var(--red);
 }
 
 .p1-bid,
 .p3-bid {
-  background-color: blue;
+  background-color: var(--blue);
 }
 
 .p1-bid {

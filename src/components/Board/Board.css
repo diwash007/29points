@@ -2,6 +2,9 @@
   --table-height: 580px;
   --table-width: 800px;
   --border-radius: 20px;
+  --red: #b22222;
+  --blue: #1362d1;
+  --green: #509412;
 }
 
 body {

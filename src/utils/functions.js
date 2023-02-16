@@ -236,7 +236,7 @@ const bid = (bid, prevState, setGameState) => {
 
   const currPlayerIndex = state.playerIds.indexOf(state.playerId)
   const hand = document.getElementById(`p${currPlayerIndex + 1}-bid`)
-  hand.innerHTML = bid <= state.bidState.bid ? 'pass' : `Bid: ${bid}`
+  hand.innerHTML = bid <= state.bidState.bid ? 'pass' : `bid: ${bid}`
 
   if (bid <= state.bidState.bid) {
     state.bidPass.push(state.playerId)
@@ -251,7 +251,7 @@ const bid = (bid, prevState, setGameState) => {
       state.bidState.bid = 16
       state.bidWinner = 'Opponent-1'
       const p4Hand = document.getElementById(`p4-bid`)
-      p4Hand.innerHTML = `Bid: 16`
+      p4Hand.innerHTML = `bid: 16`
     }
     if (state.teams[0].players.includes(state.bidWinner)) {
       state.teams[0].bid = state.bidState.bid

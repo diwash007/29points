@@ -25,7 +25,7 @@
 #bidButtons button {
   padding: 15px;
   color: white;
-  background-color: #509412;
+  background-color: var(--green);
   border-radius: 5px;
   cursor: pointer;
   border: none;
