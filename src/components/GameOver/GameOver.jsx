@@ -37,7 +37,13 @@ function GameOver({ teams, setGameState }) {
         </tbody>
       </table>
       <div className="options">
-        <button onClick={() => setGameState(new State())}>Play again</button>
+        <button
+          onClick={() => {
+            for (let i = 1; i <= 4; i++) document.getElementById(`p${i}-bid`).innerHTML = ''
+            setGameState(new State())
+          }}>
+          Play again
+        </button>
         <button>Main Menu</button>
       </div>
     </div>
