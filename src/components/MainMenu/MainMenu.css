@@ -16,7 +16,7 @@
   height: 200px;
   margin-bottom: 50px;
 }
-#menu .themes {
+#menu .themes, .bots {
   display: flex;
   font-size: smaller;
   gap: 10px;
