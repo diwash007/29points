@@ -4,7 +4,7 @@ import './Board.css'
 import State from '../../models/State'
 import Action from '../../models/Action'
 import Hand from '../Hand/Hand'
-import { playGame, roundOver, canRevealTrump, bid } from '../../utils/functions'
+import { playGame, roundOver, canRevealTrump, bid, getLegalCards } from '../../utils/functions'
 import TrumpSuit from '../TrumpSuit/TrumpSuit'
 import { userId, baseUrl } from '../../utils/constants'
 import RevealTrump from '../RevealTrump/RevealTrump'
@@ -22,6 +22,8 @@ function Board() {
   const [isLoading, setIsLoading] = useState(true)
   const [theme, setTheme] = useState('')
   const [showMenu, setShowMenu] = useState(true)
+  const [bot, setBot] = useState('pro')
+  const [delay, setDelay] = useState(1)
 
   useEffect(() => {
     const cardTheme = localStorage.getItem('theme')
@@ -63,22 +65,38 @@ function Board() {
           .then((data) => {
             bid(data.bid, state, setGameState)
           })
-      }, 1000)
+      }, delay * 1000)
     }
   }
   if (state.gameOver !== true && state.roundOver !== true && state.bidWinner) {
     if (state.playerId !== userId) {
-      const options = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(state)
+      switch (bot) {
+        case 'pro': {
+          state.delay = delay
+          const options = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(state)
+          }
+          fetch(baseUrl + 'play', options)
+            .then((response) => response.json())
+            .then((data) => {
+              const newState = playGame(state, new Action(data.card, data.revealTrump), theme)
+              roundOver(newState, setGameState)
+            })
+          break
+        }
+        case 'noob': {
+          setTimeout(() => {
+            const legalCards = getLegalCards(state)
+            const CardToPlay = legalCards[Math.floor(Math.random() * legalCards.length)]
+            const newState = playGame(state, new Action(CardToPlay, null), theme)
+            roundOver(newState, setGameState)
+          }, delay * 1000)
+
+          break
+        }
       }
-      fetch(baseUrl + 'play', options)
-        .then((response) => response.json())
-        .then((data) => {
-          const newState = playGame(state, new Action(data.card, data.revealTrump), theme)
-          roundOver(newState, setGameState)
-        })
     } else {
       if (state.allCards[0].length === 1) {
         const newState = playGame(state, new Action(state.allCards[0][0], null), theme)
@@ -92,7 +110,17 @@ function Board() {
       <div className="background">
         <div className="border">
           <div className="table">
-            {showMenu && <MainMenu setShowMenu={setShowMenu} theme={theme} setTheme={setTheme} />}
+            {showMenu && (
+              <MainMenu
+                setShowMenu={setShowMenu}
+                theme={theme}
+                setTheme={setTheme}
+                bot={bot}
+                setBot={setBot}
+                delay={delay}
+                setDelay={setDelay}
+              />
+            )}
             <>
               <BidHolder />
               {isLoading ? (

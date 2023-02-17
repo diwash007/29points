@@ -13,10 +13,10 @@
   z-index: 100;
 }
 #menu .logo {
-  height: 200px;
-  margin-bottom: 50px;
+  height: 180px;
+  margin-bottom: 40px;
 }
-#menu .themes, .bots {
+#menu .themes {
   display: flex;
   font-size: smaller;
   gap: 10px;
@@ -58,4 +58,37 @@
 #menu button:hover {
   box-shadow: 0px 0px 5px 5px white;
   background-color: rgba(10, 10, 10, 0.2);
+}
+.bots select {
+  appearance: none;
+  background-color: transparent;
+  border: none;
+  margin: 0;
+  font-family: inherit;
+  font-size: inherit;
+  outline: none;
+  font-size: smaller;
+}
+.select {
+  border: 1px solid black;
+  border-radius: 0.25em;
+  padding: 0.25em 0.5em;
+  font-size: 1.25rem;
+  cursor: pointer;
+  background-color: #fff;
+  background-image: linear-gradient(to top, #f9f9f9, #fff 33%);
+  cursor: pointer;
+  width: 50px;
+}
+#menu table {
+  width: 200px;
+  margin-top: 20px;
+  border-spacing: 10px;
+}
+.delayInput {
+  box-sizing: border-box;
+  width: 50px;
+  border-radius: 0.25em;
+  padding: 0.25em 0.5em;
+  outline: none;
 }

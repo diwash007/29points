@@ -159,7 +159,7 @@ const roundOver = (newState, setGameState) => {
 
 const getLegalCards = (state) => {
   const cards = []
-  const currPlayerIndex = 0
+  const currPlayerIndex = state.playerIds.indexOf(state.playerId)
   const playerCards = state.allCards[currPlayerIndex]
 
   if (state.played.length === 0) {
