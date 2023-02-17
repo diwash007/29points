@@ -78,6 +78,11 @@ body {
   width: calc(var(--table-width) - 160px);
 }
 
+.gameplay-area {
+  opacity: 1;
+  transition: opacity 2s linear;
+}
+
 @media screen and (max-width: 800px) {
   #board .background .border {
     width: calc(100vw - 10px);

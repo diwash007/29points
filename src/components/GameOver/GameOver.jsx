@@ -3,7 +3,7 @@ import { weWon } from '../../utils/functions'
 import './GameOver.css'
 import State from '../../models/State'
 
-function GameOver({ teams, setGameState }) {
+function GameOver({ teams, setGameState, setShowMenu }) {
   let plays = parseInt(localStorage.getItem('plays'))
   let wins = parseInt(localStorage.getItem('wins'))
   plays = plays ? plays + 1 : 1
@@ -44,7 +44,12 @@ function GameOver({ teams, setGameState }) {
           }}>
           Play again
         </button>
-        <button>Main Menu</button>
+        <button
+          onClick={() => {
+            setShowMenu(true)
+          }}>
+          Main Menu
+        </button>
       </div>
     </div>
   )

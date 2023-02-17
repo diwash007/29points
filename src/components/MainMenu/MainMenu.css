@@ -1,0 +1,51 @@
+#menu {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  color: white;
+  justify-content: center;
+  align-items: center;
+
+  background-color: green;
+  height: 100%;
+  width: 100%;
+  border-radius: var(--border-radius);
+  z-index: 100;
+}
+#menu .logo {
+  height: 200px;
+  margin-bottom: 50px;
+}
+#menu .themes {
+  display: flex;
+  font-size: smaller;
+  gap: 10px;
+  margin-top: 5px;
+}
+#menu .theme {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2px;
+  border-radius: 10px;
+}
+.themes .selected-theme {
+  box-shadow: 0px 0px 5px 1px white;
+}
+#menu .theme img {
+  width: 100px;
+  cursor: pointer;
+}
+#menu button {
+  cursor: pointer;
+  padding: 5px 0px;
+  width: 200px;
+  height: 40px;
+  color: white;
+  border-radius: 10px;
+  background-color: var(--green);
+  border: none;
+  font-size: large;
+  margin-top: 50px;
+}
