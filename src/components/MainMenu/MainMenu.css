@@ -29,6 +29,7 @@
   align-items: center;
   padding: 2px;
   border-radius: 10px;
+  cursor: pointer;
 }
 .themes .selected-theme {
   background-color: rgba(10, 10, 10, 0.2);
@@ -39,7 +40,7 @@
 }
 #menu .theme img {
   width: 100px;
-  cursor: pointer;
+  pointer-events: none;
 }
 #menu button {
   cursor: pointer;
@@ -52,4 +53,9 @@
   border: none;
   font-size: large;
   margin-top: 50px;
+  box-shadow: 0px 0px 5px 0px white;
+}
+#menu button:hover {
+  box-shadow: 0px 0px 5px 5px white;
+  background-color: rgba(10, 10, 10, 0.2);
 }
