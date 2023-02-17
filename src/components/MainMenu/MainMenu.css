@@ -31,6 +31,10 @@
   border-radius: 10px;
 }
 .themes .selected-theme {
+  background-color: rgba(10, 10, 10, 0.2);
+  box-shadow: 0px 0px 5px 1px white;
+}
+.theme:hover {
   box-shadow: 0px 0px 5px 1px white;
 }
 #menu .theme img {
