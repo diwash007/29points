@@ -92,3 +92,16 @@
   padding: 0.25em 0.5em;
   outline: none;
 }
+.fade {
+  animation: fadeOut 0.5s linear;
+}
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    height: 90%;
+    width: 90%;
+  }
+}

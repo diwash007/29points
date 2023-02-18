@@ -7,7 +7,11 @@ function MainMenu({ theme, setTheme, setShowMenu, bot, setBot, delay, setDelay }
     localStorage.setItem('theme', theme)
   }
   function startGame() {
-    setShowMenu(false)
+    document.getElementById('menu').classList.add('fade')
+    setTimeout(() => {
+      setShowMenu(false)
+      // document.getElementById('menu').classList.remove('fade')
+    }, 480)
   }
   return (
     <div id="menu">
