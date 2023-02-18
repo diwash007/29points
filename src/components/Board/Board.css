@@ -95,3 +95,9 @@ body {
     height: calc(100vw - 70px);
   }
 }
+
+@media screen and (max-width: 530px) {
+  .team2 {
+    height: calc(100vw);
+  }
+}
