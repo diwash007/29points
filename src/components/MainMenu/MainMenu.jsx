@@ -46,9 +46,7 @@ function MainMenu({ theme, setTheme, setShowMenu, bot, setBot, delay, setDelay }
                 }}>
                 <option value="noob">Noob</option>
                 <option value="pro">Pro</option>
-                <option value="hacker" disabled>
-                  Hacker
-                </option>
+                <option value="hacker">Hacker</option>
               </select>
             </td>
           </tr>

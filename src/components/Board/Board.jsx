@@ -96,6 +96,22 @@ function Board() {
 
           break
         }
+        case 'hacker': {
+          state.hacker = true
+          state.delay = delay
+          const options = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(state)
+          }
+          fetch(baseUrl + 'play', options)
+            .then((response) => response.json())
+            .then((data) => {
+              const newState = playGame(state, new Action(data.card, data.revealTrump), theme)
+              roundOver(newState, setGameState)
+            })
+          break
+        }
       }
     } else {
       if (state.allCards[0].length === 1) {

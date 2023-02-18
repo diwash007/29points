@@ -59,7 +59,7 @@
   100% {
     top: 50%;
     left: 50%;
-    transform: translateY(calc(100vh / 2 - 240px)) translate(-50%, -50%) rotate(180deg);
+    transform: translateY(calc(var(--table-width) / 2 - 190px)) translate(-50%, -50%) rotate(180deg);
   }
 }
 
@@ -84,7 +84,7 @@
   100% {
     top: 50%;
     left: 50%;
-    transform: translateY(calc(0px - 100vh / 2 + 240px)) translate(-50%, -50%) rotate(180deg);
+    transform: translateY(calc(190px - var(--table-width) / 2)) translate(-50%, -50%) rotate(180deg);
   }
 }
 
