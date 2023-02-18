@@ -1,4 +1,9 @@
-const images = ['/29points/assets/imgs/reveal-trump.png']
+const images = [
+  '/29points/assets/imgs/reveal-trump.png',
+  '/29points/assets/imgs/bhoos.png',
+  '/29points/assets/imgs/classic.png',
+  '/29points/assets/imgs/logo.png'
+]
 
 const suits = ['H', 'S', 'D', 'C']
 const values = ['J', '9', '1', 'T', 'K', 'Q', '8', '7']
