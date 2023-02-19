@@ -69,6 +69,11 @@ function MainMenu({ theme, setTheme, setShowMenu, bot, setBot, delay, setDelay }
         </tbody>
       </table>
       <button onClick={startGame}>Play game</button>
+      <a
+        href="https://www.youtube.com/watch?v=KS8hnfEDaC4&ab_channel=BhoosGames"
+        rel="noopener noreferrer">
+        How to play?
+      </a>
     </div>
   )
 }
