@@ -1,0 +1,13 @@
+#inspiration {
+  position: fixed;
+  background:  #dce1ed;
+  color: black;
+  font-size: small;
+  text-align: center;
+  box-shadow:  0 0 0 999px#dce1ed;
+  clip-path: inset(0 -100%);
+  inset: 0 0 auto auto; /* top and right equal to 0 */
+  transform-origin: 0 0; /* OR top left */
+  transform: translate(29.3%) rotate(45deg);
+  padding: 5px 0;
+}

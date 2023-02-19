@@ -8,6 +8,7 @@ function MainMenu({ theme, setTheme, setShowMenu, bot, setBot, delay, setDelay }
   }
   function startGame() {
     document.getElementById('menu').classList.add('fade')
+    document.documentElement.requestFullscreen()
     setTimeout(() => {
       setShowMenu(false)
       // document.getElementById('menu').classList.remove('fade')
@@ -71,7 +72,8 @@ function MainMenu({ theme, setTheme, setShowMenu, bot, setBot, delay, setDelay }
       <button onClick={startGame}>Play game</button>
       <a
         href="https://www.youtube.com/watch?v=KS8hnfEDaC4&ab_channel=BhoosGames"
-        rel="noopener noreferrer">
+        target="_blank"
+        rel="noreferrer">
         How to play?
       </a>
     </div>

@@ -16,6 +16,7 @@ import ChooseTrump from '../ChooseTrump/ChooseTrump'
 import BidHolder from '../BidHolder/BidHolder'
 import ChooseBid from '../ChooseBid/ChooseBid'
 import MainMenu from '../MainMenu/MainMenu'
+import Inspiration from '../Inspiration/Inspiration'
 
 function Board() {
   const [state, setGameState] = useState(new State())
@@ -24,8 +25,6 @@ function Board() {
   const [showMenu, setShowMenu] = useState(true)
   const [bot, setBot] = useState('pro')
   const [delay, setDelay] = useState(1)
-
-  document.documentElement.requestFullscreen()
 
   useEffect(() => {
     const cardTheme = localStorage.getItem('theme')
@@ -125,6 +124,7 @@ function Board() {
 
   return (
     <div id="board">
+      <Inspiration />
       <div className="background">
         <div className="border">
           <div className="table">
