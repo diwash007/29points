@@ -25,6 +25,8 @@ function Board() {
   const [bot, setBot] = useState('pro')
   const [delay, setDelay] = useState(1)
 
+  document.documentElement.requestFullscreen()
+
   useEffect(() => {
     const cardTheme = localStorage.getItem('theme')
     if (!cardTheme) localStorage.setItem('theme', 'bhoos')
