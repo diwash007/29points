@@ -4,3 +4,7 @@
   position: relative;
   transition: all 0.5s ease-in-out;
 }
+
+#p2 {
+  transform: rotate(180deg);
+}

@@ -1,7 +1,7 @@
 #inspiration {
   position: fixed;
   background:  #dce1ed;
-  color: black;
+  color: #28282B;
   font-size: small;
   text-align: center;
   box-shadow:  0 0 0 999px#dce1ed;
@@ -10,4 +10,7 @@
   transform-origin: 0 0; /* OR top left */
   transform: translate(29.3%) rotate(45deg);
   padding: 5px 0;
+}
+#inspiration .smartbots {
+  margin-top: 5px;
 }

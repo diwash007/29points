@@ -36,7 +36,7 @@
 }
 
 .p4-draw {
-  animation: p4-animation 0.5s linear forwards;
+  animation: p2-animation 0.5s linear forwards;
 }
 
 @keyframes p1-animation {
@@ -59,7 +59,7 @@
   100% {
     top: 50%;
     left: 50%;
-    transform: translateY(calc(var(--table-width) / 2 - 190px)) translate(-50%, -50%) rotate(180deg);
+    transform: translateY(calc(190px - var(--table-width) / 2)) translate(-50%, -50%) rotate(180deg);
   }
 }
 
@@ -76,32 +76,8 @@
   }
 }
 
-@keyframes p4-animation {
-  0% {
-    top: 0%;
-    left: 0%;
-  }
-  100% {
-    top: 50%;
-    left: 50%;
-    transform: translateY(calc(190px - var(--table-width) / 2)) translate(-50%, -50%) rotate(180deg);
-  }
-}
-
 @media screen and (max-width: 660px) {
   @keyframes p2-animation {
-    0% {
-      top: 0%;
-      left: 0%;
-    }
-    100% {
-      top: 50%;
-      left: 50%;
-      transform: translateY(calc(100%/ 2 + 75px)) translate(-50%, -50%) rotate(180deg);
-    }
-  }
-  
-  @keyframes p4-animation {
     0% {
       top: 0%;
       left: 0%;
