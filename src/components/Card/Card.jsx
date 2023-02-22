@@ -3,8 +3,11 @@ import './Card.css'
 import Action from '../../models/Action'
 import { getLegalCards, playGame, roundOver } from '../../utils/functions'
 import { userId } from '../../utils/constants'
+import { useGameState, useSetGameState } from '../../contexts/StateContext'
 
-function Card({ card, index, state, setGameState, theme }) {
+function Card({ card, index, theme }) {
+  const state = useGameState()
+  const setGameState = useSetGameState()
   const isLegalCard = getLegalCards(state).includes(card)
   function drawCard(e) {
     const action = new Action(e.target.id, null)

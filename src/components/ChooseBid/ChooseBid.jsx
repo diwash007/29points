@@ -1,8 +1,11 @@
 import React from 'react'
+import { useGameState, useSetGameState } from '../../contexts/StateContext'
 import { bid } from '../../utils/functions'
 import './ChooseBid.css'
 
-function ChooseBid({ state, setGameState }) {
+function ChooseBid() {
+  const state = useGameState()
+  const setGameState = useSetGameState()
   const minimumBid = state.bidState.bid
   const bidButtons = []
 

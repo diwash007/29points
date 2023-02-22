@@ -1,9 +1,12 @@
 import React from 'react'
 import { ClipLoader } from 'react-spinners'
+import { useGameState, useSetGameState } from '../../contexts/StateContext'
 import { dprint } from '../../utils/utils'
 import './ChooseTrump.css'
 
-function ChooseTrump({ state, setGameState, theme, isLoading }) {
+function ChooseTrump({ theme, isLoading }) {
+  const state = useGameState()
+  const setGameState = useSetGameState()
   const selectTrump = (trump) => {
     const newState = Object.assign(Object.create(Object.getPrototypeOf(state)), state)
     newState.hiddenTrumpSuit = trump

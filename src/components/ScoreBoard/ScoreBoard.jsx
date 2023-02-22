@@ -1,7 +1,10 @@
 import React from 'react'
+import { useGameState } from '../../contexts/StateContext'
 import './ScoreBoard.css'
 
-function ScoreBoard({ teams }) {
+function ScoreBoard() {
+  const state = useGameState()
+  const teams = state.teams
   return (
     <div id="scoreboard">
       <div className="player-score">

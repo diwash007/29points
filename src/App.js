@@ -1,10 +1,11 @@
 import Board from './components/Board/Board'
+import { StateProvider } from './contexts/StateContext'
 
 function App() {
   return (
-    <div>
+    <StateProvider>
       <Board />
-    </div>
+    </StateProvider>
   )
 }
 
