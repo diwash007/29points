@@ -1,4 +1,4 @@
-import { React, useEffect, useState } from 'react'
+import { React } from 'react'
 import ScoreBoard from '../ScoreBoard/ScoreBoard'
 import './Board.css'
 import Action from '../../models/Action'
@@ -8,7 +8,7 @@ import TrumpSuit from '../TrumpSuit/TrumpSuit'
 import { userId, baseUrl } from '../../utils/constants'
 import RevealTrump from '../RevealTrump/RevealTrump'
 import GameOver from '../GameOver/GameOver'
-import { cacheImages, dprint } from '../../utils/utils'
+import { dprint } from '../../utils/utils'
 import ChooseTrump from '../ChooseTrump/ChooseTrump'
 import BidHolder from '../BidHolder/BidHolder'
 import ChooseBid from '../ChooseBid/ChooseBid'
@@ -16,18 +16,13 @@ import MainMenu from '../MainMenu/MainMenu'
 import Inspiration from '../Inspiration/Inspiration'
 import { useGameState, useSetGameState } from '../../contexts/StateContext'
 import { useTheme } from '../../contexts/ThemeContext'
+import { useMenu } from '../../contexts/SettingContext'
 
 function Board() {
-  const [showMenu, setShowMenu] = useState(true)
-  const [bot, setBot] = useState('pro')
-  const [delay, setDelay] = useState(1)
+  const { showMenu, setShowMenu, bot, delay } = useMenu()
   const state = useGameState()
   const setGameState = useSetGameState()
   const theme = useTheme()
-
-  useEffect(() => {
-    cacheImages()
-  }, [])
 
   if (state.bidWinner !== null && state.hiddenTrumpSuit === null && state.bidWinner !== userId) {
     const options = {
@@ -123,15 +118,7 @@ function Board() {
       <div className="background">
         <div className="border">
           <div className="table">
-            {showMenu && (
-              <MainMenu
-                setShowMenu={setShowMenu}
-                bot={bot}
-                setBot={setBot}
-                delay={delay}
-                setDelay={setDelay}
-              />
-            )}
+            {showMenu && <MainMenu />}
             <>
               <BidHolder />
 

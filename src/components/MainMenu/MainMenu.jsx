@@ -1,10 +1,12 @@
 import React from 'react'
+import { useMenu } from '../../contexts/SettingContext'
 import { useTheme, useSetTheme } from '../../contexts/ThemeContext'
 import './MainMenu.css'
 
-function MainMenu({ setShowMenu, bot, setBot, delay, setDelay }) {
+function MainMenu() {
   const theme = useTheme()
   const setTheme = useSetTheme()
+  const { setShowMenu, bot, setBot, delay, setDelay } = useMenu()
 
   function chooseTheme(theme) {
     setTheme(theme)
@@ -16,7 +18,6 @@ function MainMenu({ setShowMenu, bot, setBot, delay, setDelay }) {
     document.documentElement.requestFullscreen()
     setTimeout(() => {
       setShowMenu(false)
-      // document.getElementById('menu').classList.remove('fade')
     }, 480)
   }
   return (
