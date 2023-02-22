@@ -1,8 +1,11 @@
 import React from 'react'
+import { useGameState, useSetGameState } from '../../contexts/StateContext'
 import { revealTrump } from '../../utils/functions'
 import './RevealTrump.css'
 
-function RevealTrump({ state, setGameState }) {
+function RevealTrump() {
+  const state = useGameState()
+  const setGameState = useSetGameState()
   return (
     <img
       id="reveal-trump"

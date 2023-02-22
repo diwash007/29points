@@ -1,8 +1,11 @@
 import React from 'react'
+import { useGameState } from '../../contexts/StateContext'
 import { userId } from '../../utils/constants'
 import './TrumpSuit.css'
 
-function TrumpSuit({ state }) {
+function TrumpSuit() {
+  const state = useGameState()
+
   const trumpSuit = state.trumpRevealed
     ? `1${state.trumpSuit}.png`
     : userId === state.bidWinner && state.hiddenTrumpSuit

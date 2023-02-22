@@ -44,7 +44,7 @@ function sleep(ms) {
   }
 }
 
-const cacheImages = async (setIsLoading) => {
+const cacheImages = async () => {
   const promises = await images.map((src) => {
     return new Promise(function (resolve, reject) {
       const img = new Image()
@@ -54,7 +54,6 @@ const cacheImages = async (setIsLoading) => {
     })
   })
   await Promise.all(promises)
-  setIsLoading(false)
 }
 
 const dprint = (msg) => {

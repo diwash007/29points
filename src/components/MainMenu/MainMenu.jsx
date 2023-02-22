@@ -1,17 +1,23 @@
 import React from 'react'
+import { useMenu } from '../../contexts/SettingContext'
+import { useTheme, useSetTheme } from '../../contexts/ThemeContext'
 import './MainMenu.css'
 
-function MainMenu({ theme, setTheme, setShowMenu, bot, setBot, delay, setDelay }) {
+function MainMenu() {
+  const theme = useTheme()
+  const setTheme = useSetTheme()
+  const { setShowMenu, bot, setBot, delay, setDelay } = useMenu()
+
   function chooseTheme(theme) {
     setTheme(theme)
     localStorage.setItem('theme', theme)
   }
+
   function startGame() {
     document.getElementById('menu').classList.add('fade')
     document.documentElement.requestFullscreen()
     setTimeout(() => {
       setShowMenu(false)
-      // document.getElementById('menu').classList.remove('fade')
     }, 480)
   }
   return (

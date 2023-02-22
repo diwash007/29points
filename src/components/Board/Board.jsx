@@ -1,7 +1,6 @@
-import { React, useEffect, useState } from 'react'
+import { React } from 'react'
 import ScoreBoard from '../ScoreBoard/ScoreBoard'
 import './Board.css'
-import State from '../../models/State'
 import Action from '../../models/Action'
 import Hand from '../Hand/Hand'
 import { playGame, roundOver, canRevealTrump, bid, getLegalCards } from '../../utils/functions'
@@ -9,32 +8,21 @@ import TrumpSuit from '../TrumpSuit/TrumpSuit'
 import { userId, baseUrl } from '../../utils/constants'
 import RevealTrump from '../RevealTrump/RevealTrump'
 import GameOver from '../GameOver/GameOver'
-import { cacheImages, dprint } from '../../utils/utils'
-import { ClipLoader } from 'react-spinners'
+import { dprint } from '../../utils/utils'
 import ChooseTrump from '../ChooseTrump/ChooseTrump'
-// import ChooseBid from '../ChooseBid/ChooseBid'
 import BidHolder from '../BidHolder/BidHolder'
 import ChooseBid from '../ChooseBid/ChooseBid'
 import MainMenu from '../MainMenu/MainMenu'
 import Inspiration from '../Inspiration/Inspiration'
+import { useGameState, useSetGameState } from '../../contexts/StateContext'
+import { useTheme } from '../../contexts/ThemeContext'
+import { useMenu } from '../../contexts/SettingContext'
 
 function Board() {
-  const [state, setGameState] = useState(new State())
-  const [isLoading, setIsLoading] = useState(true)
-  const [theme, setTheme] = useState('')
-  const [showMenu, setShowMenu] = useState(true)
-  const [bot, setBot] = useState('pro')
-  const [delay, setDelay] = useState(1)
-
-  useEffect(() => {
-    const cardTheme = localStorage.getItem('theme')
-    if (!cardTheme) localStorage.setItem('theme', 'bhoos')
-    setTheme(cardTheme || 'bhoos')
-  }, [theme])
-
-  useEffect(() => {
-    cacheImages(setIsLoading)
-  }, [])
+  const { showMenu, setShowMenu, bot, delay } = useMenu()
+  const state = useGameState()
+  const setGameState = useSetGameState()
+  const theme = useTheme()
 
   if (state.bidWinner !== null && state.hiddenTrumpSuit === null && state.bidWinner !== userId) {
     const options = {
@@ -116,8 +104,10 @@ function Board() {
       }
     } else {
       if (state.allCards[0].length === 1) {
-        const newState = playGame(state, new Action(state.allCards[0][0], null), theme)
-        roundOver(newState, setGameState)
+        setTimeout(() => {
+          const newState = playGame(state, new Action(state.allCards[0][0], null), theme)
+          roundOver(newState, setGameState)
+        }, delay * 1000)
       }
     }
   }
@@ -128,88 +118,30 @@ function Board() {
       <div className="background">
         <div className="border">
           <div className="table">
-            {showMenu && (
-              <MainMenu
-                setShowMenu={setShowMenu}
-                theme={theme}
-                setTheme={setTheme}
-                bot={bot}
-                setBot={setBot}
-                delay={delay}
-                setDelay={setDelay}
-              />
-            )}
+            {showMenu && <MainMenu />}
             <>
               <BidHolder />
-              {isLoading ? (
-                <ClipLoader color="white" />
-              ) : (
-                <>
-                  {state.gameOver && (
-                    <GameOver
-                      teams={state.teams}
-                      setGameState={setGameState}
-                      setShowMenu={setShowMenu}
-                    />
-                  )}
-                  <ScoreBoard teams={state.teams} />
-                  <TrumpSuit state={state} />
-                  {state.played.length > 0 &&
-                    state.playerId === userId &&
-                    !state.trumpRevealed &&
-                    canRevealTrump(state) &&
-                    !state.roundOver && <RevealTrump state={state} setGameState={setGameState} />}
 
-                  {!state.hiddenTrumpSuit && state.bidWinner === userId && (
-                    <ChooseTrump
-                      state={state}
-                      setGameState={setGameState}
-                      theme={theme}
-                      isLoading={isLoading}
-                    />
-                  )}
+              {state.gameOver && <GameOver setShowMenu={setShowMenu} />}
+              <ScoreBoard />
+              <TrumpSuit />
+              {state.played.length > 0 &&
+                state.playerId === userId &&
+                !state.trumpRevealed &&
+                canRevealTrump(state) &&
+                !state.roundOver && <RevealTrump />}
 
-                  {state.playerId === userId && state.bidWinner === null && (
-                    <ChooseBid state={state} setGameState={setGameState} />
-                  )}
-                  <div className="team2">
-                    <Hand
-                      cards={state.allCards[1]}
-                      player="p2"
-                      key="p2"
-                      state={state}
-                      setGameState={setGameState}
-                      theme={theme}
-                    />
-                    <Hand
-                      cards={state.allCards[3]}
-                      player="p4"
-                      key="p4"
-                      state={state}
-                      setGameState={setGameState}
-                      theme={theme}
-                    />
-                  </div>
-                  <div className="team1">
-                    <Hand
-                      cards={state.allCards[2]}
-                      player="p3"
-                      key="p3"
-                      state={state}
-                      setGameState={setGameState}
-                      theme={theme}
-                    />
-                    <Hand
-                      cards={state.allCards[0]}
-                      player="p1"
-                      key="p1"
-                      state={state}
-                      setGameState={setGameState}
-                      theme={theme}
-                    />
-                  </div>
-                </>
-              )}
+              {!state.hiddenTrumpSuit && state.bidWinner === userId && <ChooseTrump />}
+
+              {state.playerId === userId && state.bidWinner === null && <ChooseBid />}
+              <div className="team2">
+                <Hand cards={state.allCards[1]} player="p2" key="p2" />
+                <Hand cards={state.allCards[3]} player="p4" key="p4" />
+              </div>
+              <div className="team1">
+                <Hand cards={state.allCards[2]} player="p3" key="p3" />
+                <Hand cards={state.allCards[0]} player="p1" key="p1" />
+              </div>
             </>
           </div>
         </div>

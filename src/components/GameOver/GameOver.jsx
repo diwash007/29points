@@ -2,8 +2,15 @@ import React, { useEffect } from 'react'
 import { weWon } from '../../utils/functions'
 import './GameOver.css'
 import State from '../../models/State'
+import { useGameState, useSetGameState } from '../../contexts/StateContext'
+import { useMenu } from '../../contexts/SettingContext'
 
-function GameOver({ teams, setGameState, setShowMenu }) {
+function GameOver() {
+  const state = useGameState()
+  const setGameState = useSetGameState()
+  const teams = state.teams
+  const { setShowMenu } = useMenu()
+
   let plays = parseInt(localStorage.getItem('plays'))
   let wins = parseInt(localStorage.getItem('wins'))
   plays = plays ? plays + 1 : 1
