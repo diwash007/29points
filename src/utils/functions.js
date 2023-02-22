@@ -64,8 +64,6 @@ const clearTable = (prevState) => {
   document.getElementsByClassName('p1-draw')[0].style.display = 'none'
   for (let i = 1; i < 5; i++) {
     const hand = document.getElementById(`p${i}`)
-    // hand.firstChild.src = `/29points/assets/cards/back.png`;
-    // hand.firstChild.classList.remove(`p${i}-draw`, "winner");
     hand.firstChild.remove()
   }
 
