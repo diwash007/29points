@@ -14,3 +14,10 @@
 #inspiration .smartbots {
   margin-top: 5px;
 }
+
+@media screen and (max-width: 450px) {
+  #inspiration {
+    transform: none;
+    inset: 0 0 auto 0;
+  }
+}
