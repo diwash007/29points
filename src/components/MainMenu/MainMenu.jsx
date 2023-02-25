@@ -15,7 +15,6 @@ function MainMenu() {
 
   function startGame() {
     document.getElementById('menu').classList.add('fade')
-    document.documentElement.requestFullscreen()
     setTimeout(() => {
       setShowMenu(false)
     }, 480)
