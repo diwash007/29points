@@ -1,7 +1,7 @@
 const userId = 'You-0'
 const DEBUG = false
-const baseUrl = 'http://localhost:5000/'
-// const baseUrl = 'https://29.gilobyte.com/'
+// const baseUrl = 'http://localhost:5000/'
+const baseUrl = 'https://29.gilobyte.com/'
 
 const clearTableDelay = 2000
 

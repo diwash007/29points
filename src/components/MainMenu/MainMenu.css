@@ -9,11 +9,10 @@
   background-color: green;
   height: 100%;
   width: 100%;
-  border-radius: var(--border-radius);
   z-index: 100;
 }
 #menu .logo {
-  height: 180px;
+  height: 120px;
   margin-bottom: 40px;
 }
 #menu .themes {
@@ -110,7 +109,18 @@
   }
   100% {
     opacity: 0;
-    height: 95%;
-    width: 90%;
+    height: calc(var(--table-height) - 50px);
+    width: calc(var(--table-width) - 100px);
+  }
+}
+
+@media screen and (min-width: 800px) {
+  #menu {
+    height: var(--table-height);
+    width: var(--table-width);
+    border-radius: var(--border-radius);
+  }
+  #menu .logo {
+    height: 180px;
   }
 }

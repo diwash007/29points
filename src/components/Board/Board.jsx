@@ -115,10 +115,10 @@ function Board() {
   return (
     <div id="board">
       <Inspiration />
+      {showMenu && <MainMenu />}
       <div className="background">
         <div className="border">
           <div className="table">
-            {showMenu && <MainMenu />}
             <>
               <BidHolder />
 
