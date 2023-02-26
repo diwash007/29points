@@ -77,6 +77,10 @@
 }
 
 @media screen and (max-width: 660px) {
+  :root {
+    --card-height: 60px;
+    --card-width: 42px;
+  }
   @keyframes p2-animation {
     0% {
       top: 0%;

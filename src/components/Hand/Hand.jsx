@@ -22,7 +22,9 @@ function Hand({ cards, player }) {
       className={`${player} hand`}
       id={player}
       key={player}
-      style={{ width: `calc(56px + ${cards.length - 1} * 20px)` }}>
+      style={{
+        width: `calc(${window.innerWidth <= 660 ? '42' : '56'}px + ${cards.length - 1} * 20px)`
+      }}>
       {playerCards}
     </div>
   )
