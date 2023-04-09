@@ -5,6 +5,7 @@ import { ThemeProvider } from './contexts/ThemeContext'
 import { cacheImages } from './utils/utils'
 import { UserProvider } from './contexts/UserContext'
 import Home from './Home'
+import { DbProvider } from './contexts/DbContext'
 
 function App() {
   useEffect(() => {
@@ -12,15 +13,17 @@ function App() {
   }, [])
 
   return (
-    <UserProvider>
-      <ThemeProvider>
-        <MenuProvider>
-          <StateProvider>
-            <Home />
-          </StateProvider>
-        </MenuProvider>
-      </ThemeProvider>
-    </UserProvider>
+    <DbProvider>
+      <UserProvider>
+        <ThemeProvider>
+          <MenuProvider>
+            <StateProvider>
+              <Home />
+            </StateProvider>
+          </MenuProvider>
+        </ThemeProvider>
+      </UserProvider>
+    </DbProvider>
   )
 }
 

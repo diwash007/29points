@@ -1,13 +1,11 @@
 import React from 'react'
-import { createClient } from '@supabase/supabase-js'
 import './EnterName.css'
 import { useSetUser } from '../../contexts/UserContext'
+import { useDatabase } from '../../contexts/DbContext'
 
 function EnterName() {
   const setUser = useSetUser()
-  const DB_URL = process.env.REACT_APP_DB_URL
-  const DB_KEY = process.env.REACT_APP_DB_KEY
-  const supabase = createClient(DB_URL, DB_KEY)
+  const supabase = useDatabase()
 
   const handleClick = async () => {
     const username = document.getElementById('username').value
