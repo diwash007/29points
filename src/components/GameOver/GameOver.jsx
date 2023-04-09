@@ -4,19 +4,28 @@ import './GameOver.css'
 import State from '../../models/State'
 import { useGameState, useSetGameState } from '../../contexts/StateContext'
 import { useMenu } from '../../contexts/SettingContext'
+import { useDatabase } from '../../contexts/DbContext'
+import { useUser } from '../../contexts/UserContext'
 
 function GameOver() {
   const state = useGameState()
   const setGameState = useSetGameState()
   const teams = state.teams
   const { setShowMenu } = useMenu()
+  const database = useDatabase()
+  const user = useUser()
 
   let plays = parseInt(localStorage.getItem('plays'))
   let wins = parseInt(localStorage.getItem('wins'))
+  const win = weWon(teams)
   plays = plays ? plays + 1 : 1
-  if (weWon(teams)) wins = wins ? wins + 1 : 1
+  if (win) wins = wins ? wins + 1 : 1
 
   useEffect(() => {
+    async function insertData() {
+      await database.from('games').insert({ player: user, state, win })
+    }
+    insertData()
     localStorage.setItem('wins', wins)
     localStorage.setItem('plays', plays)
     // eslint-disable-next-line
@@ -25,7 +34,7 @@ function GameOver() {
   return (
     <div id="summary">
       <div className="result">
-        <span>You {weWon(teams) ? 'Win' : 'Lose'}</span>
+        <span>You {win ? 'Win' : 'Lose'}</span>
       </div>
       <table className="stats">
         <tbody>

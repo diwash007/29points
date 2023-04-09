@@ -5,13 +5,13 @@ import { useDatabase } from '../../contexts/DbContext'
 
 function EnterName() {
   const setUser = useSetUser()
-  const supabase = useDatabase()
+  const database = useDatabase()
 
   const handleClick = async () => {
     const username = document.getElementById('username').value
-    const { data, error } = await supabase.from('players').select('name').eq('name', username)
+    const { data, error } = await database.from('players').select('name').eq('name', username)
     if (error || data.length > 0) return
-    const { insertError } = await supabase.from('players').insert({ name: username })
+    const { insertError } = await database.from('players').insert({ name: username })
     if (insertError) console.log(insertError)
     setUser(username)
   }
