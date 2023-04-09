@@ -20,7 +20,7 @@ function GameOver() {
     localStorage.setItem('wins', wins)
     localStorage.setItem('plays', plays)
     // eslint-disable-next-line
-  }, []);
+  }, [])
 
   return (
     <div id="summary">

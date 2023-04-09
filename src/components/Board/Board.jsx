@@ -13,7 +13,7 @@ import ChooseTrump from '../ChooseTrump/ChooseTrump'
 import BidHolder from '../BidHolder/BidHolder'
 import ChooseBid from '../ChooseBid/ChooseBid'
 import MainMenu from '../MainMenu/MainMenu'
-import Inspiration from '../Inspiration/Inspiration'
+// import Inspiration from '../Inspiration/Inspiration'
 import { useGameState, useSetGameState } from '../../contexts/StateContext'
 import { useTheme } from '../../contexts/ThemeContext'
 import { useMenu } from '../../contexts/SettingContext'
@@ -114,7 +114,7 @@ function Board() {
 
   return (
     <div id="board">
-      <Inspiration />
+      {/* <Inspiration /> */}
       {showMenu && <MainMenu />}
       <div className="background">
         <div className="border">

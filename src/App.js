@@ -1,9 +1,10 @@
 import { useEffect } from 'react'
-import Board from './components/Board/Board'
 import { MenuProvider } from './contexts/SettingContext'
 import { StateProvider } from './contexts/StateContext'
 import { ThemeProvider } from './contexts/ThemeContext'
 import { cacheImages } from './utils/utils'
+import { UserProvider } from './contexts/UserContext'
+import Home from './Home'
 
 function App() {
   useEffect(() => {
@@ -11,13 +12,15 @@ function App() {
   }, [])
 
   return (
-    <ThemeProvider>
-      <MenuProvider>
-        <StateProvider>
-          <Board />
-        </StateProvider>
-      </MenuProvider>
-    </ThemeProvider>
+    <UserProvider>
+      <ThemeProvider>
+        <MenuProvider>
+          <StateProvider>
+            <Home />
+          </StateProvider>
+        </MenuProvider>
+      </ThemeProvider>
+    </UserProvider>
   )
 }
 
