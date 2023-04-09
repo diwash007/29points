@@ -79,7 +79,7 @@
   cursor: pointer;
   width: 60px;
 }
-#menu table {
+#menu > table {
   width: 200px;
   margin-top: 20px;
   border-spacing: 10px;

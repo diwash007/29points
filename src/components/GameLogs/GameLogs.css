@@ -1,0 +1,42 @@
+#gamelogs {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: var(--green);
+  color: black;
+}
+
+#gamelogs table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.history-logo {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  width: 50px;
+  cursor: pointer;
+}
+
+#gamelogs td,
+th {
+  padding: 16px 24px;
+  text-align: left;
+}
+
+#gamelogs thead tr {
+  background-color: green;
+  color: #fff;
+}
+
+#gamelogs thead th {
+  width: 25%;
+}
+
+#gamelogs tbody tr:nth-child(odd) {
+  background-color: #f8f9fa;
+}
+
+#gamelogs tbody tr:nth-child(even) {
+  background-color: #e9ecef;
+}

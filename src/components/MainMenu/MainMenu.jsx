@@ -2,6 +2,7 @@ import React from 'react'
 import { useMenu } from '../../contexts/SettingContext'
 import { useTheme, useSetTheme } from '../../contexts/ThemeContext'
 import './MainMenu.css'
+import GameLogs from '../GameLogs/GameLogs'
 
 function MainMenu() {
   const theme = useTheme()
@@ -21,6 +22,7 @@ function MainMenu() {
   }
   return (
     <div id="menu">
+      <GameLogs />
       <img src="/29points/assets/imgs/logo.png" alt="29 points" className="logo" />
       <label>Card theme</label>
       <div className="themes">
