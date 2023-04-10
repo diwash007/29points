@@ -26,13 +26,15 @@ function MainMenu() {
       <div className="themes">
         <div
           className={`theme ${theme === 'bhoos' && 'selected-theme'}`}
-          onClick={() => chooseTheme('bhoos')}>
+          onClick={() => chooseTheme('bhoos')}
+        >
           <img src="/29points/assets/imgs/bhoos.png" alt="29 points" />
           <label>Bhoos</label>
         </div>
         <div
           className={`theme ${theme === 'classic' && 'selected-theme'}`}
-          onClick={() => chooseTheme('classic')}>
+          onClick={() => chooseTheme('classic')}
+        >
           <img src="/29points/assets/imgs/classic.png" alt="29 points" className="theme" />
           <label>Classic</label>
         </div>
@@ -49,7 +51,8 @@ function MainMenu() {
                 value={bot}
                 onChange={(e) => {
                   setBot(e.target.value)
-                }}>
+                }}
+              >
                 <option value="noob">Noob</option>
                 <option value="pro">Pro</option>
                 <option value="hacker">Hacker</option>
@@ -78,7 +81,8 @@ function MainMenu() {
       <a
         href="https://www.youtube.com/watch?v=KS8hnfEDaC4&ab_channel=BhoosGames"
         target="_blank"
-        rel="noreferrer">
+        rel="noreferrer"
+      >
         How to play?
       </a>
     </div>
