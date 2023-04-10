@@ -17,13 +17,18 @@ function EnterName() {
   }
   return (
     <div id="root">
-      <div className="input-field">
-        <input type="text" id="username" required spellCheck="false" />
-        <label>Enter name</label>
-        <br />
-        <button className="username-btn" onClick={handleClick}>
-          Submit
-        </button>
+      <div id="root">
+        <img src="/29points/assets/imgs/logo.png" width="300px" />
+        <div className="input-field">
+          <div className="input-field-placeholder">
+            <input type="text" id="username" required spellCheck="false" />
+            <label>Enter name</label>
+          </div>
+          <br />
+          <button className="username-btn" onClick={handleClick}>
+            Submit
+          </button>
+        </div>
       </div>
     </div>
   )

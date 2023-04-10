@@ -11,7 +11,7 @@ function GameOver() {
   const state = useGameState()
   const setGameState = useSetGameState()
   const teams = state.teams
-  const { setShowMenu } = useMenu()
+  const { setShowMenu, bot } = useMenu()
   const database = useDatabase()
   const user = useUser()
 
@@ -23,7 +23,7 @@ function GameOver() {
 
   useEffect(() => {
     async function insertData() {
-      await database.from('games').insert({ player: user, state, win })
+      await database.from('games').insert({ player: user, state, win, bot })
     }
     insertData()
     localStorage.setItem('wins', wins)

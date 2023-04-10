@@ -2,17 +2,23 @@
   height: 100vh;
   width: 100vw;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 10px;
   background: radial-gradient(circle farthest-side, #a8e063, #56ab2f);
 }
 
 .input-field {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 .input-field input {
   width: 350px;
-  height: 60px;
+  height: 40px;
   border-radius: 6px;
   font-size: 18px;
   padding: 0 15px;
@@ -20,6 +26,9 @@
   background: transparent;
   color: #fff;
   outline: none;
+}
+.input-field-placeholder {
+  position: relative;
 }
 .input-field label {
   position: absolute;
@@ -31,6 +40,7 @@
   pointer-events: none;
   transition: 0.3s;
 }
+
 input:focus {
   border: 2px solid #ffcc00;
 }
@@ -40,11 +50,20 @@ input:valid ~ label {
   left: 15px;
   font-size: 16px;
   padding: 0 2px;
-  background: #353842;
+  background: var(--green);
 }
 .username-btn {
-  width: 100px;
-  height: 35px;
+  width: 150px;
+  height: 40px;
   color: white;
+  background-color: transparent;
+  border-radius: 6px;
+  border: var(--green) 2px solid;
+  cursor: pointer;
+  transition: all 1s ease;
+}
+
+.username-btn:hover {
   background-color: var(--green);
+  border: white 2px solid;
 }
