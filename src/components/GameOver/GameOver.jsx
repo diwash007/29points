@@ -57,7 +57,8 @@ function GameOver() {
           onClick={() => {
             for (let i = 1; i <= 4; i++) document.getElementById(`p${i}-bid`).innerHTML = ''
             setGameState(new State())
-          }}>
+          }}
+        >
           Play again
         </button>
         <button
@@ -65,7 +66,8 @@ function GameOver() {
             setShowMenu(true)
             for (let i = 1; i <= 4; i++) document.getElementById(`p${i}-bid`).innerHTML = ''
             setGameState(new State())
-          }}>
+          }}
+        >
           Main Menu
         </button>
       </div>

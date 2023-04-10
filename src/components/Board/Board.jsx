@@ -2,13 +2,13 @@ import { React } from 'react'
 import ScoreBoard from '../ScoreBoard/ScoreBoard'
 import './Board.css'
 import Action from '../../models/Action'
+import Bot from '../../models/Bot'
 import Hand from '../Hand/Hand'
-import { playGame, roundOver, canRevealTrump, bid, getLegalCards } from '../../utils/functions'
+import { playGame, roundOver, canRevealTrump } from '../../utils/functions'
 import TrumpSuit from '../TrumpSuit/TrumpSuit'
-import { userId, baseUrl } from '../../utils/constants'
+import { userId } from '../../utils/constants'
 import RevealTrump from '../RevealTrump/RevealTrump'
 import GameOver from '../GameOver/GameOver'
-import { dprint } from '../../utils/utils'
 import ChooseTrump from '../ChooseTrump/ChooseTrump'
 import BidHolder from '../BidHolder/BidHolder'
 import ChooseBid from '../ChooseBid/ChooseBid'
@@ -25,83 +25,17 @@ function Board() {
   const theme = useTheme()
 
   if (state.bidWinner !== null && state.hiddenTrumpSuit === null && state.bidWinner !== userId) {
-    const options = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(state)
-    }
-    fetch(baseUrl + 'chooseTrump', options)
-      .then((response) => response.json())
-      .then((data) => {
-        const newState = Object.assign(Object.create(Object.getPrototypeOf(state)), state)
-        newState.hiddenTrumpSuit = data.suit
-        newState.dealCards()
-        dprint(`Trump selected: ${data.suit} - ${state.bidWinner}`)
-        setGameState(newState)
-      })
+    Bot.chooseTrump(state, setGameState)
   }
 
   if (state.bidWinner === null) {
     if (state.playerId !== userId) {
-      const options = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(state)
-      }
-      setTimeout(() => {
-        fetch(baseUrl + 'bid', options)
-          .then((response) => response.json())
-          .then((data) => {
-            bid(data.bid, state, setGameState)
-          })
-      }, delay * 1000)
+      Bot.bid(state, setGameState, delay)
     }
   }
   if (state.gameOver !== true && state.roundOver !== true && state.bidWinner) {
     if (state.playerId !== userId) {
-      switch (bot) {
-        case 'pro': {
-          state.delay = delay
-          const options = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(state)
-          }
-          fetch(baseUrl + 'play', options)
-            .then((response) => response.json())
-            .then((data) => {
-              const newState = playGame(state, new Action(data.card, data.revealTrump), theme)
-              roundOver(newState, setGameState)
-            })
-          break
-        }
-        case 'noob': {
-          setTimeout(() => {
-            const legalCards = getLegalCards(state)
-            const CardToPlay = legalCards[Math.floor(Math.random() * legalCards.length)]
-            const newState = playGame(state, new Action(CardToPlay, null), theme)
-            roundOver(newState, setGameState)
-          }, delay * 1000)
-
-          break
-        }
-        case 'hacker': {
-          state.hacker = true
-          state.delay = delay
-          const options = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(state)
-          }
-          fetch(baseUrl + 'play', options)
-            .then((response) => response.json())
-            .then((data) => {
-              const newState = playGame(state, new Action(data.card, data.revealTrump), theme)
-              roundOver(newState, setGameState)
-            })
-          break
-        }
-      }
+      Bot.play(bot, state, setGameState, delay, theme)
     } else {
       if (state.allCards[0].length === 1) {
         setTimeout(() => {
