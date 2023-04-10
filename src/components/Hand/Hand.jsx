@@ -24,7 +24,8 @@ function Hand({ cards, player }) {
       key={player}
       style={{
         width: `calc(${window.innerWidth <= 660 ? '42' : '56'}px + ${cards.length - 1} * 20px)`
-      }}>
+      }}
+    >
       {playerCards}
     </div>
   )
