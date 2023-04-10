@@ -14,7 +14,7 @@ function GameLogs() {
       setLogs(data)
     }
     fetchData()
-  })
+  }, [])
   const handleClick = () => {
     setShowLogs(!showLogs)
   }
