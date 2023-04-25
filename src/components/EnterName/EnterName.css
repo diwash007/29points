@@ -67,3 +67,8 @@ input:valid ~ label {
   background-color: var(--green);
   border: white 2px solid;
 }
+
+.error {
+  color: darkred;
+  margin-top: 3px;
+}
